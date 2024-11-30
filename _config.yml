@@ -1,9 +1,9 @@
 theme: jekyll-theme-minimal
-title: ADA Template Website
+title: The Metamorphosis of Movie Archetypes: A timeless tale of film personas
 description: A template website for ADA
 show_downloads: True
 navigation:
-  - title: Home
+  - title: Introduction
     url: /
   - title: Example
     url: example
