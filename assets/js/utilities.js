@@ -51,7 +51,7 @@ function processYearlyData(data, startYear = 1920) {
                 if (!yearStats[year]) {
                     yearStats[year] = {
                         count: 0,
-                        revenue: 0,
+                        totalRevenue: 0,  // Add this field
                         revenues: [],
                         ratings: [],
                         votes: [],
@@ -65,7 +65,10 @@ function processYearlyData(data, startYear = 1920) {
                 const rating = parseFloat(row.rating) || 0;
                 const votes = parseFloat(row.vote_count) || 0;
                 
-                if (revenue > 0) yearStats[year].revenues.push(revenue);
+                if (revenue > 0) {
+                    yearStats[year].revenues.push(revenue);
+                    yearStats[year].totalRevenue += revenue;  // Update total revenue
+                }
                 if (rating > 0) yearStats[year].ratings.push(rating);
                 if (votes > 0) yearStats[year].votes.push(votes);
                 

@@ -21,7 +21,7 @@ function createReleasesPlot(yearStats, years) {
 function createRevenuePlot(yearStats, years) {
     const revenueTrace = {
         x: years,
-        y: years.map(year => yearStats[year].revenue),
+        y: years.map(year => yearStats[year].totalRevenue),
         type: 'scatter',
         mode: 'lines',
         line: {
