@@ -1,15 +1,16 @@
 theme: jekyll-theme-minimal
 title: Stars or Storyline
 description: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
-show_downloads: false
+baseurl: "/ada-template-website"
+url: "https://pierrelts.github.io"
 navigation:
   - title: Home
-    url: /ada-template-website/
+    url: /
   - title: Data Analysis
-    url: /ada-template-website/data-analysis
+    url: /data-analysis
   - title: Sentiment Analysis
-    url: /ada-template-website/sentiment-analysis
+    url: /sentiment-analysis
   - title: Network Analysis
-    url: /ada-template-website/network-analysis
+    url: /network-analysis
   - title: Results
-    url: /ada-template-website/results
+    url: /results
