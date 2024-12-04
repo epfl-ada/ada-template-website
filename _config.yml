@@ -1,4 +1,6 @@
-theme: jekyll-theme-minimal
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme
 title: Stars or Storyline
 description: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
 baseurl: "/ada-template-website"
