@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
-title: ADA Template Website
-description: A template website for ADA
+title: Stars or Storyline: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
+description: Our project investigates how actor fame and the emotional trajectory of movie plots, analyzed through sentiment and social network analysis, contribute to a film’s critical success.
 show_downloads: True
 navigation:
   - title: Home
