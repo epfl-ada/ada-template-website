@@ -59,4 +59,4 @@ This formula balances:
 
 Our success metric shows strong correlation with revenue while providing a more balanced evaluation of movie performance across different eras and budgets.
 
-[Back to Home](./)
+[Back to Home](/ada-template-website/)

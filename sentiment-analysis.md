@@ -52,4 +52,4 @@ Our sentiment analysis reveals:
 - Genre-specific sentiment patterns
 - Correlation between sentiment variation and audience engagement
 
-[Back to Home](./)
+[Back to Home](/ada-template-website/)

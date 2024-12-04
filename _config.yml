@@ -4,12 +4,12 @@ description: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical 
 show_downloads: false
 navigation:
   - title: Home
-    url: /
+    url: /ada-template-website/
   - title: Data Analysis
-    url: data-analysis
+    url: /ada-template-website/data-analysis
   - title: Sentiment Analysis
-    url: sentiment-analysis
+    url: /ada-template-website/sentiment-analysis
   - title: Network Analysis
-    url: network-analysis
+    url: /ada-template-website/network-analysis
   - title: Results
-    url: results
+    url: /ada-template-website/results

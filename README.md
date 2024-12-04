@@ -23,9 +23,7 @@ Our approach investigates two main factors:
 ### Navigation
 
 Explore our findings through these detailed sections:
-- [Data Analysis](./data-analysis.html): Preliminary analysis and metric selection
-- [Sentiment Analysis](./sentiment-analysis.html): Investigation of plot emotions using VADER and DistilBERT
-- [Network Analysis](./network-analysis.html): Actor collaboration networks and success correlation
-- [Results](./results.html): Combined findings and interpretations
-
-[View our complete analysis on GitHub]({{ site.github.repository_url }})
+- [Data Analysis](/ada-template-website/data-analysis): Preliminary analysis and metric selection
+- [Sentiment Analysis](/ada-template-website/sentiment-analysis): Investigation of plot emotions using VADER and DistilBERT
+- [Network Analysis](/ada-template-website/network-analysis): Actor collaboration networks and success correlation
+- [Results](/ada-template-website/results): Combined findings and interpretations
