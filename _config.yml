@@ -9,10 +9,12 @@ navigation:
   - title: Home
     url: /
   - title: Data Analysis
-    url: /data-analysis
+    url: data-analysis
   - title: Sentiment Analysis
-    url: /sentiment-analysis
+    url: sentiment-analysis
   - title: Network Analysis
-    url: /network-analysis
+    url: network-analysis
   - title: Results
-    url: /results
+    url: results
+github:
+  is_project_page: false
