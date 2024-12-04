@@ -5,7 +5,7 @@ layout: default
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 
-# Data Analysis 5:53
+# Data Analysis 5:59
 
 ## Preliminary Analysis and Metric Selection
 
