@@ -84,6 +84,7 @@ function createStatsPlot(divId, yearStats, years, field, title, yLabel, logY = f
 }
 
 function createScatterPlot(divId, yearStats, years, field, title, yLabel, logY = false) {
+    // Create scatter plot of individual movies
     const allMovies = years.flatMap(year => 
         yearStats[year].movies
             .filter(movie => movie[field] > 0)
@@ -106,10 +107,13 @@ function createScatterPlot(divId, yearStats, years, field, title, yLabel, logY =
         }
     };
 
-    const stats = years.map(year => calculateStatistics(yearStats[year][field + 's']));
+    // Calculate and create mean line trace
     const meanTrace = {
         x: years,
-        y: stats.map(s => s.mean),
+        y: years.map(year => {
+            const values = yearStats[year][field === 'votes' ? 'votes' : field + 's'];
+            return values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+        }),
         type: 'scatter',
         mode: 'lines',
         name: 'Mean',
