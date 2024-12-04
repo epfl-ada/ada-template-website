@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script>
+
 
 
 ## Ratings and Vote Count Evaluation
@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
+</script>
 
 **Conclusion**:
 The trends in vote counts and ratings together provide a more comprehensive picture of a movie's impact over time. While ratings reflect audience satisfaction, vote counts indicate the level of engagement. The combination of these metrics offers valuable insights into how movies resonate with audiences across different periods.
