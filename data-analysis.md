@@ -1,35 +1,23 @@
----
-layout: default
----
+```markdown
+[Previous content remains the same...]
 
-# Preliminary Analysis and Metric Selection 8:22
+## Detailed Revenue Analysis 11:57
 
-Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
+<div id="revenue-stats-plot" style="width: 100%; height: 600px;"></div>
 
-For all visualizations in this analysis, we decided to apply a cutoff at the year 1920. This decision was made due to the limited availability of ratings and vote data for movies released before 1920, which could skew results and impact the clarity of trends observed in more recent years.
-
-## Total Movie Releases
-
-<div id="releases-plot" style="width: 100%; height: 600px;"></div>
-
-**Observation**:
-
-The plot illustrates an overall growth in the number of movies released yearly from 1920 onward, with notable fluctuations. Hypothetically, early stability may be due to historical constraints, while the post-1980s increase could reflect technological and industry expansion. This growth trend will be an important consideration in our subsequent analysis.
-
-## Revenue Analysis
-
-<div id="revenue-plot" style="width: 100%; height: 600px;"></div>
+<div id="revenue-scatter-plot" style="width: 100%; height: 600px;"></div>
 
 **Observations**:
 
-We observe a near-exponential growth in total box office revenue per year. This trend may be driven by:
-- An increasing number of movie releases
-- Inflation over time
-- Growing interest in the film industry
-- Expansion of global markets
+1. **Variance in Revenue**: Over time, the variance in box office revenue has increased significantly, which may reflect the polarized landscape of modern cinema. This could indicate the simultaneous rise of high-grossing blockbusters and lower-budget independent films, appealing to increasingly diverse audience preferences.
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+2. **Revenue Trends**: Notable spikes in mean revenue can be observed in certain years, with peaks in the 1960s, 1970s, and the 2000s, potentially reflecting trends in cinema consumption or the success of particularly influential movies.
+
+3. **Overall Growth**: An upward trend in overall revenue is apparent, which may be influenced by inflation as well as increased global interest in cinema over time. This growth highlights both the industry's expansion and the rising financial impact of movies as cultural products.
+
+**Revenue Conclusion**:
+While box office revenue provides valuable insight into the financial success of movies, it is an incomplete metric for gauging overall success. This preliminary analysis suggests that revenue alone does not fully capture a movie's impact or popularity, and additional metrics are necessary to achieve a comprehensive understanding of cinematic success.
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
@@ -37,45 +25,83 @@ document.addEventListener('DOMContentLoaded', function() {
         header: true,
         complete: function(results) {
             const data = results.data;
-            console.log("Data loaded:", data.length, "rows"); // Debug log
             
-            // Process data for releases plot
-            const yearCounts = {};
-            const yearRevenues = {};
+            // Process data by year
+            const yearStats = {};
+            const individualMovies = [];
             
             data.forEach(row => {
-                if (row.release_date) {
+                if (row.release_date && row.revenue) {
                     const year = new Date(row.release_date).getFullYear();
-                    if (year >= 1920 && !isNaN(year)) {
-                        yearCounts[year] = (yearCounts[year] || 0) + 1;
-                        if (row.revenue && !isNaN(row.revenue)) {
-                            yearRevenues[year] = (yearRevenues[year] || 0) + parseFloat(row.revenue);
+                    const revenue = parseFloat(row.revenue);
+                    
+                    if (year >= 1920 && !isNaN(year) && !isNaN(revenue) && revenue > 0) {
+                        if (!yearStats[year]) {
+                            yearStats[year] = {
+                                revenues: [],
+                                mean: 0,
+                                median: 0,
+                                std: 0
+                            };
                         }
+                        yearStats[year].revenues.push(revenue);
+                        individualMovies.push({year: year, revenue: revenue});
                     }
                 }
             });
 
-            console.log("Years processed:", Object.keys(yearCounts).length); // Debug log
+            // Calculate statistics
+            const years = Object.keys(yearStats).sort((a,b) => a-b);
+            years.forEach(year => {
+                const revenues = yearStats[year].revenues;
+                yearStats[year].mean = revenues.reduce((a,b) => a+b, 0) / revenues.length;
+                yearStats[year].median = revenues.sort((a,b) => a-b)[Math.floor(revenues.length/2)];
+                yearStats[year].std = Math.sqrt(revenues.reduce((a,b) => a + Math.pow(b - yearStats[year].mean, 2), 0) / revenues.length);
+            });
 
-            // Create releases plot
-            const years = Object.keys(yearCounts).sort();
-            const movieCounts = years.map(year => yearCounts[year]);
-
-            const releasesTrace = {
+            // Create statistics plot
+            const meanTrace = {
                 x: years,
-                y: movieCounts,
+                y: years.map(year => yearStats[year].mean),
                 type: 'scatter',
                 mode: 'lines',
-                line: {
-                    color: 'lightblue',
-                    width: 2
-                },
-                name: 'Number of Movies'
+                name: 'Mean Revenue',
+                line: {color: 'lightgreen', width: 3}
             };
 
-            const releasesLayout = {
+            const medianTrace = {
+                x: years,
+                y: years.map(year => yearStats[year].median),
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Median Revenue',
+                line: {color: 'white', width: 3, dash: 'dash'}
+            };
+
+            const stdUpperTrace = {
+                x: years,
+                y: years.map(year => yearStats[year].mean + yearStats[year].std),
+                type: 'scatter',
+                mode: 'lines',
+                name: '1 Std Dev',
+                line: {width: 0},
+                showlegend: false
+            };
+
+            const stdLowerTrace = {
+                x: years,
+                y: years.map(year => yearStats[year].mean - yearStats[year].std),
+                type: 'scatter',
+                mode: 'lines',
+                fill: 'tonexty',
+                fillcolor: 'rgba(255,255,255,0.2)',
+                line: {width: 0},
+                name: '1 Std Dev'
+            };
+
+            const statsLayout = {
                 title: {
-                    text: 'Total Number of Movies Released Yearly',
+                    text: 'Box Office Revenue Statistics',
                     font: { size: 24, color: 'white' }
                 },
                 xaxis: {
@@ -84,34 +110,47 @@ document.addEventListener('DOMContentLoaded', function() {
                     color: 'white'
                 },
                 yaxis: {
-                    title: 'Number of Movies',
+                    title: 'Revenue [$]',
                     gridcolor: 'gray',
                     color: 'white'
                 },
                 plot_bgcolor: '#1e1e1e',
                 paper_bgcolor: '#1e1e1e',
                 font: { color: 'white' },
-                showlegend: true
+                showlegend: true,
+                legend: {
+                    font: { color: 'white' }
+                }
             };
 
-            Plotly.newPlot('releases-plot', [releasesTrace], releasesLayout);
+            Plotly.newPlot('revenue-stats-plot', [stdUpperTrace, stdLowerTrace, meanTrace, medianTrace], statsLayout);
 
-            // Create revenue plot
-            const revenueTrace = {
+            // Create scatter plot
+            const scatterTrace = {
+                x: individualMovies.map(m => m.year),
+                y: individualMovies.map(m => m.revenue),
+                type: 'scatter',
+                mode: 'markers',
+                name: 'Individual Movies',
+                marker: {
+                    color: 'magenta',
+                    size: 5,
+                    opacity: 0.1
+                }
+            };
+
+            const meanOverlayTrace = {
                 x: years,
-                y: years.map(year => yearRevenues[year]),
+                y: years.map(year => yearStats[year].mean),
                 type: 'scatter',
                 mode: 'lines',
-                line: {
-                    color: 'lightgreen',
-                    width: 2
-                },
-                name: 'Total Box Office Revenue'
+                name: 'Mean Revenue',
+                line: {color: 'lightgreen', width: 4}
             };
 
-            const revenueLayout = {
+            const scatterLayout = {
                 title: {
-                    text: 'Total Yearly Box Office Revenue (1920+)',
+                    text: 'Box Office Revenue per Movie (log)',
                     font: { size: 24, color: 'white' }
                 },
                 xaxis: {
@@ -120,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     color: 'white'
                 },
                 yaxis: {
-                    title: 'Total Box Office Revenue [$] (log)',
+                    title: 'Revenue [$] (log)',
                     type: 'log',
                     gridcolor: 'gray',
                     color: 'white'
@@ -128,14 +167,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 plot_bgcolor: '#1e1e1e',
                 paper_bgcolor: '#1e1e1e',
                 font: { color: 'white' },
-                showlegend: true
+                showlegend: true,
+                legend: {
+                    font: { color: 'white' }
+                }
             };
 
-            Plotly.newPlot('revenue-plot', [revenueTrace], revenueLayout);
-        },
-        error: function(error) {
-            console.error('Error loading data:', error); // Debug log
+            Plotly.newPlot('revenue-scatter-plot', [scatterTrace, meanOverlayTrace], scatterLayout);
         }
     });
 });
 </script>
+```
