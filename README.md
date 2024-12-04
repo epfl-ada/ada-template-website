@@ -1,9 +1,31 @@
-# ADA Template Website
-## Usage
-1. Fork (copy) this repository by clicking the "Fork" button on the top right corner.
-2. Go to "Settings" -> "Pages" in your forked repository. Under "Branch" change "None" to "master" and click "Save".
-3. Edit the `_config.yml` file in your forked repository to change the site title (after `title:`) and description (after `description:`).
-4. Build your own page by editing this `README.md` (home page) and creating new `.md` files (other pages), formatting is done with standard [GitHub Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax), we provide an example file `example.md` in the repository.
-**Important**: Please include ```--- layout: default ---``` (the first three line in `example.md`) at the beginning of your every newly created `.md` file.
-5. Add your new `.md` files to the site by editing the `_config.yml` file in your forked repository. Under `navigation:` add a new pair of `- title:` and `url:`, and fill their value with your page name and `.md` file name. Remember to remove the `- title:` and `url:` pair for the example page.
-6. Go back to "Settings" -> "Pages" to find your website link.
+---
+layout: default
+---
+
+# Stars or Storyline: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
+
+## Introduction
+
+In the world of cinema, understanding what makes a movie successful is complex and multi-faceted. Does the star power of its cast drive success, or does a captivating storyline influence audience perception more significantly? Our project seeks to unravel these elements, focusing on how both actor fame and the emotional journey of the plot contribute to a movie's critical success.
+
+### Project Overview
+
+Our approach investigates two main factors:
+1. **Actor Fame**: Using social network analysis to assess an actor's influence and connections within the industry
+2. **Sentiment Trajectory**: Analyzing the emotional arc of movie plots through sentiment analysis
+
+### Key Research Questions
+
+- How does an actor's network of collaborations influence a movie's success?
+- What role does the emotional journey of a plot play in audience reception?
+- Can we identify patterns in successful movies through sentiment analysis?
+
+### Navigation
+
+Explore our findings through these detailed sections:
+- [Data Analysis](./data-analysis.html): Preliminary analysis and metric selection
+- [Sentiment Analysis](./sentiment-analysis.html): Investigation of plot emotions using VADER and DistilBERT
+- [Network Analysis](./network-analysis.html): Actor collaboration networks and success correlation
+- [Results](./results.html): Combined findings and interpretations
+
+[View our complete analysis on GitHub]({{ site.github.repository_url }})
