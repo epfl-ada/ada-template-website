@@ -133,3 +133,70 @@ function createScatterPlot(divId, yearStats, years, field, title, yLabel, logY =
 
     Plotly.newPlot(divId, [scatterTrace, meanTrace], layout);
 }
+
+// Add to assets/js/data-analysis-plots.js
+
+function createSuccessPlots(yearStats, years) {
+    // Calculate success for each movie
+    years.forEach(year => {
+        yearStats[year].movies.forEach(movie => {
+            if (movie.rating > 0 && movie.votes > 0) {
+                movie.success = movie.rating * Math.log(movie.votes);
+            }
+        });
+        yearStats[year].successes = yearStats[year].movies
+            .filter(m => m.success)
+            .map(m => m.success);
+    });
+
+    // Create success statistics plot
+    createStatsPlot('success-stats-plot', yearStats, years, 'successes',
+        'Success Statistics', 'Success');
+    
+    // Create success scatter plot
+    createScatterPlot('success-scatter-plot', yearStats, years, 'success',
+        'Success per Movie', 'Success');
+
+    // Create success vs revenue plot
+    const allMovies = years.flatMap(year => 
+        yearStats[year].movies
+            .filter(movie => movie.success && movie.revenue > 0)
+            .map(movie => ({
+                success: movie.success,
+                revenue: movie.revenue,
+                rating: movie.rating
+            }))
+    );
+
+    const trace = {
+        x: allMovies.map(m => m.success),
+        y: allMovies.map(m => m.revenue),
+        mode: 'markers',
+        type: 'scatter',
+        marker: {
+            color: allMovies.map(m => m.rating),
+            colorscale: 'Viridis',
+            showscale: true,
+            size: 5,
+            opacity: 0.3
+        },
+        name: 'Movies'
+    };
+
+    const layout = createPlotlyLayout(
+        'Box Office Revenue vs. Success',
+        'Success = rating * log(vote_count)',
+        'Box Office Revenue [$] (log)',
+        true
+    );
+
+    layout.showlegend = false;
+    layout.coloraxis = {
+        colorbar: {
+            title: 'Rating',
+            titleside: 'right'
+        }
+    };
+
+    Plotly.newPlot('success-revenue-plot', [trace], layout);
+}

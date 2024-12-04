@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 12:48
+# Preliminary Analysis and Metric Selection 12:57
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -71,6 +71,31 @@ In this part, we examine the distribution and evolution of vote counts per movie
 **Conclusion**:
 The trends in vote counts and ratings together provide a more comprehensive picture of a movie's impact over time. While ratings reflect audience satisfaction, vote counts indicate the level of engagement. The combination of these metrics offers valuable insights into how movies resonate with audiences across different periods.
 
+## Definition of Success
+
+To conduct meaningful analysis, it's crucial to first define what "success" means in the context of movies. Success is a multifaceted concept that can vary widely depending on goals, stakeholders, and industry standards.
+
+We define success using a combination of ratings and audience engagement:
+
+**S = rating * log(number of votes)**
+
+This formula effectively combines both quality (ratings) and popularity (vote count) into a single metric. The logarithmic adjustment of vote count helps balance the influence of highly-voted movies without letting them disproportionately skew the results.
+
+### Success Metric Analysis
+
+<div id="success-stats-plot" style="width: 100%; height: 600px;"></div>
+<div id="success-scatter-plot" style="width: 100%; height: 600px;"></div>
+
+**Observations:**
+1. **Early Fluctuations**: Higher variability in early years (1920s-1940s) likely due to fewer ratings and votes.
+2. **Stabilizing Trends**: Success metric stabilizes over time, with a gradual increase in the mean.
+3. **Overall Growth**: The rise in mean success reflects increased movie output, audience engagement, and influential blockbusters.
+
+### Success vs Revenue Analysis
+
+<div id="success-revenue-plot" style="width: 100%; height: 600px;"></div>
+
+We can observe a clear correlation between success and revenue: Revenue tends to grow exponentially with our definition of success, which validates our success metric. Additionally, movies with lower success generally have lower ratings, with some exceptions that had little attention despite their high rating and vice versa.
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
@@ -107,6 +132,20 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         error: function(error) {
             console.error('Error loading data:', error);
+        }
+    });
+});
+// Add to the existing script section in data-analysis.md
+document.addEventListener('DOMContentLoaded', function() {
+    Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+            const yearStats = processYearlyData(results.data);
+            const years = Object.keys(yearStats).sort((a,b) => a-b);
+            
+            // Add this line to the existing function calls
+            createSuccessPlots(yearStats, years);
         }
     });
 });
