@@ -107,23 +107,29 @@ function createScatterPlot(divId, yearStats, years, field, title, yLabel, logY =
         }
     };
 
-    // Calculate and create mean line trace
+    // Calculate mean differently for votes
     const meanTrace = {
         x: years,
         y: years.map(year => {
-            const values = yearStats[year][field === 'votes' ? 'votes' : field + 's'];
-            return values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+            const movies = yearStats[year].movies.filter(m => m[field] > 0);
+            if (movies.length === 0) return 0;
+            return movies.reduce((sum, movie) => sum + movie[field], 0) / movies.length;
         }),
         type: 'scatter',
         mode: 'lines',
         name: 'Mean',
         line: {
-            color: field === 'revenue' ? COLORS.secondary : COLORS.tertiary,
+            color: COLORS.tertiary,
             width: 4
         }
     };
 
-    Plotly.newPlot(divId, [scatterTrace, meanTrace], 
-        createPlotlyLayout(title, 'Year', yLabel, logY)
-    );
+    const layout = createPlotlyLayout(title, 'Year', yLabel, logY);
+    
+    // Ensure y-axis shows logarithmic ticks properly for vote counts
+    if (field === 'votes') {
+        layout.yaxis.dtick = 1;  // This will show ticks at each order of magnitude
+    }
+
+    Plotly.newPlot(divId, [scatterTrace, meanTrace], layout);
 }

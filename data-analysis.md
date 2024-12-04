@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 12:41
+# Preliminary Analysis and Metric Selection 12:48
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
