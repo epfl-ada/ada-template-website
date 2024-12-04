@@ -140,9 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-```markdown
-[Previous content remains the same...]
-
 ## Detailed Revenue Analysis
 
 <div id="revenue-stats-plot" style="width: 100%; height: 600px;"></div>
@@ -320,4 +317,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-```
