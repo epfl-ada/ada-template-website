@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
+</script>
 
 
 ## Ratings and Vote Count Evaluation
@@ -342,7 +342,7 @@ In this part, we examine the distribution and evolution of vote counts per movie
 2. **Increasing Engagement Over Time**: Over the years, both mean and median vote counts have increased, reflecting the growth of movie audiences and the rise of global platforms that make films more accessible for voting and reviews.
 3. **Fluctuations in Mean Vote Counts**: The variability in mean vote counts suggests shifts in audience attention, likely due to the release of particularly popular films in certain years.
 
-
+</script>
 document.addEventListener('DOMContentLoaded', function() {
     Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
         download: true,
