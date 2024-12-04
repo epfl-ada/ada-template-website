@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection
+# Preliminary Analysis and Metric Selection 12:24
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -71,450 +71,43 @@ In this part, we examine the distribution and evolution of vote counts per movie
 **Conclusion**:
 The trends in vote counts and ratings together provide a more comprehensive picture of a movie's impact over time. While ratings reflect audience satisfaction, vote counts indicate the level of engagement. The combination of these metrics offers valuable insights into how movies resonate with audiences across different periods.
 
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
+<script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
 <script>
-// Initialize all plots when the document is ready
 document.addEventListener('DOMContentLoaded', function() {
-    // Load and process data
     Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
         download: true,
         header: true,
         complete: function(results) {
-            const data = results.data;
-            
-            // Process data for all plots
-            const yearStats = processData(data);
+            const yearStats = processYearlyData(results.data);
             const years = Object.keys(yearStats).sort((a,b) => a-b);
             
-            // Create all plots
+            // Create all plots using utility functions
             createReleasesPlot(yearStats, years);
             createRevenuePlot(yearStats, years);
-            createRevenueStatsPlot(yearStats, years);
-            createRevenueScatterPlot(yearStats, years);
-            createRatingsPlots(yearStats, years);
-            createVotesPlots(yearStats, years);
+            
+            // Create statistics plots
+            createStatsPlot('revenue-stats-plot', yearStats, years, 'revenues', 
+                'Box Office Revenue Statistics', 'Revenue [$]');
+            createScatterPlot('revenue-scatter-plot', yearStats, years, 'revenue', 
+                'Box Office Revenue per Movie (log)', 'Revenue [$] (log)', true);
+            
+            createStatsPlot('ratings-stats-plot', yearStats, years, 'ratings',
+                'Yearly Rating Statistics', 'Rating');
+            createScatterPlot('ratings-scatter-plot', yearStats, years, 'rating',
+                'Ratings per Movie', 'Rating');
+            
+            createStatsPlot('votes-stats-plot', yearStats, years, 'votes',
+                'Yearly Vote Count Statistics', 'Vote Count');
+            createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
+                'Vote Counts per Movie (log)', 'Vote Count (log)', true);
         },
         error: function(error) {
             console.error('Error loading data:', error);
         }
     });
 });
-
-// Data processing function
-function processData(data) {
-    const yearStats = {};
-    
-    data.forEach(row => {
-        if (row.release_date) {
-            const year = new Date(row.release_date).getFullYear();
-            if (year >= 1920 && !isNaN(year)) {
-                if (!yearStats[year]) {
-                    yearStats[year] = {
-                        count: 0,
-                        revenue: 0,
-                        revenues: [],
-                        ratings: [],
-                        votes: [],
-                        movies: []
-                    };
-                }
-                
-                yearStats[year].count++;
-                
-                if (row.revenue && !isNaN(row.revenue)) {
-                    const revenue = parseFloat(row.revenue);
-                    yearStats[year].revenue += revenue;
-                    yearStats[year].revenues.push(revenue);
-                }
-                
-                if (row.rating && !isNaN(row.rating)) {
-                    yearStats[year].ratings.push(parseFloat(row.rating));
-                }
-                
-                if (row.vote_count && !isNaN(row.vote_count)) {
-                    yearStats[year].votes.push(parseFloat(row.vote_count));
-                }
-                
-                yearStats[year].movies.push({
-                    revenue: parseFloat(row.revenue) || 0,
-                    rating: parseFloat(row.rating) || 0,
-                    votes: parseFloat(row.vote_count) || 0
-                });
-            }
-        }
-    });
-    
-    // Calculate statistics for each year
-    Object.keys(yearStats).forEach(year => {
-        const stats = yearStats[year];
-        stats.meanRevenue = stats.revenues.length ? stats.revenues.reduce((a,b) => a+b, 0) / stats.revenues.length : 0;
-        stats.medianRevenue = stats.revenues.length ? stats.revenues.sort((a,b) => a-b)[Math.floor(stats.revenues.length/2)] : 0;
-        stats.stdRevenue = calculateStd(stats.revenues, stats.meanRevenue);
-        
-        stats.meanRating = stats.ratings.length ? stats.ratings.reduce((a,b) => a+b, 0) / stats.ratings.length : 0;
-        stats.medianRating = stats.ratings.length ? stats.ratings.sort((a,b) => a-b)[Math.floor(stats.ratings.length/2)] : 0;
-        stats.stdRating = calculateStd(stats.ratings, stats.meanRating);
-        
-        stats.meanVotes = stats.votes.length ? stats.votes.reduce((a,b) => a+b, 0) / stats.votes.length : 0;
-        stats.medianVotes = stats.votes.length ? stats.votes.sort((a,b) => a-b)[Math.floor(stats.votes.length/2)] : 0;
-        stats.stdVotes = calculateStd(stats.votes, stats.meanVotes);
-    });
-    
-    return yearStats;
-}
-
-// Helper function to calculate standard deviation
-function calculateStd(arr, mean) {
-    if (!arr.length) return 0;
-    return Math.sqrt(arr.reduce((a,b) => a + Math.pow(b - mean, 2), 0) / arr.length);
-}
-
-// Plot creation functions
-function createPlotlyLayout(title, xTitle, yTitle, logY = false) {
-    return {
-        title: {
-            text: title,
-            font: { size: 24, color: 'white' }
-        },
-        xaxis: {
-            title: xTitle,
-            gridcolor: 'gray',
-            color: 'white'
-        },
-        yaxis: {
-            title: yTitle,
-            type: logY ? 'log' : 'linear',
-            gridcolor: 'gray',
-            color: 'white'
-        },
-        plot_bgcolor: '#1e1e1e',
-        paper_bgcolor: '#1e1e1e',
-        font: { color: 'white' },
-        showlegend: true,
-        legend: {
-            font: { color: 'white' }
-        }
-    };
-}
-
-function createReleasesPlot(yearStats, years) {
-    const releasesTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].count),
-        type: 'scatter',
-        mode: 'lines',
-        line: {
-            color: 'lightblue',
-            width: 2
-        },
-        name: 'Number of Movies'
-    };
-
-    const layout = createPlotlyLayout(
-        'Total Number of Movies Released Yearly',
-        'Year',
-        'Number of Movies'
-    );
-
-    Plotly.newPlot('releases-plot', [releasesTrace], layout);
-}
-
-function createRevenuePlot(yearStats, years) {
-    const revenueTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].revenue),
-        type: 'scatter',
-        mode: 'lines',
-        line: {
-            color: 'lightgreen',
-            width: 2
-        },
-        name: 'Total Box Office Revenue'
-    };
-
-    const layout = createPlotlyLayout(
-        'Total Yearly Box Office Revenue (1920+)',
-        'Year',
-        'Total Box Office Revenue [$] (log)',
-        true
-    );
-
-    Plotly.newPlot('revenue-plot', [revenueTrace], layout);
-}
-
-function createRevenueStatsPlot(yearStats, years) {
-    const meanTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRevenue),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean Revenue',
-        line: {color: 'lightgreen', width: 3}
-    };
-
-    const medianTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].medianRevenue),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Median Revenue',
-        line: {color: 'white', width: 3, dash: 'dash'}
-    };
-
-    const stdUpperTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRevenue + yearStats[year].stdRevenue),
-        type: 'scatter',
-        mode: 'lines',
-        name: '1 Std Dev',
-        line: {width: 0},
-        showlegend: false
-    };
-
-    const stdLowerTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRevenue - yearStats[year].stdRevenue),
-        type: 'scatter',
-        mode: 'lines',
-        fill: 'tonexty',
-        fillcolor: 'rgba(255,255,255,0.2)',
-        line: {width: 0},
-        name: '1 Std Dev'
-    };
-
-    const layout = createPlotlyLayout(
-        'Box Office Revenue Statistics',
-        'Year',
-        'Revenue [$]'
-    );
-
-    Plotly.newPlot('revenue-stats-plot', 
-        [stdUpperTrace, stdLowerTrace, meanTrace, medianTrace], 
-        layout
-    );
-}
-
-function createRevenueScatterPlot(yearStats, years) {
-    const allMovies = years.flatMap(year => 
-        yearStats[year].movies.map(movie => ({
-            year: parseInt(year),
-            revenue: movie.revenue
-        }))
-    ).filter(movie => movie.revenue > 0);
-
-    const scatterTrace = {
-        x: allMovies.map(m => m.year),
-        y: allMovies.map(m => m.revenue),
-        type: 'scatter',
-        mode: 'markers',
-        name: 'Individual Movies',
-        marker: {
-            color: 'magenta',
-            size: 5,
-            opacity: 0.1
-        }
-    };
-
-    const meanTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRevenue),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean Revenue',
-        line: {color: 'lightgreen', width: 4}
-    };
-
-    const layout = createPlotlyLayout(
-        'Box Office Revenue per Movie (log)',
-        'Year',
-        'Revenue [$] (log)',
-        true
-    );
-
-    Plotly.newPlot('revenue-scatter-plot', [scatterTrace, meanTrace], layout);
-}
-
-function createRatingsPlots(yearStats, years) {
-    // Stats plot
-    const meanTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRating),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean',
-        line: {color: 'orange', width: 3}
-    };
-
-    const medianTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].medianRating),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Median',
-        line: {color: 'white', width: 3, dash: 'dash'}
-    };
-
-    const stdUpperTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRating + yearStats[year].stdRating),
-        type: 'scatter',
-        mode: 'lines',
-        name: '1 Std Dev',
-        line: {width: 0},
-        showlegend: false
-    };
-
-    const stdLowerTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRating - yearStats[year].stdRating),
-        type: 'scatter',
-        mode: 'lines',
-        fill: 'tonexty',
-        fillcolor: 'rgba(255,255,255,0.2)',
-        line: {width: 0},
-        name: '1 Std Dev'
-    };
-
-    const statsLayout = createPlotlyLayout(
-        'Yearly Rating Statistics',
-        'Year',
-        'Rating'
-    );
-
-    Plotly.newPlot('ratings-stats-plot', 
-        [stdUpperTrace, stdLowerTrace, meanTrace, medianTrace], 
-        statsLayout
-    );
-
-    // Scatter plot
-    const allMovies = years.flatMap(year => 
-        yearStats[year].movies.map(movie => ({
-            year: parseInt(year),
-            rating: movie.rating
-        }))
-    ).filter(movie => movie.rating > 0);
-
-    const scatterTrace = {
-        x: allMovies.map(m => m.year),
-        y: allMovies.map(m => m.rating),
-        type: 'scatter',
-        mode: 'markers',
-        name: 'Individual Movies',
-        marker: {
-            color: 'magenta',
-            size: 5,
-            opacity: 0.1
-        }
-    };
-
-    const scatterMeanTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanRating),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean',
-        line: {color: 'orange', width: 4}
-    };
-
-    const scatterLayout = createPlotlyLayout(
-        'Ratings per Movie',
-        'Year',
-        'Rating'
-    );
-
-    Plotly.newPlot('ratings-scatter-plot', [scatterTrace, scatterMeanTrace], scatterLayout);
-}
-
-function createVotesPlots(yearStats, years) {
-    // Stats plot
-    const meanTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanVotes),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean',
-        line: {color: 'orange', width: 3}
-    };
-
-    const medianTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].medianVotes),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Median',
-        line: {color: 'white', width: 3, dash: 'dash'}
-    };
-
-    const stdUpperTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanVotes + yearStats[year].stdVotes),
-        type: 'scatter',
-        mode: 'lines',
-        name: '1 Std Dev',
-        line: {width: 0},
-        showlegend: false
-    };
-
-    const stdLowerTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanVotes - yearStats[year].stdVotes),
-        type: 'scatter',
-        mode: 'lines',
-        fill: 'tonexty',
-        fillcolor: 'rgba(255,255,255,0.2)',
-        line: {width: 0},
-        name: '1 Std Dev'
-    };
-
-    const statsLayout = createPlotlyLayout(
-        'Yearly Vote Count Statistics',
-        'Year',
-        'Vote Count'
-    );
-
-    Plotly.newPlot('votes-stats-plot', 
-        [stdUpperTrace, stdLowerTrace, meanTrace, medianTrace], 
-        statsLayout
-    );
-
-    // Scatter plot
-    const allMovies = years.flatMap(year => 
-        yearStats[year].movies.map(movie => ({
-            year: parseInt(year),
-            votes: movie.votes
-        }))
-    ).filter(movie => movie.votes > 0);
-
-    const scatterTrace = {
-        x: allMovies.map(m => m.year),
-        y: allMovies.map(m => m.votes),
-        type: 'scatter',
-        mode: 'markers',
-        name: 'Individual Movies',
-        marker: {
-            color: 'magenta',
-            size: 5,
-            opacity: 0.1
-        }
-    };
-
-    const scatterMeanTrace = {
-        x: years,
-        y: years.map(year => yearStats[year].meanVotes),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean',
-        line: {color: 'orange', width: 4}
-    };
-
-    const scatterLayout = createPlotlyLayout(
-        'Vote Counts per Movie (log)',
-        'Year',
-        'Vote Count (log)',
-        true
-    );
-
-    Plotly.newPlot('votes-scatter-plot', [scatterTrace, scatterMeanTrace], scatterLayout);
-}
 </script>
