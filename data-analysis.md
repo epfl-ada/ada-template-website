@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 8:07
+# Preliminary Analysis and Metric Selection 8:22
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -32,11 +32,12 @@ We observe a near-exponential growth in total box office revenue per year. This 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    Papa.parse('/data/movie_master_dataset.csv', {
+    Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
         download: true,
         header: true,
         complete: function(results) {
             const data = results.data;
+            console.log("Data loaded:", data.length, "rows"); // Debug log
             
             // Process data for releases plot
             const yearCounts = {};
@@ -53,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             });
+
+            console.log("Years processed:", Object.keys(yearCounts).length); // Debug log
 
             // Create releases plot
             const years = Object.keys(yearCounts).sort();
@@ -129,6 +132,9 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             Plotly.newPlot('revenue-plot', [revenueTrace], revenueLayout);
+        },
+        error: function(error) {
+            console.error('Error loading data:', error); // Debug log
         }
     });
 });
