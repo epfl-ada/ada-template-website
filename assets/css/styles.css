@@ -122,8 +122,6 @@ img {
   width: 100%;
   margin: 20px 0;
   background-color: var(--background-color);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -134,6 +132,33 @@ img {
   padding: 15px;
   margin: 20px 0;
   border-radius: 0 4px 4px 0;
+}
+
+/* Plotly specific styles */
+.js-plotly-plot .plotly .modebar {
+  background: transparent !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn:hover {
+  color: white !important;
+}
+
+/* Remove borders from all plot divs */
+[id$="-plot"] {
+  border: none !important;
+  background: transparent !important;
+}
+
+.js-plotly-plot {
+  border: none !important;
+}
+
+.plotly {
+  border: none !important;
 }
 
 /* Responsive design */
@@ -157,31 +182,4 @@ img {
   body {
     padding: 20px;
   }
-}
-
-/* Plot containers */
-.plot-container {
-  width: 100%;
-  margin: 20px 0;
-  background-color: var(--background-color);
-  overflow: hidden;
-}
-
-/* Remove default Plotly modebar background */
-.js-plotly-plot .plotly .modebar {
-  background: transparent !important;
-}
-
-.js-plotly-plot .plotly .modebar-btn {
-  color: rgba(255, 255, 255, 0.3) !important;
-}
-
-.js-plotly-plot .plotly .modebar-btn:hover {
-  color: white !important;
-}
-
-/* Remove any border from plot divs */
-[id$="-plot"] {
-  border: none !important;
-  background: transparent !important;
 }

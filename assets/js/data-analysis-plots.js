@@ -270,8 +270,8 @@ function createActorAgePlot(characterData) {
             name: 'Actors',
             marker: {
                 color: 'magenta',
-                size: 15,
-                opacity: 0.2
+                size: 10,
+                opacity: 0.05
             }
         };
 
@@ -306,6 +306,7 @@ function createActorAgePlot(characterData) {
         };
 
         // Create layout with improved visibility and fixed y-axis range
+        // In createActorAgePlot function, update the layout configuration:
         const layout = {
             title: {
                 text: 'Actor Career Analysis: Age vs. Number of Appearances',
@@ -322,11 +323,12 @@ function createActorAgePlot(characterData) {
             yaxis: {
                 title: 'Number of Appearances',
                 type: 'log',
-                range: [0, Math.log10(1000)], // Set range from 0 to 1000 (in log scale)
+                range: [0, 3],  // log10(1000) ≈ 3
                 gridcolor: 'gray',
                 color: 'white',
                 showline: false,
-                zeroline: false
+                zeroline: false,
+                fixedrange: true  // This prevents user from zooming on y-axis
             },
             plot_bgcolor: '#1e1e1e',
             paper_bgcolor: '#1e1e1e',
@@ -335,20 +337,30 @@ function createActorAgePlot(characterData) {
                 font: { color: 'white' }
             },
             shapes: [
-                // Key age markers
-                { type: 'line', x0: 3, x1: 3, y0: 1, y1: 1000, 
-                  line: { color: 'yellow', width: 1 } },
-                { type: 'line', x0: 17, x1: 17, y0: 1, y1: 1000, 
-                  line: { color: 'yellow', width: 1 } },
+                // Update vertical lines to extend full height
+                { 
+                    type: 'line', 
+                    x0: 3, x1: 3, 
+                    y0: 1, y1: 1000,
+                    yref: 'y',
+                    line: { color: 'yellow', width: 1 } 
+                },
+                { 
+                    type: 'line', 
+                    x0: 17, x1: 17, 
+                    y0: 1, y1: 1000,
+                    yref: 'y',
+                    line: { color: 'yellow', width: 1 } 
+                },
                 // Additional reference lines
-                { type: 'line', x0: 1, x1: 1, y0: 1, y1: 1000, 
-                  line: { color: 'white', width: 0.5, dash: 'dash' } },
-                { type: 'line', x0: 5, x1: 5, y0: 1, y1: 1000, 
-                  line: { color: 'white', width: 0.5, dash: 'dash' } },
-                { type: 'line', x0: 15, x1: 15, y0: 1, y1: 1000, 
-                  line: { color: 'white', width: 0.5, dash: 'dash' } },
-                { type: 'line', x0: 19, x1: 19, y0: 1, y1: 1000, 
-                  line: { color: 'white', width: 0.5, dash: 'dash' } }
+                { 
+                    type: 'line', 
+                    x0: 1, x1: 1, 
+                    y0: 1, y1: 1000,
+                    yref: 'y',
+                    line: { color: 'white', width: 0.5, dash: 'dash' } 
+                },
+                // ... (repeat for other vertical lines)
             ],
             margin: {
                 l: 80,
