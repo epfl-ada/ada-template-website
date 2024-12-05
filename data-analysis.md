@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 1:11
+# Preliminary Analysis and Metric Selection 1:27
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -97,6 +97,23 @@ This formula effectively combines both quality (ratings) and popularity (vote co
 
 We can observe a clear correlation between success and revenue: Revenue tends to grow exponentially with our definition of success, which validates our success metric. Additionally, movies with lower success generally have lower ratings, with some exceptions that had little attention despite their high rating and vice versa.
 
+## Understanding Actor Trajectories
+
+Understanding actors' trajectories can offer valuable insights into their influence in the industry. Generally, actors who start their careers at a younger age tend to have more connections and experience, which could positively impact a movie's success. In this section, we examine how the age of an actor at their first movie appearance correlates with the total number of movies they appear in.
+
+<div id="actor-age-plot" style="width: 100%; height: 600px;"></div>
+
+**Observations**:
+
+1. **Age Intervals of High Activity**: There are two key age ranges where actors are more likely to appear in additional movies:
+   - **1-5 years**: Very early career starts
+   - **15-19 years**: Teenage career beginnings
+   These intervals suggest that actors starting young or during teenage years often have longer, more prolific careers.
+
+2. **Declining Trend**: An overall decline in appearances with increasing starting age indicates that actors beginning their careers later are less likely to have extensive filmographies. This trend suggests a strong correlation between early career start and accumulated experience.
+
+These findings support our hypothesis that an experienced actor contributes to a movie's success. To incorporate this, we considered the most experienced actor in each movie (i.e., the actor with the most previous appearances by the movie's release date) as a factor in our success metric.
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
@@ -127,9 +144,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Yearly Vote Count Statistics', 'Vote Count');
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
-            
             // Create success plots
             createSuccessPlots(yearStats, years);
+            // Add to the existing script section in data-analysis.md, inside the complete callback
+            createActorAgePlot();
         },
         error: function(error) {
             console.error('Error loading data:', error);

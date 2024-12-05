@@ -223,3 +223,115 @@ function createSuccessPlots(yearStats, years) {
 
     Plotly.newPlot('success-revenue-plot', [trace], layout);
 }
+
+// Add to assets/js/data-analysis-plots.js
+
+async function createActorAgePlot() {
+    try {
+        // Load character metadata
+        const characterData = await fetch('../data/character_metadata_cleaned.csv')
+            .then(response => response.text())
+            .then(text => Papa.parse(text, { header: true }).data);
+
+        // Process actor data
+        const actorStats = {};
+        characterData.forEach(row => {
+            const actorName = row.actor_name;
+            const age = parseFloat(row.actor_age);
+            
+            if (actorName && !isNaN(age) && age > 0) {
+                if (!actorStats[actorName]) {
+                    actorStats[actorName] = {
+                        youngest_age: age,
+                        occurrences: 1
+                    };
+                } else {
+                    actorStats[actorName].youngest_age = Math.min(actorStats[actorName].youngest_age, age);
+                    actorStats[actorName].occurrences++;
+                }
+            }
+        });
+
+        // Convert to arrays for plotting
+        const plotData = Object.values(actorStats)
+            .filter(stat => stat.youngest_age <= 100); // Filter out unrealistic ages
+
+        // Calculate mean occurrences per age
+        const ageStats = {};
+        plotData.forEach(stat => {
+            const age = Math.floor(stat.youngest_age);
+            if (!ageStats[age]) {
+                ageStats[age] = { sum: 0, count: 0 };
+            }
+            ageStats[age].sum += stat.occurrences;
+            ageStats[age].count++;
+        });
+
+        const meanLine = Object.entries(ageStats).map(([age, stats]) => ({
+            age: parseInt(age),
+            mean: stats.sum / stats.count
+        })).sort((a, b) => a.age - b.age);
+
+        // Create scatter plot
+        const scatterTrace = {
+            x: plotData.map(d => d.youngest_age),
+            y: plotData.map(d => d.occurrences),
+            mode: 'markers',
+            type: 'scatter',
+            name: 'Actors',
+            marker: {
+                color: 'magenta',
+                size: 5,
+                opacity: 0.02
+            }
+        };
+
+        // Create mean line
+        const meanTrace = {
+            x: meanLine.map(d => d.age),
+            y: meanLine.map(d => d.mean),
+            mode: 'lines',
+            type: 'scatter',
+            name: 'Mean Occurrences',
+            line: {
+                color: 'cyan',
+                width: 2
+            }
+        };
+
+        // Add vertical highlight lines
+        const verticalLines = [
+            { x: 1, color: 'white', style: 'dash', width: 0.5 },
+            { x: 3, color: 'yellow', style: 'solid', width: 1 },
+            { x: 5, color: 'white', style: 'dash', width: 0.5 },
+            { x: 15, color: 'white', style: 'dash', width: 0.5 },
+            { x: 17, color: 'yellow', style: 'solid', width: 1 },
+            { x: 19, color: 'white', style: 'dash', width: 0.5 }
+        ].map(line => ({
+            type: 'line',
+            x0: line.x,
+            x1: line.x,
+            y0: 0,
+            y1: Math.max(...plotData.map(d => d.occurrences)),
+            line: {
+                color: line.color,
+                width: line.width,
+                dash: line.style
+            }
+        }));
+
+        const layout = createPlotlyLayout(
+            'Total Number of Occurrences vs. Youngest Age at First Occurrence',
+            'Youngest Age at First Occurrence',
+            'Total Number of Occurrences',
+            true
+        );
+
+        layout.shapes = verticalLines;
+
+        Plotly.newPlot('actor-age-plot', [scatterTrace, meanTrace], layout);
+
+    } catch (error) {
+        console.error('Error creating actor age plot:', error);
+    }
+}
