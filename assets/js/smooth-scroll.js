@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAnimating = false;
   
     // Inertia parameters - feel free to adjust these
-    const SCROLL_MULTIPLIER = 0.5;  // How much scroll affects velocity
-    const FRICTION = 0.90;          // How quickly motion slows down (0-1)
-    const VELOCITY_MIN = 0.1;       // When to stop animation
-    const MAX_OFFSET = 50;          // Maximum pixels of movement
+    const SCROLL_MULTIPLIER = 0.8;  // How much scroll affects velocity
+    const FRICTION = 0.50;          // How quickly motion slows down (0-1)
+    const VELOCITY_MIN = 0.9;       // When to stop animation
+    const MAX_OFFSET = 200;          // Maximum pixels of movement
   
     function animate() {
       if (Math.abs(velocity) > VELOCITY_MIN) {
