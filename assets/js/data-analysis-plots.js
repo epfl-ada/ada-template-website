@@ -136,37 +136,51 @@ function createScatterPlot(divId, yearStats, years, field, title, yLabel, logY =
 
 // Add to assets/js/data-analysis-plots.js
 
+// Add to assets/js/data-analysis-plots.js
+
+function calculateSuccess(rating, votes) {
+    if (!rating || !votes || votes <= 1) return null;
+    return rating * Math.log(votes);
+}
+
 function createSuccessPlots(yearStats, years) {
-    // Calculate success for each movie
+    console.log("Creating success plots..."); // Debug log
+
+    // Calculate success for each movie and add to yearStats
     years.forEach(year => {
+        yearStats[year].successes = [];
         yearStats[year].movies.forEach(movie => {
-            if (movie.rating > 0 && movie.votes > 0) {
-                movie.success = movie.rating * Math.log(movie.votes);
+            const success = calculateSuccess(movie.rating, movie.votes);
+            if (success !== null) {
+                movie.success = success;
+                yearStats[year].successes.push(success);
             }
         });
-        yearStats[year].successes = yearStats[year].movies
-            .filter(m => m.success)
-            .map(m => m.success);
     });
+
+    // Log some debug info
+    console.log("Sample success values:", yearStats[years[0]].successes.slice(0, 5));
 
     // Create success statistics plot
     createStatsPlot('success-stats-plot', yearStats, years, 'successes',
-        'Success Statistics', 'Success');
-    
+        'Success Statistics', 'Success', false);
+
     // Create success scatter plot
     createScatterPlot('success-scatter-plot', yearStats, years, 'success',
-        'Success per Movie', 'Success');
+        'Success per Movie', 'Success', false);
 
     // Create success vs revenue plot
     const allMovies = years.flatMap(year => 
         yearStats[year].movies
-            .filter(movie => movie.success && movie.revenue > 0)
+            .filter(movie => movie.success !== null && movie.revenue > 0 && movie.rating > 0)
             .map(movie => ({
                 success: movie.success,
                 revenue: movie.revenue,
                 rating: movie.rating
             }))
     );
+
+    console.log("Number of movies for success-revenue plot:", allMovies.length); // Debug log
 
     const trace = {
         x: allMovies.map(m => m.success),
@@ -178,7 +192,11 @@ function createSuccessPlots(yearStats, years) {
             colorscale: 'Viridis',
             showscale: true,
             size: 5,
-            opacity: 0.3
+            opacity: 0.3,
+            colorbar: {
+                title: 'Rating',
+                titleside: 'right'
+            }
         },
         name: 'Movies'
     };
@@ -191,12 +209,6 @@ function createSuccessPlots(yearStats, years) {
     );
 
     layout.showlegend = false;
-    layout.coloraxis = {
-        colorbar: {
-            title: 'Rating',
-            titleside: 'right'
-        }
-    };
 
     Plotly.newPlot('success-revenue-plot', [trace], layout);
 }

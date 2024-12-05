@@ -40,7 +40,8 @@ function calculateStatistics(array) {
     return { mean, median, std };
 }
 
-// Data transformation utilities
+// Update in assets/js/utilities.js
+
 function processYearlyData(data, startYear = 1920) {
     const yearStats = {};
     
@@ -51,10 +52,11 @@ function processYearlyData(data, startYear = 1920) {
                 if (!yearStats[year]) {
                     yearStats[year] = {
                         count: 0,
-                        totalRevenue: 0,  // Add this field
+                        totalRevenue: 0,
                         revenues: [],
                         ratings: [],
                         votes: [],
+                        successes: [],
                         movies: []
                     };
                 }
@@ -67,14 +69,26 @@ function processYearlyData(data, startYear = 1920) {
                 
                 if (revenue > 0) {
                     yearStats[year].revenues.push(revenue);
-                    yearStats[year].totalRevenue += revenue;  // Update total revenue
+                    yearStats[year].totalRevenue += revenue;
                 }
                 if (rating > 0) yearStats[year].ratings.push(rating);
                 if (votes > 0) yearStats[year].votes.push(votes);
                 
-                yearStats[year].movies.push({ revenue, rating, votes });
+                yearStats[year].movies.push({
+                    revenue,
+                    rating,
+                    votes,
+                    success: rating > 0 && votes > 0 ? rating * Math.log(votes) : null
+                });
             }
         }
+    });
+    
+    // Calculate successes after all movies are processed
+    Object.keys(yearStats).forEach(year => {
+        yearStats[year].successes = yearStats[year].movies
+            .map(m => m.success)
+            .filter(s => s !== null);
     });
     
     return yearStats;

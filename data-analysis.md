@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 12:57
+# Preliminary Analysis and Metric Selection 1:03
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -103,49 +103,36 @@ We can observe a clear correlation between success and revenue: Revenue tends to
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM Content Loaded"); // Debug log
     Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
         download: true,
         header: true,
         complete: function(results) {
+            console.log("Data loaded successfully"); // Debug log
             const yearStats = processYearlyData(results.data);
             const years = Object.keys(yearStats).sort((a,b) => a-b);
             
-            // Create all plots using utility functions
+            // Create all plots
             createReleasesPlot(yearStats, years);
             createRevenuePlot(yearStats, years);
-            
-            // Create statistics plots
             createStatsPlot('revenue-stats-plot', yearStats, years, 'revenues', 
                 'Box Office Revenue Statistics', 'Revenue [$]');
             createScatterPlot('revenue-scatter-plot', yearStats, years, 'revenue', 
                 'Box Office Revenue per Movie (log)', 'Revenue [$] (log)', true);
-            
             createStatsPlot('ratings-stats-plot', yearStats, years, 'ratings',
                 'Yearly Rating Statistics', 'Rating');
             createScatterPlot('ratings-scatter-plot', yearStats, years, 'rating',
                 'Ratings per Movie', 'Rating');
-            
             createStatsPlot('votes-stats-plot', yearStats, years, 'votes',
                 'Yearly Vote Count Statistics', 'Vote Count');
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
+            
+            // Create success plots
+            createSuccessPlots(yearStats, years);
         },
         error: function(error) {
             console.error('Error loading data:', error);
-        }
-    });
-});
-// Add to the existing script section in data-analysis.md
-document.addEventListener('DOMContentLoaded', function() {
-    Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
-        download: true,
-        header: true,
-        complete: function(results) {
-            const yearStats = processYearlyData(results.data);
-            const years = Object.keys(yearStats).sort((a,b) => a-b);
-            
-            // Add this line to the existing function calls
-            createSuccessPlots(yearStats, years);
         }
     });
 });
