@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 1:27
+# Preliminary Analysis and Metric Selection 1:31
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -102,6 +102,7 @@ We can observe a clear correlation between success and revenue: Revenue tends to
 Understanding actors' trajectories can offer valuable insights into their influence in the industry. Generally, actors who start their careers at a younger age tend to have more connections and experience, which could positively impact a movie's success. In this section, we examine how the age of an actor at their first movie appearance correlates with the total number of movies they appear in.
 
 <div id="actor-age-plot" style="width: 100%; height: 600px;"></div>
+<div id="actor-age-plot-error" style="color: red;"></div>
 
 **Observations**:
 
