@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
-title: ADA Template Website
-description: A template website for ADA
+title: BeerAdvocate vs. RateBeer: A Study of Cross-Platform Beer Ratings
+description: A ADA data story
 show_downloads: True
 navigation:
   - title: Home
