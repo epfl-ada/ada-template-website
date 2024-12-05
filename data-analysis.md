@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 2:02
+# Preliminary Analysis and Metric Selection 2:06
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -121,13 +121,14 @@ These findings support our hypothesis that an experienced actor contributes to a
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Load the movie master dataset
     Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
         download: true,
         header: true,
-        complete: function(results) {
-            const yearStats = processYearlyData(results.data);
+        complete: function(movieResults) {
+            const yearStats = processYearlyData(movieResults.data);
             const years = Object.keys(yearStats).sort((a,b) => a-b);
-            // Create all plots
+            // Create movie-related plots
             createReleasesPlot(yearStats, years);
             createRevenuePlot(yearStats, years);
             createStatsPlot('revenue-stats-plot', yearStats, years, 'revenues', 
@@ -143,11 +144,22 @@ document.addEventListener('DOMContentLoaded', function() {
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
             createSuccessPlots(yearStats, years);
-            // Create actor age plot with the movie data
-            createActorAgePlot(results.data);
+            
+            // Load the character metadata for actor age plot
+            Papa.parse('{{ site.baseurl }}/data/character_metadata_cleaned.csv', {
+                download: true,
+                header: true,
+                complete: function(characterResults) {
+                    console.log("Character data loaded:", characterResults.data.length);
+                    createActorAgePlot(characterResults.data);
+                },
+                error: function(error) {
+                    console.error('Error loading character data:', error);
+                }
+            });
         },
         error: function(error) {
-            console.error('Error loading data:', error);
+            console.error('Error loading movie data:', error);
         }
     });
 });

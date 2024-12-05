@@ -228,29 +228,33 @@ function createSuccessPlots(yearStats, years) {
 
 // Update in assets/js/data-analysis-plots.js
 
-function createActorAgePlot(movieData) {
+function createActorAgePlot(characterData) {
     try {
-        // Process actor data from the movie dataset
+        console.log("Starting actor age plot creation");
+        console.log("Sample character data:", characterData.slice(0, 5));
+
+        // Process actor data from the character dataset
         const actorStats = new Map();
         
         // Filter and process valid actor data
-        movieData
-            .filter(row => row.actor_age && row.actor_name)
+        characterData
+            .filter(row => {
+                const age = parseFloat(row.actor_age);
+                return row.actor_name && !isNaN(age) && age > 0 && age < 100;
+            })
             .forEach(row => {
                 const actorName = row.actor_name;
                 const age = parseFloat(row.actor_age);
                 
-                if (!isNaN(age) && age > 0 && age < 100) {
-                    if (!actorStats.has(actorName)) {
-                        actorStats.set(actorName, {
-                            youngest_age: age,
-                            occurrences: 1
-                        });
-                    } else {
-                        const stats = actorStats.get(actorName);
-                        stats.youngest_age = Math.min(stats.youngest_age, age);
-                        stats.occurrences += 1;
-                    }
+                if (!actorStats.has(actorName)) {
+                    actorStats.set(actorName, {
+                        youngest_age: age,
+                        occurrences: 1
+                    });
+                } else {
+                    const stats = actorStats.get(actorName);
+                    stats.youngest_age = Math.min(stats.youngest_age, age);
+                    stats.occurrences += 1;
                 }
             });
 
@@ -260,10 +264,9 @@ function createActorAgePlot(movieData) {
 
         // Debug logging
         console.log("Number of valid actors:", plotData.length);
-        console.log("Age range:", Math.min(...plotData.map(d => d.youngest_age)), 
-                   "to", Math.max(...plotData.map(d => d.youngest_age)));
+        console.log("Sample plot data:", plotData.slice(0, 5));
 
-        // Create scatter plot with improved visibility
+        // Create scatter plot with increased visibility
         const scatterTrace = {
             x: plotData.map(d => d.youngest_age),
             y: plotData.map(d => d.occurrences),
@@ -272,28 +275,31 @@ function createActorAgePlot(movieData) {
             name: 'Actors',
             marker: {
                 color: 'magenta',
-                size: 5,
-                opacity: 0.3
+                size: 6,
+                opacity: 0.4
             }
         };
 
         // Calculate mean line with proper binning
-        const ageGroups = new Map();
+        const ageGroups = Array(100).fill().map(() => []);
         plotData.forEach(d => {
             const age = Math.floor(d.youngest_age);
-            if (!ageGroups.has(age)) {
-                ageGroups.set(age, []);
+            if (age >= 0 && age < 100) {
+                ageGroups[age].push(d.occurrences);
             }
-            ageGroups.get(age).push(d.occurrences);
         });
 
-        const meanLine = Array.from(ageGroups.entries())
-            .map(([age, occurrences]) => ({
-                age: parseInt(age),
-                mean: occurrences.reduce((a, b) => a + b, 0) / occurrences.length
+        const meanLine = ageGroups
+            .map((occurrences, age) => ({
+                age,
+                mean: occurrences.length > 0 
+                    ? occurrences.reduce((a, b) => a + b, 0) / occurrences.length 
+                    : null
             }))
-            .sort((a, b) => a.age - b.age)
-            .filter(d => !isNaN(d.mean)); // Filter out any NaN values
+            .filter(d => d.mean !== null);
+
+        console.log("Mean line data points:", meanLine.length);
+        console.log("Sample mean line data:", meanLine.slice(0, 5));
 
         const meanTrace = {
             x: meanLine.map(d => d.age),
@@ -315,13 +321,14 @@ function createActorAgePlot(movieData) {
             },
             xaxis: {
                 title: 'Age at First Appearance',
-                range: [0, 40], // Adjusted range for better visibility
+                range: [0, 40],
                 gridcolor: 'gray',
                 color: 'white'
             },
             yaxis: {
                 title: 'Number of Appearances',
                 type: 'log',
+                range: [0, Math.log10(Math.max(...plotData.map(d => d.occurrences)) * 1.1)],
                 gridcolor: 'gray',
                 color: 'white'
             },
@@ -349,6 +356,7 @@ function createActorAgePlot(movieData) {
             ]
         };
 
+        console.log("Creating plot with data points:", plotData.length);
         Plotly.newPlot('actor-age-plot', [scatterTrace, meanTrace], layout);
 
     } catch (error) {
