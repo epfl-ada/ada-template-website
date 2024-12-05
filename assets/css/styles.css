@@ -1,15 +1,16 @@
 /* Base styles */
 :root {
   --primary-color: #39c;
-  --text-color: #494949;
-  --heading-color: #222;
-  --border-color: #e5e5e5;
-  --background-hover: #f4f4f4;
-  --code-background: #f8f8f8;
+  --text-color: #e0e0e0;
+  --heading-color: #ffffff;
+  --border-color: #404040;
+  --background-color: #1e1e1e;
+  --background-hover: #2d2d2d;
+  --code-background: #2d2d2d;
 }
 
 body {
-  background-color: #fff;
+  background-color: var(--background-color);
   padding: 50px;
   font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
   color: var(--text-color);
@@ -32,7 +33,7 @@ h1 {
 
 h2 {
   font-size: 2em;
-  color: #393939;
+  color: #cccccc;
   margin-top: 40px;
 }
 
@@ -53,7 +54,7 @@ a {
 }
 
 a:hover {
-  color: #069;
+  color: #69c;
   text-decoration: underline;
 }
 
@@ -72,34 +73,10 @@ header {
   align-self: start;
 }
 
-nav {
-  margin-top: 20px;
-}
-
-nav p {
-  margin: 10px 0;
-}
-
-nav a {
-  display: block;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-nav a:hover {
-  background-color: var(--background-hover);
-  text-decoration: none;
-}
-
-section {
-  padding: 20px 0;
-}
-
 /* Code blocks */
 code, pre {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-  color: #333;
+  color: #e0e0e0;
   font-size: 14px;
   background: var(--code-background);
   border-radius: 4px;
@@ -112,16 +89,12 @@ pre {
   border: 1px solid var(--border-color);
 }
 
-pre code {
-  background: transparent;
-  padding: 0;
-}
-
 /* Tables */
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
+  background-color: var(--background-color);
 }
 
 th, td {
@@ -133,6 +106,7 @@ th, td {
 th {
   background-color: var(--background-hover);
   font-weight: 600;
+  color: var(--heading-color);
 }
 
 /* Images */
@@ -141,6 +115,25 @@ img {
   height: auto;
   border-radius: 4px;
   margin: 20px 0;
+}
+
+/* Plot containers */
+.plot-container {
+  width: 100%;
+  margin: 20px 0;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Observations and conclusions */
+.observation, .conclusion {
+  background-color: var(--background-hover);
+  border-left: 4px solid var(--primary-color);
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 0 4px 4px 0;
 }
 
 /* Responsive design */
@@ -163,14 +156,5 @@ img {
   
   body {
     padding: 20px;
-  }
-}
-
-/* Print styles */
-@media print {
-  body {
-    padding: 0.4in;
-    font-size: 12pt;
-    color: #444;
   }
 }
