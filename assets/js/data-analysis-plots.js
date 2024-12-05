@@ -275,8 +275,8 @@ function createActorAgePlot(characterData) {
             name: 'Actors',
             marker: {
                 color: 'magenta',
-                size: 6,
-                opacity: 0.4
+                size: 15,
+                opacity: 0.2
             }
         };
 
