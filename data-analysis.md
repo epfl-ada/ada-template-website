@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 1:42
+# Preliminary Analysis and Metric Selection 1:51
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -121,44 +121,36 @@ These findings support our hypothesis that an experienced actor contributes to a
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Load both datasets in parallel
-    Promise.all([
-        new Promise((resolve, reject) => {
-            Papa.parse('/ada-template-website/data/movie_master_dataset.csv', {
-                download: true,
-                header: true,
-                complete: resolve,
-                error: reject
-            });
-        }),
-        fetch('/ada-template-website/data/character_metadata_cleaned.csv')
-            .then(response => response.text())
-            .then(text => Papa.parse(text, { header: true }))
-    ]).then(([movieResults, characterResults]) => {
-        const yearStats = processYearlyData(movieResults.data);
-        const years = Object.keys(yearStats).sort((a,b) => a-b);
-        // Create all plots
-        createReleasesPlot(yearStats, years);
-        createRevenuePlot(yearStats, years);
-        createStatsPlot('revenue-stats-plot', yearStats, years, 'revenues', 
-            'Box Office Revenue Statistics', 'Revenue [$]');
-        createScatterPlot('revenue-scatter-plot', yearStats, years, 'revenue', 
-            'Box Office Revenue per Movie (log)', 'Revenue [$] (log)', true);
-        createStatsPlot('ratings-stats-plot', yearStats, years, 'ratings',
-            'Yearly Rating Statistics', 'Rating');
-        createScatterPlot('ratings-scatter-plot', yearStats, years, 'rating',
-            'Ratings per Movie', 'Rating');
-        createStatsPlot('votes-stats-plot', yearStats, years, 'votes',
-            'Yearly Vote Count Statistics', 'Vote Count');
-        createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
-            'Vote Counts per Movie (log)', 'Vote Count (log)', true);
-        createSuccessPlots(yearStats, years);
-        // Create actor age plot with character data
-        createActorAgePlot();
-    }).catch(error => {
-        console.error('Error loading data:', error);
-        document.getElementById('actor-age-plot-error').textContent = 
-            `Error loading data: ${error.message}`;
+    Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+            const yearStats = processYearlyData(results.data);
+            const years = Object.keys(yearStats).sort((a,b) => a-b);
+            
+            // Create all plots
+            createReleasesPlot(yearStats, years);
+            createRevenuePlot(yearStats, years);
+            createStatsPlot('revenue-stats-plot', yearStats, years, 'revenues', 
+                'Box Office Revenue Statistics', 'Revenue [$]');
+            createScatterPlot('revenue-scatter-plot', yearStats, years, 'revenue', 
+                'Box Office Revenue per Movie (log)', 'Revenue [$] (log)', true);
+            createStatsPlot('ratings-stats-plot', yearStats, years, 'ratings',
+                'Yearly Rating Statistics', 'Rating');
+            createScatterPlot('ratings-scatter-plot', yearStats, years, 'rating',
+                'Ratings per Movie', 'Rating');
+            createStatsPlot('votes-stats-plot', yearStats, years, 'votes',
+                'Yearly Vote Count Statistics', 'Vote Count');
+            createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
+                'Vote Counts per Movie (log)', 'Vote Count (log)', true);
+            createSuccessPlots(yearStats, years);
+            
+            // Create actor age plot with the movie data
+            createActorAgePlot(results.data);
+        },
+        error: function(error) {
+            console.error('Error loading data:', error);
+        }
     });
 });
 </script>

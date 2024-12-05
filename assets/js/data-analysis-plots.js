@@ -228,37 +228,27 @@ function createSuccessPlots(yearStats, years) {
 
 // Update in assets/js/data-analysis-plots.js
 
-async function createActorAgePlot() {
+function createActorAgePlot(movieData) {
     try {
-        // Update the data loading path
-        const response = await fetch('/ada-template-website/data/character_metadata_cleaned.csv');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const text = await response.text();
-        const result = Papa.parse(text, { header: true });
-        const characterData = result.data;
-
-        // Debug logs
-        console.log("Raw data first row:", characterData[0]);
-        
-        // Process actor data
+        // Process actor data from the movie dataset
         const actorStats = new Map();
         
-        characterData.forEach(row => {
-            const actorName = row.actor_name;
-            const age = parseFloat(row.actor_age);
-            
-            if (actorName && !isNaN(age) && age > 0 && age < 100) {
-                if (!actorStats.has(actorName)) {
-                    actorStats.set(actorName, {
-                        youngest_age: age,
-                        occurrences: 1
-                    });
-                } else {
-                    const stats = actorStats.get(actorName);
-                    stats.youngest_age = Math.min(stats.youngest_age, age);
-                    stats.occurrences += 1;
+        movieData.forEach(row => {
+            if (row.actor_age) {
+                const actorName = row.actor_name;
+                const age = parseFloat(row.actor_age);
+                
+                if (actorName && !isNaN(age) && age > 0 && age < 100) {
+                    if (!actorStats.has(actorName)) {
+                        actorStats.set(actorName, {
+                            youngest_age: age,
+                            occurrences: 1
+                        });
+                    } else {
+                        const stats = actorStats.get(actorName);
+                        stats.youngest_age = Math.min(stats.youngest_age, age);
+                        stats.occurrences += 1;
+                    }
                 }
             }
         });
@@ -324,7 +314,7 @@ async function createActorAgePlot() {
             type: 'line',
             x0: line.x,
             x1: line.x,
-            y0: 1,  // Start from 1 since we're using log scale
+            y0: 1,
             y1: Math.max(...plotData.map(d => d.occurrences)),
             line: {
                 color: line.color,
@@ -348,7 +338,7 @@ async function createActorAgePlot() {
                 color: 'white'
             },
             xaxis: {
-                range: [0, 20],  // Limit x-axis to focus on relevant age range
+                range: [0, 20],
                 gridcolor: 'gray',
                 color: 'white'
             }
@@ -359,6 +349,6 @@ async function createActorAgePlot() {
     } catch (error) {
         console.error('Error creating actor age plot:', error);
         document.getElementById('actor-age-plot-error').textContent = 
-            `Error loading data: ${error.message}`;
+            `Error creating plot: ${error.message}`;
     }
 }
