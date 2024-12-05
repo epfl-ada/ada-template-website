@@ -189,13 +189,20 @@ function createSuccessPlots(yearStats, years) {
         type: 'scatter',
         marker: {
             color: allMovies.map(m => m.rating),
-            colorscale: 'Viridis',
+            colorscale: [
+                [0, 'rgb(0,0,255)'],      // Blue
+                [0.33, 'rgb(138,43,226)'], // Purple
+                [0.66, 'rgb(255,0,255)'],  // Magenta
+                [1, 'rgb(255,0,0)']        // Red
+            ],
             showscale: true,
             size: 5,
             opacity: 0.3,
             colorbar: {
-                title: 'Rating',
-                titleside: 'right'
+                title: {
+                    text: 'Rating',
+                    side: 'right'
+                }
             }
         },
         name: 'Movies'
