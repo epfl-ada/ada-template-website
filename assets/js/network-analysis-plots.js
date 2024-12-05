@@ -1,132 +1,42 @@
 // File: assets/js/network-analysis-plots.js
 
-// Utility functions for data processing
-function processActorStats(characterData, movieData) {
-    const actorStats = new Map();
-    
-    // Process movie success data
-    const movieSuccess = new Map();
-    movieData.forEach(movie => {
-        movieSuccess.set(movie.movie_id, {
-            success: movie.rating * Math.log(Math.max(movie.vote_count, 1)),
-            year: new Date(movie.release_date).getFullYear()
-        });
-    });
-
-    // Calculate actor statistics
-    characterData.forEach(char => {
-        if (!actorStats.has(char.actor_name)) {
-            actorStats.set(char.actor_name, {
-                collaborations: new Set(),
-                movies: new Set(),
-                totalSuccess: 0,
-                firstYear: Infinity
-            });
-        }
-        
-        const stats = actorStats.get(char.actor_name);
-        stats.movies.add(char.movie_id);
-        
-        const movieData = movieSuccess.get(char.movie_id);
-        if (movieData) {
-            stats.totalSuccess += movieData.success;
-            stats.firstYear = Math.min(stats.firstYear, movieData.year);
-        }
-    });
-
-    // Process collaborations
-    characterData.forEach(char1 => {
-        characterData.forEach(char2 => {
-            if (char1.movie_id === char2.movie_id && char1.actor_name !== char2.actor_name) {
-                actorStats.get(char1.actor_name).collaborations.add(char2.actor_name);
-            }
-        });
-    });
-
-    // Convert to array format
-    return Array.from(actorStats.entries()).map(([name, stats]) => ({
-        name,
-        collaborations: stats.collaborations.size,
-        movies: stats.movies.size,
-        success: stats.totalSuccess / stats.movies.size,
-        firstYear: stats.firstYear
-    }));
+function createNetworkPlots(characterData, movieData) {
+    createActorNetwork(characterData, movieData);
+    createCollaborationSuccessPlot(characterData, movieData);
+    createCareerTrajectoryPlot(characterData, movieData);
 }
 
-// Network visualization
 function createActorNetwork(characterData, movieData, width = 800, height = 800) {
-    const actorStats = processActorStats(characterData, movieData);
+    // Process data for network visualization
+    const { nodes, links } = processNetworkData(characterData, movieData);
     
-    // Filter to top 60 actors by collaborations
-    const topActors = actorStats
-        .sort((a, b) => b.collaborations - a.collaborations)
-        .slice(0, 60);
-
-    // Create nodes and links
-    const nodes = topActors.map(actor => ({
-        id: actor.name,
-        collaborations: actor.collaborations,
-        success: actor.success,
-        radius: Math.sqrt(actor.collaborations) * 2
-    }));
-
-    const links = [];
-    for (let i = 0; i < topActors.length; i++) {
-        for (let j = i + 1; j < topActors.length; j++) {
-            if (areCollaborators(topActors[i].name, topActors[j].name, characterData)) {
-                links.push({
-                    source: topActors[i].name,
-                    target: topActors[j].name
-                });
-            }
-        }
-    }
-
-    // Create force simulation
     const simulation = d3.forceSimulation(nodes)
         .force('link', d3.forceLink(links).id(d => d.id))
         .force('charge', d3.forceManyBody().strength(-200))
-        .force('center', d3.forceCenter(width / 2, height / 2))
-        .force('collision', d3.forceCollide().radius(d => d.radius + 2));
+        .force('center', d3.forceCenter(width / 2, height / 2));
 
-    // Create SVG container
     const svg = d3.select('#actor-network-plot')
         .append('svg')
         .attr('viewBox', [0, 0, width, height])
         .style('background-color', '#1e1e1e');
 
-    // Add links
+    // Create links
     const link = svg.append('g')
         .selectAll('line')
         .data(links)
         .join('line')
         .style('stroke', '#404040')
-        .style('stroke-width', 0.5)
         .style('stroke-opacity', 0.6);
 
-    // Add nodes
+    // Create nodes
     const node = svg.append('g')
         .selectAll('circle')
         .data(nodes)
         .join('circle')
-        .attr('r', d => d.radius)
-        .style('fill', d => d3.interpolateViridis(normalizeSuccess(d.success)))
-        .style('stroke', '#fff')
-        .style('stroke-width', 0.5)
+        .attr('r', d => Math.sqrt(d.collaborations) * 2)
+        .style('fill', d => d3.interpolateViridis(d.success))
         .call(drag(simulation));
 
-    // Add labels
-    const label = svg.append('g')
-        .selectAll('text')
-        .data(nodes)
-        .join('text')
-        .text(d => d.id)
-        .style('fill', 'white')
-        .style('font-size', '8px')
-        .style('text-anchor', 'middle')
-        .style('pointer-events', 'none');
-
-    // Simulation update function
     simulation.on('tick', () => {
         link
             .attr('x1', d => d.source.x)
@@ -137,14 +47,9 @@ function createActorNetwork(characterData, movieData, width = 800, height = 800)
         node
             .attr('cx', d => d.x)
             .attr('cy', d => d.y);
-
-        label
-            .attr('x', d => d.x)
-            .attr('y', d => d.y + 3);
     });
 }
 
-// Collaboration success analysis
 function createCollaborationSuccessPlot(characterData, movieData) {
     const actorStats = processActorStats(characterData, movieData);
     
@@ -154,23 +59,11 @@ function createCollaborationSuccessPlot(characterData, movieData) {
         mode: 'markers',
         type: 'scatter',
         marker: {
-            size: 6,
+            size: 8,
             color: actorStats.map(d => d.movies),
             colorscale: 'Viridis',
-            opacity: 0.6,
-            showscale: true,
-            colorbar: {
-                title: 'Number of Movies',
-                titlefont: { color: 'white' },
-                tickfont: { color: 'white' }
-            }
-        },
-        hovertemplate: 
-            '<b>%{text}</b><br>' +
-            'Collaborations: %{x}<br>' +
-            'Success: %{y:.2f}<br>' +
-            '<extra></extra>',
-        text: actorStats.map(d => d.name)
+            opacity: 0.6
+        }
     };
 
     const layout = {
@@ -191,23 +84,20 @@ function createCollaborationSuccessPlot(characterData, movieData) {
         },
         plot_bgcolor: '#1e1e1e',
         paper_bgcolor: '#1e1e1e',
-        font: { color: 'white' },
-        showlegend: false
+        font: { color: 'white' }
     };
 
     Plotly.newPlot('collaboration-success-plot', [trace], layout);
 }
 
-// Career trajectory analysis
-function createCareerTrajectoryPlot(characterData) {
-    // Calculate average success by career year
-    const careerData = processCareerTrajectories(characterData);
+function createCareerTrajectoryPlot(characterData, movieData) {
+    const trajectoryData = processCareerTrajectories(characterData, movieData);
     
     const trace = {
-        x: careerData.years,
-        y: careerData.avgSuccess,
-        mode: 'lines+markers',
+        x: trajectoryData.years,
+        y: trajectoryData.avgSuccess,
         type: 'scatter',
+        mode: 'lines+markers',
         line: { color: 'cyan', width: 2 },
         marker: { size: 8 }
     };
@@ -235,81 +125,234 @@ function createCareerTrajectoryPlot(characterData) {
     Plotly.newPlot('career-trajectory-plot', [trace], layout);
 }
 
-// Utility functions
-function drag(simulation) {
-    function dragstarted(event) {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        event.subject.fx = event.subject.x;
-        event.subject.fy = event.subject.y;
-    }
+// Utility functions for network analysis
 
-    function dragged(event) {
-        event.subject.fx = event.x;
-        event.subject.fy = event.y;
-    }
-
-    function dragended(event) {
-        if (!event.active) simulation.alphaTarget(0);
-        event.subject.fx = null;
-        event.subject.fy = null;
-    }
-
-    return d3.drag()
-        .on('start', dragstarted)
-        .on('drag', dragged)
-        .on('end', dragended);
-}
-
-function areCollaborators(actor1, actor2, characterData) {
-    return characterData.some(char1 => 
-        char1.actor_name === actor1 && 
-        characterData.some(char2 => 
-            char2.actor_name === actor2 && 
-            char1.movie_id === char2.movie_id
-        )
+function processNetworkData(characterData, movieData) {
+    // Create maps for movie and actor success metrics
+    const movieSuccessMap = new Map(
+        movieData.map(movie => [
+            movie.movie_id,
+            {
+                success: parseFloat(movie.rating) * Math.log(Math.max(parseFloat(movie.vote_count), 1)),
+                year: new Date(movie.release_date).getFullYear()
+            }
+        ])
     );
-}
 
-function normalizeSuccess(success) {
-    // Normalize success value to [0,1] range for color scaling
-    const minSuccess = 0;
-    const maxSuccess = 100;
-    return (success - minSuccess) / (maxSuccess - minSuccess);
-}
+    // Create collaboration tracking structures
+    const collaborations = new Map();
+    const actorMovies = new Map();
+    const actorSuccess = new Map();
 
-function processCareerTrajectories(characterData) {
-    const careerData = new Map();
-    
-    // Process career trajectories
-    characterData.forEach(char => {
-        const careerYear = getCareerYear(char.actor_name, char.release_date, characterData);
-        if (!careerData.has(careerYear)) {
-            careerData.set(careerYear, {
+    // Process all character data to build collaboration network
+    characterData.forEach(char1 => {
+        const actor1 = char1.actor_name;
+        
+        // Track movies per actor
+        if (!actorMovies.has(actor1)) {
+            actorMovies.set(actor1, new Set());
+        }
+        actorMovies.get(actor1).add(char1.movie_id);
+
+        // Track success metrics
+        if (!actorSuccess.has(actor1)) {
+            actorSuccess.set(actor1, {
                 totalSuccess: 0,
-                count: 0
+                movieCount: 0
             });
         }
-        const yearData = careerData.get(careerYear);
-        yearData.totalSuccess += char.success || 0;
-        yearData.count += 1;
+
+        const movieSuccess = movieSuccessMap.get(char1.movie_id);
+        if (movieSuccess) {
+            const stats = actorSuccess.get(actor1);
+            stats.totalSuccess += movieSuccess.success;
+            stats.movieCount += 1;
+        }
+
+        // Find collaborations within the same movie
+        characterData.forEach(char2 => {
+            if (char1.movie_id === char2.movie_id && char1.actor_name !== char2.actor_name) {
+                const actor2 = char2.actor_name;
+                const collaborationKey = [actor1, actor2].sort().join('|');
+
+                if (!collaborations.has(collaborationKey)) {
+                    collaborations.set(collaborationKey, {
+                        count: 0,
+                        movies: new Set()
+                    });
+                }
+                
+                const collab = collaborations.get(collaborationKey);
+                if (!collab.movies.has(char1.movie_id)) {
+                    collab.count += 1;
+                    collab.movies.add(char1.movie_id);
+                }
+            }
+        });
+    });
+
+    // Create nodes array (top 60 actors by collaboration count)
+    const actorCollabCounts = new Map();
+    collaborations.forEach((value, key) => {
+        const [actor1, actor2] = key.split('|');
+        actorCollabCounts.set(actor1, (actorCollabCounts.get(actor1) || 0) + value.count);
+        actorCollabCounts.set(actor2, (actorCollabCounts.get(actor2) || 0) + value.count);
+    });
+
+    const topActors = Array.from(actorCollabCounts.entries())
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 60)
+        .map(([actor]) => actor);
+
+    const nodes = topActors.map(actor => ({
+        id: actor,
+        collaborations: actorCollabCounts.get(actor),
+        success: actorSuccess.get(actor).totalSuccess / actorSuccess.get(actor).movieCount,
+        movieCount: actorMovies.get(actor).size
+    }));
+
+    // Create links array for top actors
+    const links = Array.from(collaborations.entries())
+        .filter(([key]) => {
+            const [actor1, actor2] = key.split('|');
+            return topActors.includes(actor1) && topActors.includes(actor2);
+        })
+        .map(([key, value]) => {
+            const [actor1, actor2] = key.split('|');
+            return {
+                source: actor1,
+                target: actor2,
+                weight: value.count
+            };
+        });
+
+    return { nodes, links };
+}
+
+function processActorStats(characterData, movieData) {
+    // Create movie success map
+    const movieSuccessMap = new Map(
+        movieData.map(movie => [
+            movie.movie_id,
+            {
+                success: parseFloat(movie.rating) * Math.log(Math.max(parseFloat(movie.vote_count), 1)),
+                year: new Date(movie.release_date).getFullYear()
+            }
+        ])
+    );
+
+    // Track actor statistics
+    const actorStats = new Map();
+
+    // Process all character appearances
+    characterData.forEach(char => {
+        const actor = char.actor_name;
+        if (!actorStats.has(actor)) {
+            actorStats.set(actor, {
+                collaborations: new Set(),
+                movies: new Set(),
+                totalSuccess: 0,
+                firstYear: Infinity,
+                latestYear: -Infinity
+            });
+        }
+
+        const stats = actorStats.get(actor);
+        const movieSuccess = movieSuccessMap.get(char.movie_id);
+
+        if (movieSuccess) {
+            stats.movies.add(char.movie_id);
+            stats.totalSuccess += movieSuccess.success;
+            stats.firstYear = Math.min(stats.firstYear, movieSuccess.year);
+            stats.latestYear = Math.max(stats.latestYear, movieSuccess.year);
+
+            // Find collaborators in the same movie
+            characterData
+                .filter(c => c.movie_id === char.movie_id && c.actor_name !== actor)
+                .forEach(collaborator => {
+                    stats.collaborations.add(collaborator.actor_name);
+                });
+        }
+    });
+
+    // Convert to array format for plotting
+    return Array.from(actorStats.entries())
+        .filter(([_, stats]) => stats.movies.size >= 5) // Filter for actors with at least 5 movies
+        .map(([actor, stats]) => ({
+            name: actor,
+            collaborations: stats.collaborations.size,
+            movies: stats.movies.size,
+            success: stats.totalSuccess / stats.movies.size,
+            careerLength: stats.latestYear - stats.firstYear + 1
+        }));
+}
+
+function processCareerTrajectories(characterData, movieData) {
+    // Create movie success map
+    const movieSuccessMap = new Map(
+        movieData.map(movie => [
+            movie.movie_id,
+            {
+                success: parseFloat(movie.rating) * Math.log(Math.max(parseFloat(movie.vote_count), 1)),
+                year: new Date(movie.release_date).getFullYear()
+            }
+        ])
+    );
+
+    // Track career trajectories
+    const careerData = new Map();
+
+    // Process all character appearances
+    characterData.forEach(char => {
+        const actor = char.actor_name;
+        const movieSuccess = movieSuccessMap.get(char.movie_id);
+
+        if (movieSuccess) {
+            if (!careerData.has(actor)) {
+                careerData.set(actor, {
+                    firstYear: movieSuccess.year,
+                    yearlySuccess: new Map()
+                });
+            }
+
+            const career = careerData.get(actor);
+            const careerYear = movieSuccess.year - career.firstYear;
+
+            if (!career.yearlySuccess.has(careerYear)) {
+                career.yearlySuccess.set(careerYear, {
+                    totalSuccess: 0,
+                    count: 0
+                });
+            }
+
+            const yearStats = career.yearlySuccess.get(careerYear);
+            yearStats.totalSuccess += movieSuccess.success;
+            yearStats.count += 1;
+        }
+    });
+
+    // Calculate average success by career year
+    const trajectoryStats = new Map();
+    careerData.forEach(career => {
+        career.yearlySuccess.forEach((stats, year) => {
+            if (!trajectoryStats.has(year)) {
+                trajectoryStats.set(year, {
+                    totalSuccess: 0,
+                    count: 0
+                });
+            }
+            const yearStats = trajectoryStats.get(year);
+            yearStats.totalSuccess += stats.totalSuccess / stats.count;
+            yearStats.count += 1;
+        });
     });
 
     // Convert to arrays for plotting
-    const years = Array.from(careerData.keys()).sort((a, b) => a - b);
+    const years = Array.from(trajectoryStats.keys()).sort((a, b) => a - b);
     const avgSuccess = years.map(year => {
-        const yearData = careerData.get(year);
-        return yearData.totalSuccess / yearData.count;
+        const stats = trajectoryStats.get(year);
+        return stats.totalSuccess / stats.count;
     });
 
     return { years, avgSuccess };
-}
-
-function getCareerYear(actorName, releaseDate, characterData) {
-    const firstMovie = characterData
-        .filter(char => char.actor_name === actorName)
-        .sort((a, b) => new Date(a.release_date) - new Date(b.release_date))[0];
-    
-    return firstMovie ? 
-        Math.floor((new Date(releaseDate) - new Date(firstMovie.release_date)) / (1000 * 60 * 60 * 24 * 365)) : 
-        0;
 }

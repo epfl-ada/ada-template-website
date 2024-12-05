@@ -1,9 +1,51 @@
 // File: assets/js/sentiment-analysis-plots.js
 
-function createSentimentComparisonPlot(vaderData, distilbertData, movieId) {
+function createSentimentPlots(vaderData, distilbertData) {
+    createSentimentComparisonPlot(vaderData, distilbertData);
+    createGenreSentimentPlot(vaderData);
+}
+
+function createSentimentComparisonPlot(vaderData, distilbertData) {
+    const movieId = '77856';
+    
+    // Process VADER data
+    const vaderMovieData = vaderData
+        .filter(d => d.movie_id === movieId)
+        .map((d, i) => ({
+            x: i,
+            y: JSON.parse(d.sentence_sentiments)[0].compound
+        }));
+
+    // Process DistilBERT data
+    const distilbertMovieData = distilbertData
+        .filter(d => d.movie_id === movieId)
+        .map((d, i) => ({
+            x: i,
+            y: parseFloat(d.sentiment_score)
+        }));
+
+    const traces = [
+        {
+            x: vaderMovieData.map(d => d.x),
+            y: vaderMovieData.map(d => d.y),
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'VADER',
+            line: { color: 'cyan', width: 2 }
+        },
+        {
+            x: distilbertMovieData.map(d => d.x),
+            y: distilbertMovieData.map(d => d.y),
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'DistilBERT',
+            line: { color: 'magenta', width: 2 }
+        }
+    ];
+
     const layout = {
         title: {
-            text: `Sentiment Comparison for Movie ID: ${movieId}`,
+            text: 'Sentiment Analysis Comparison',
             font: { size: 24, color: 'white' }
         },
         xaxis: {
@@ -23,37 +65,34 @@ function createSentimentComparisonPlot(vaderData, distilbertData, movieId) {
         legend: { font: { color: 'white' } }
     };
 
-    // Process VADER data
-    const vaderTrace = {
-        x: Array.from({ length: vaderData.length }, (_, i) => i),
-        y: vaderData.map(d => parseFloat(d.compound)),
-        type: 'scatter',
-        mode: 'lines+markers',
-        name: 'VADER',
-        line: { color: 'cyan', width: 2 }
-    };
-
-    // Process DistilBERT data
-    const distilbertTrace = {
-        x: Array.from({ length: distilbertData.length }, (_, i) => i),
-        y: distilbertData.map(d => parseFloat(d.sentiment_score)),
-        type: 'scatter',
-        mode: 'lines+markers',
-        name: 'DistilBERT',
-        line: { color: 'magenta', width: 2 }
-    };
-
-    Plotly.newPlot('sentiment-comparison-plot', [vaderTrace, distilbertTrace], layout);
+    Plotly.newPlot('sentiment-comparison-plot', traces, layout);
 }
 
-function createGenreSentimentPlot(data, modelType) {
+function createGenreSentimentPlot(vaderData) {
+    const genreStats = processGenreSentiments(vaderData);
+    
+    const trace = {
+        x: Object.keys(genreStats),
+        y: Object.values(genreStats).map(d => d.avgSentiment),
+        type: 'bar',
+        marker: {
+            color: Object.values(genreStats).map(d => d.avgSentiment),
+            colorscale: [
+                [0, 'rgb(178,24,43)'],
+                [0.5, 'rgb(244,244,244)'],
+                [1, 'rgb(33,102,172)']
+            ]
+        }
+    };
+
     const layout = {
         title: {
-            text: `Genre-based Sentiment Analysis (${modelType})`,
+            text: 'Average Sentiment by Genre',
             font: { size: 24, color: 'white' }
         },
         xaxis: {
             title: 'Genre',
+            tickangle: 45,
             gridcolor: 'gray',
             color: 'white'
         },
@@ -67,71 +106,39 @@ function createGenreSentimentPlot(data, modelType) {
         font: { color: 'white' }
     };
 
-    // Process genre sentiment data
-    const genreStats = processGenreSentiments(data);
-    
-    const trace = {
-        x: Object.keys(genreStats),
-        y: Object.values(genreStats).map(g => g.avgSentiment),
-        type: 'bar',
-        marker: {
-            color: Object.values(genreStats).map(g => g.avgSentiment),
-            colorscale: 'Viridis'
-        }
-    };
-
-    Plotly.newPlot(`genre-sentiment-${modelType.toLowerCase()}`, [trace], layout);
+    Plotly.newPlot('genre-sentiment-plot', [trace], layout);
 }
 
 function processGenreSentiments(data) {
     const genreStats = {};
-
-    // Extract genres and calculate sentiment averages
+    
     data.forEach(movie => {
         if (!movie.genres) return;
         
         const genres = movie.genres.split(', ');
-        const sentiment = typeof movie.plot_sentiment === 'string' ? 
-            JSON.parse(movie.plot_sentiment).compound : 
-            parseFloat(movie.sentiment_score);
-
-        if (!isNaN(sentiment)) {
-            genres.forEach(genre => {
-                if (!genreStats[genre]) {
-                    genreStats[genre] = {
-                        totalSentiment: 0,
-                        count: 0,
-                        sentiments: []
-                    };
-                }
-                
-                genreStats[genre].totalSentiment += sentiment;
-                genreStats[genre].count += 1;
-                genreStats[genre].sentiments.push(sentiment);
-            });
-        }
-    });
-
-    // Calculate averages and standard deviations
-    Object.keys(genreStats).forEach(genre => {
-        const stats = genreStats[genre];
-        stats.avgSentiment = stats.totalSentiment / stats.count;
+        const sentiments = JSON.parse(movie.sentence_sentiments);
+        const avgSentiment = sentiments.reduce((sum, s) => sum + s.compound, 0) / sentiments.length;
         
-        // Calculate standard deviation
-        const mean = stats.avgSentiment;
-        stats.stdDev = Math.sqrt(
-            stats.sentiments.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / stats.count
-        );
+        genres.forEach(genre => {
+            if (!genreStats[genre]) {
+                genreStats[genre] = {
+                    total: 0,
+                    count: 0
+                };
+            }
+            genreStats[genre].total += avgSentiment;
+            genreStats[genre].count += 1;
+        });
     });
-
-    // Filter for top 20 genres by movie count
-    const sortedGenres = Object.entries(genreStats)
-        .sort((a, b) => b[1].count - a[1].count)
-        .slice(0, 20)
-        .reduce((obj, [genre, stats]) => {
-            obj[genre] = stats;
-            return obj;
-        }, {});
-
-    return sortedGenres;
+    
+    Object.keys(genreStats).forEach(genre => {
+        genreStats[genre].avgSentiment = genreStats[genre].total / genreStats[genre].count;
+    });
+    
+    // Get top 20 genres by count
+    return Object.fromEntries(
+        Object.entries(genreStats)
+            .sort((a, b) => b[1].count - a[1].count)
+            .slice(0, 20)
+    );
 }
