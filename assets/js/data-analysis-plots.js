@@ -256,10 +256,7 @@ function createActorAgePlot(movieData) {
         // Convert Map to array
         const plotData = Array.from(actorStats.values());
         
-        console.log("Number of actors:", plotData.length);
-        console.log("Sample plot data:", plotData.slice(0, 5));
-
-        // Create scatter plot
+        // Create scatter plot with more opacity and larger markers
         const scatterTrace = {
             x: plotData.map(d => d.youngest_age),
             y: plotData.map(d => d.occurrences),
@@ -268,8 +265,8 @@ function createActorAgePlot(movieData) {
             name: 'Actors',
             marker: {
                 color: 'magenta',
-                size: 3,
-                opacity: 0.2
+                size: 6,           // Increased marker size
+                opacity: 0.05      // Lower opacity for better density visualization
             }
         };
 
@@ -295,7 +292,7 @@ function createActorAgePlot(movieData) {
             y: meanLine.map(d => d.mean),
             mode: 'lines',
             type: 'scatter',
-            name: 'Mean Occurrences',
+            name: 'Mean Occurrences per Age',
             line: {
                 color: 'cyan',
                 width: 2
@@ -315,11 +312,11 @@ function createActorAgePlot(movieData) {
             x0: line.x,
             x1: line.x,
             y0: 1,
-            y1: Math.max(...plotData.map(d => d.occurrences)),
+            y1: 1000,  // Fixed upper limit for vertical lines
             line: {
                 color: line.color,
                 width: line.width,
-                dash: line.style
+                dash: line.style === 'dash' ? 'dash' : 'solid'
             }
         }));
 
@@ -327,21 +324,28 @@ function createActorAgePlot(movieData) {
             ...createPlotlyLayout(
                 'Total Number of Occurrences vs. Youngest Age at First Occurrence',
                 'Youngest Age at First Occurrence',
-                'Total Number of Occurrences',
-                true
+                'Total Number of Occurrences'
             ),
             shapes: verticalLines,
+            showlegend: true,
+            legend: {
+                x: 1,
+                xanchor: 'right',
+                y: 1
+            },
             yaxis: {
                 type: 'log',
-                autorange: true,
+                range: [0, 3],     // log10 scale from 1 to 1000
                 gridcolor: 'gray',
                 color: 'white'
             },
             xaxis: {
-                range: [0, 20],
+                range: [0, 100],   // Extended x-axis range to match desired plot
                 gridcolor: 'gray',
                 color: 'white'
-            }
+            },
+            plot_bgcolor: '#1e1e1e',
+            paper_bgcolor: '#1e1e1e'
         };
 
         Plotly.newPlot('actor-age-plot', [scatterTrace, meanTrace], layout);
