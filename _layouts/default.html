@@ -1,26 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>{{ page.title | default: site.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css?v=' | append: site.github.build_revision | relative_url }}">
-  </head>
-  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+</head>
+<body>
     <div class="wrapper">
-      <header>
-        <h1>{{ site.title }}</h1>
-        <p>{{ site.description }}</p>
+        <aside class="sidebar">
+            <div class="site-title">
+                <h1>{{ site.title }}</h1>
+                <p>{{ site.description }}</p>
+            </div>
+            <nav class="nav-menu">
+                {% for nav in site.navigation %}
+                <div class="nav-item">
+                    <a href="{{ nav.url | relative_url }}" class="nav-link {% if page.url == nav.url %}active{% endif %}">
+                        {{ nav.title }}
+                    </a>
+                </div>
+                {% endfor %}
+            </nav>
+        </aside>
         
-        <nav>
-          {% for nav in site.navigation %}
-            <p><a href="{{ nav.url }}">{{ nav.title }}</a></p>
-          {% endfor %}
-        </nav>
-      </header>
-
-      <section>
-        {{ content }}
-      </section>
+        <main class="main-content">
+            {{ content }}
+        </main>
     </div>
-  </body>
+
+    <script>
+        // Add active class to current page in navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
