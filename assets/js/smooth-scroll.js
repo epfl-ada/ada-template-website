@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.requestAnimationFrame(() => {
           plots.forEach(plot => {
             // Calculate inertia effect based on scroll velocity
-            const inertia = Math.min(Math.max(scrollVelocity * 0.1, -10), 10);
+            const inertia = Math.min(Math.max(scrollVelocity * 0.3, -20), 20);
             plot.style.transform = `translateY(${inertia}px)`;
           });
           ticking = false;
