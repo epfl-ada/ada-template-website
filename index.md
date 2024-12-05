@@ -1,31 +1,71 @@
 ---
 layout: default
-title: Home
-permalink: /
 ---
 
-# Stars or Storyline: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
+# Stars or Storyline
 
-## Introduction
+<div class="hero-section">
+  <h2>How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success</h2>
+  <p class="lead">Exploring the intricate relationship between star power and storyline in determining a movie's success</p>
+</div>
 
-In the world of cinema, understanding what makes a movie successful is complex and multi-faceted. Does the star power of its cast drive success, or does a captivating storyline influence audience perception more significantly? Our project seeks to unravel these elements, focusing on how both actor fame and the emotional journey of the plot contribute to a movie's critical success.
+<div class="navigation-grid">
+  <div class="nav-card" onclick="window.location='./data-analysis'">
+    <h3>Data Analysis</h3>
+    <p>Explore our comprehensive analysis of movie industry trends and metrics</p>
+  </div>
+  
+  <div class="nav-card" onclick="window.location='./sentiment-analysis'">
+    <h3>Sentiment Analysis</h3>
+    <p>Discover how emotional arcs in movie plots influence success</p>
+  </div>
+  
+  <div class="nav-card" onclick="window.location='./network-analysis'">
+    <h3>Network Analysis</h3>
+    <p>Uncover the impact of actor collaborations and industry connections</p>
+  </div>
+  
+  <div class="nav-card" onclick="window.location='./results'">
+    <h3>Results</h3>
+    <p>See our key findings and conclusions</p>
+  </div>
+</div>
 
-### Project Overview
+<style>
+.hero-section {
+  text-align: center;
+  margin: 4rem 0;
+  animation: fadeIn 1s ease-in;
+}
 
-Our approach investigates two main factors:
-1. **Actor Fame**: Using social network analysis to assess an actor's influence and connections within the industry
-2. **Sentiment Trajectory**: Analyzing the emotional arc of movie plots through sentiment analysis
+.lead {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin: 2rem 0;
+}
 
-### Key Research Questions
+.navigation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 4rem 0;
+}
 
-- How does an actor's network of collaborations influence a movie's success?
-- What role does the emotional journey of a plot play in audience reception?
-- Can we identify patterns in successful movies through sentiment analysis?
+.nav-card {
+  background: var(--background-hover);
+  padding: 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-### Navigation
+.nav-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
 
-Explore our findings through these detailed sections:
-- [Data Analysis](./data-analysis)
-- [Sentiment Analysis](./sentiment-analysis)
-- [Network Analysis](./network-analysis)
-- [Results](./results)
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>

@@ -1,6 +1,8 @@
-/* Base styles */
+/* Modern color scheme */
 :root {
-  --primary-color: #39c;
+  --primary-color: #4a90e2;
+  --secondary-color: #50e3c2;
+  --accent-color: #f39c12;
   --text-color: #e0e0e0;
   --heading-color: #ffffff;
   --border-color: #404040;
@@ -9,177 +11,152 @@
   --code-background: #2d2d2d;
 }
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base styles with animations */
 body {
   background-color: var(--background-color);
-  padding: 50px;
-  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
   color: var(--text-color);
-  font-weight: 400;
-  max-width: 100%;
-  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--heading-color);
-  margin: 0 0 20px;
-  line-height: 1.3;
+/* Header styles */
+.site-header {
+  background: linear-gradient(to right, var(--background-color), var(--background-hover));
+  padding: 2rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
-h1 {
-  font-size: 2.5em;
-  font-weight: 600;
+.site-header.hidden {
+  transform: translateY(-100%);
 }
 
-h2 {
-  font-size: 2em;
-  color: #cccccc;
-  margin-top: 40px;
+/* Navigation */
+.nav-menu {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
 }
 
-h3 {
-  font-size: 1.5em;
-  margin-top: 30px;
-}
-
-p, ul, ol, table, pre, dl {
-  margin: 0 0 20px;
-}
-
-/* Links */
-a {
-  color: var(--primary-color);
+.nav-link {
+  color: var(--text-color);
   text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #69c;
-  text-decoration: underline;
-}
-
-/* Layout */
-.wrapper {
-  width: 1080px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 270px 1fr;
-  gap: 40px;
-}
-
-header {
-  position: sticky;
-  top: 20px;
-  align-self: start;
-}
-
-/* Code blocks */
-code, pre {
-  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-  color: #e0e0e0;
-  font-size: 14px;
-  background: var(--code-background);
+  padding: 0.5rem 1rem;
   border-radius: 4px;
-  padding: 2px 4px;
+  transition: all 0.3s ease;
 }
 
-pre {
-  padding: 15px;
-  overflow-x: auto;
-  border: 1px solid var(--border-color);
+.nav-link:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
 }
 
-/* Tables */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  background-color: var(--background-color);
+/* Main content */
+.main-content {
+  margin-top: 80px;
+  padding: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-th, td {
-  text-align: left;
-  padding: 12px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-th {
-  background-color: var(--background-hover);
-  font-weight: 600;
-  color: var(--heading-color);
-}
-
-/* Images */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  margin: 20px 0;
-}
-
-/* Plot containers */
+/* Plot containers with hover effects */
 .plot-container {
-  width: 100%;
-  margin: 20px 0;
-  background-color: var(--background-color);
-  overflow: hidden;
+  background: var(--background-hover);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 2rem 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Observations and conclusions */
-.observation, .conclusion {
-  background-color: var(--background-hover);
-  border-left: 4px solid var(--primary-color);
-  padding: 15px;
-  margin: 20px 0;
-  border-radius: 0 4px 4px 0;
+.plot-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Plotly specific styles */
-.js-plotly-plot .plotly .modebar {
-  background: transparent !important;
+/* Section headers with animation */
+.section-header {
+  color: var(--heading-color);
+  font-size: 2.5rem;
+  margin: 3rem 0 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--primary-color);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-.js-plotly-plot .plotly .modebar-btn {
-  color: rgba(255, 255, 255, 0.3) !important;
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.js-plotly-plot .plotly .modebar-btn:hover {
-  color: white !important;
+/* Observations boxes */
+.observation-box {
+  background: var(--background-hover);
+  border-left: 4px solid var(--accent-color);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  transition: transform 0.3s ease;
 }
 
-/* Remove borders from all plot divs */
-[id$="-plot"] {
-  border: none !important;
-  background: transparent !important;
+.observation-box:hover {
+  transform: translateX(10px);
 }
 
-.js-plotly-plot {
-  border: none !important;
+/* Interactive elements */
+button, .interactive-element {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.plotly {
-  border: none !important;
+button:hover, .interactive-element:hover {
+  background: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+/* Plot title styling */
+.plot-title {
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 /* Responsive design */
-@media screen and (max-width: 1200px) {
-  .wrapper {
-    width: auto;
-    margin: 0 20px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .wrapper {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-direction: column;
+    align-items: center;
   }
   
-  header {
-    position: static;
-    margin-bottom: 40px;
+  .main-content {
+    padding: 1rem;
   }
   
-  body {
-    padding: 20px;
+  .section-header {
+    font-size: 2rem;
   }
 }
