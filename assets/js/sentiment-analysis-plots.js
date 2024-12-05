@@ -84,7 +84,54 @@ function createGenreSentimentPlot(data, modelType) {
 }
 
 function processGenreSentiments(data) {
-    // Implementation of genre sentiment processing
-    // Returns object with genre statistics
-    // ...
+    const genreStats = {};
+
+    // Extract genres and calculate sentiment averages
+    data.forEach(movie => {
+        if (!movie.genres) return;
+        
+        const genres = movie.genres.split(', ');
+        const sentiment = typeof movie.plot_sentiment === 'string' ? 
+            JSON.parse(movie.plot_sentiment).compound : 
+            parseFloat(movie.sentiment_score);
+
+        if (!isNaN(sentiment)) {
+            genres.forEach(genre => {
+                if (!genreStats[genre]) {
+                    genreStats[genre] = {
+                        totalSentiment: 0,
+                        count: 0,
+                        sentiments: []
+                    };
+                }
+                
+                genreStats[genre].totalSentiment += sentiment;
+                genreStats[genre].count += 1;
+                genreStats[genre].sentiments.push(sentiment);
+            });
+        }
+    });
+
+    // Calculate averages and standard deviations
+    Object.keys(genreStats).forEach(genre => {
+        const stats = genreStats[genre];
+        stats.avgSentiment = stats.totalSentiment / stats.count;
+        
+        // Calculate standard deviation
+        const mean = stats.avgSentiment;
+        stats.stdDev = Math.sqrt(
+            stats.sentiments.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / stats.count
+        );
+    });
+
+    // Filter for top 20 genres by movie count
+    const sortedGenres = Object.entries(genreStats)
+        .sort((a, b) => b[1].count - a[1].count)
+        .slice(0, 20)
+        .reduce((obj, [genre, stats]) => {
+            obj[genre] = stats;
+            return obj;
+        }, {});
+
+    return sortedGenres;
 }
