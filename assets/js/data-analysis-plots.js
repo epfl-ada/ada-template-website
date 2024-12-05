@@ -182,6 +182,13 @@ function createSuccessPlots(yearStats, years) {
 
     console.log("Number of movies for success-revenue plot:", allMovies.length); // Debug log
 
+    const customColorScale = [
+        [0, '#0000FF'],      // Blue
+        [0.33, '#8A2BE2'],   // Purple
+        [0.66, '#FF00FF'],   // Magenta
+        [1, '#FF0000']       // Red
+    ];
+    
     const trace = {
         x: allMovies.map(m => m.success),
         y: allMovies.map(m => m.revenue),
@@ -189,12 +196,7 @@ function createSuccessPlots(yearStats, years) {
         type: 'scatter',
         marker: {
             color: allMovies.map(m => m.rating),
-            colorscale: [
-                [0, 'rgb(0,0,255)'],      // Blue
-                [0.33, 'rgb(138,43,226)'], // Purple
-                [0.66, 'rgb(255,0,255)'],  // Magenta
-                [1, 'rgb(255,0,0)']        // Red
-            ],
+            colorscale: customColorScale,
             showscale: true,
             size: 5,
             opacity: 0.3,
@@ -202,7 +204,9 @@ function createSuccessPlots(yearStats, years) {
                 title: {
                     text: 'Rating',
                     side: 'right'
-                }
+                },
+                tickfont: { color: 'white' },
+                titlefont: { color: 'white' }
             }
         },
         name: 'Movies'
