@@ -230,8 +230,8 @@ function createSuccessPlots(yearStats, years) {
 
 async function createActorAgePlot() {
     try {
-        // Update the fetch path to use baseurl
-        const response = await fetch('{{ site.baseurl }}/data/character_metadata_cleaned.csv');
+        // Update the data loading path
+        const response = await fetch('/ada-template-website/data/character_metadata_cleaned.csv');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

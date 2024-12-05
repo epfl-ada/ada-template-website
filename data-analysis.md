@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Preliminary Analysis and Metric Selection 1:37
+# Preliminary Analysis and Metric Selection 1:42
 
 Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
 
@@ -124,20 +124,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load both datasets in parallel
     Promise.all([
         new Promise((resolve, reject) => {
-            Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
+            Papa.parse('/ada-template-website/data/movie_master_dataset.csv', {
                 download: true,
                 header: true,
                 complete: resolve,
                 error: reject
             });
         }),
-        fetch('{{ site.baseurl }}/data/character_metadata_cleaned.csv')
+        fetch('/ada-template-website/data/character_metadata_cleaned.csv')
             .then(response => response.text())
             .then(text => Papa.parse(text, { header: true }))
     ]).then(([movieResults, characterResults]) => {
         const yearStats = processYearlyData(movieResults.data);
         const years = Object.keys(yearStats).sort((a,b) => a-b);
-        
         // Create all plots
         createReleasesPlot(yearStats, years);
         createRevenuePlot(yearStats, years);
@@ -154,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
         createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
             'Vote Counts per Movie (log)', 'Vote Count (log)', true);
         createSuccessPlots(yearStats, years);
-        
         // Create actor age plot with character data
         createActorAgePlot();
     }).catch(error => {
