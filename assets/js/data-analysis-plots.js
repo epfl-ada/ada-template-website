@@ -231,7 +231,6 @@ function createSuccessPlots(yearStats, years) {
 function createActorAgePlot(characterData) {
     try {
         console.log("Starting actor age plot creation");
-        console.log("Sample character data:", characterData.slice(0, 5));
 
         // Process actor data from the character dataset
         const actorStats = new Map();
@@ -262,10 +261,6 @@ function createActorAgePlot(characterData) {
         const plotData = Array.from(actorStats.values())
             .filter(d => d.youngest_age > 0 && d.occurrences > 0);
 
-        // Debug logging
-        console.log("Number of valid actors:", plotData.length);
-        console.log("Sample plot data:", plotData.slice(0, 5));
-
         // Create scatter plot with increased visibility
         const scatterTrace = {
             x: plotData.map(d => d.youngest_age),
@@ -275,8 +270,8 @@ function createActorAgePlot(characterData) {
             name: 'Actors',
             marker: {
                 color: 'magenta',
-                size: 10,
-                opacity: 0.05
+                size: 15,
+                opacity: 0.2
             }
         };
 
@@ -298,9 +293,6 @@ function createActorAgePlot(characterData) {
             }))
             .filter(d => d.mean !== null);
 
-        console.log("Mean line data points:", meanLine.length);
-        console.log("Sample mean line data:", meanLine.slice(0, 5));
-
         const meanTrace = {
             x: meanLine.map(d => d.age),
             y: meanLine.map(d => d.mean),
@@ -313,7 +305,7 @@ function createActorAgePlot(characterData) {
             }
         };
 
-        // Create layout with improved visibility
+        // Create layout with improved visibility and fixed y-axis range
         const layout = {
             title: {
                 text: 'Actor Career Analysis: Age vs. Number of Appearances',
@@ -323,14 +315,18 @@ function createActorAgePlot(characterData) {
                 title: 'Age at First Appearance',
                 range: [0, 40],
                 gridcolor: 'gray',
-                color: 'white'
+                color: 'white',
+                showline: false,
+                zeroline: false
             },
             yaxis: {
                 title: 'Number of Appearances',
                 type: 'log',
-                range: [0, Math.log10(Math.max(...plotData.map(d => d.occurrences)) * 1.1)],
+                range: [0, Math.log10(1000)], // Set range from 0 to 1000 (in log scale)
                 gridcolor: 'gray',
-                color: 'white'
+                color: 'white',
+                showline: false,
+                zeroline: false
             },
             plot_bgcolor: '#1e1e1e',
             paper_bgcolor: '#1e1e1e',
@@ -353,10 +349,15 @@ function createActorAgePlot(characterData) {
                   line: { color: 'white', width: 0.5, dash: 'dash' } },
                 { type: 'line', x0: 19, x1: 19, y0: 1, y1: 1000, 
                   line: { color: 'white', width: 0.5, dash: 'dash' } }
-            ]
+            ],
+            margin: {
+                l: 80,
+                r: 30,
+                t: 100,
+                b: 80
+            }
         };
 
-        console.log("Creating plot with data points:", plotData.length);
         Plotly.newPlot('actor-age-plot', [scatterTrace, meanTrace], layout);
 
     } catch (error) {
