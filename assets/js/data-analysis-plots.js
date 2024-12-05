@@ -230,57 +230,44 @@ function createSuccessPlots(yearStats, years) {
 
 async function createActorAgePlot() {
     try {
-        // Load character metadata
-        const response = await fetch('../data/character_metadata_cleaned.csv');
+        // Update the fetch path to use baseurl
+        const response = await fetch('{{ site.baseurl }}/data/character_metadata_cleaned.csv');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const text = await response.text();
-        const characterData = Papa.parse(text, { header: true }).data;
+        const result = Papa.parse(text, { header: true });
+        const characterData = result.data;
 
-        console.log("Loaded character data length:", characterData.length); // Debug log
-
+        // Debug logs
+        console.log("Raw data first row:", characterData[0]);
+        
         // Process actor data
-        const actorStats = {};
+        const actorStats = new Map();
+        
         characterData.forEach(row => {
-            if (row.actor_name && row.actor_age) {  // Check if values exist
-                const actorName = row.actor_name;
-                const age = parseFloat(row.actor_age);
-                
-                if (actorName && !isNaN(age) && age > 0 && age < 100) {
-                    if (!actorStats[actorName]) {
-                        actorStats[actorName] = {
-                            youngest_age: age,
-                            occurrences: 1
-                        };
-                    } else {
-                        actorStats[actorName].youngest_age = Math.min(actorStats[actorName].youngest_age, age);
-                        actorStats[actorName].occurrences++;
-                    }
+            const actorName = row.actor_name;
+            const age = parseFloat(row.actor_age);
+            
+            if (actorName && !isNaN(age) && age > 0 && age < 100) {
+                if (!actorStats.has(actorName)) {
+                    actorStats.set(actorName, {
+                        youngest_age: age,
+                        occurrences: 1
+                    });
+                } else {
+                    const stats = actorStats.get(actorName);
+                    stats.youngest_age = Math.min(stats.youngest_age, age);
+                    stats.occurrences += 1;
                 }
             }
         });
 
-        console.log("Number of processed actors:", Object.keys(actorStats).length); // Debug log
-
-        // Convert to arrays for plotting
-        const plotData = Object.values(actorStats);
-        console.log("Plot data points:", plotData.length); // Debug log
-
-        // Calculate mean occurrences per age
-        const ageStats = {};
-        plotData.forEach(stat => {
-            const age = Math.floor(stat.youngest_age);
-            if (!ageStats[age]) {
-                ageStats[age] = { sum: 0, count: 0 };
-            }
-            ageStats[age].sum += stat.occurrences;
-            ageStats[age].count++;
-        });
-
-        const meanLine = Object.entries(ageStats)
-            .map(([age, stats]) => ({
-                age: parseInt(age),
-                mean: stats.sum / stats.count
-            }))
-            .sort((a, b) => a.age - b.age);
+        // Convert Map to array
+        const plotData = Array.from(actorStats.values());
+        
+        console.log("Number of actors:", plotData.length);
+        console.log("Sample plot data:", plotData.slice(0, 5));
 
         // Create scatter plot
         const scatterTrace = {
@@ -296,7 +283,23 @@ async function createActorAgePlot() {
             }
         };
 
-        // Create mean line
+        // Calculate and create mean line
+        const ageGroups = new Map();
+        plotData.forEach(d => {
+            const age = Math.floor(d.youngest_age);
+            if (!ageGroups.has(age)) {
+                ageGroups.set(age, []);
+            }
+            ageGroups.get(age).push(d.occurrences);
+        });
+
+        const meanLine = Array.from(ageGroups.entries())
+            .map(([age, occurrences]) => ({
+                age: parseInt(age),
+                mean: occurrences.reduce((a, b) => a + b, 0) / occurrences.length
+            }))
+            .sort((a, b) => a.age - b.age);
+
         const meanTrace = {
             x: meanLine.map(d => d.age),
             y: meanLine.map(d => d.mean),
@@ -309,7 +312,7 @@ async function createActorAgePlot() {
             }
         };
 
-        // Add vertical highlight lines
+        // Vertical lines
         const verticalLines = [
             { x: 1, color: 'white', style: 'dash', width: 0.5 },
             { x: 3, color: 'yellow', style: 'solid', width: 1 },
@@ -321,7 +324,7 @@ async function createActorAgePlot() {
             type: 'line',
             x0: line.x,
             x1: line.x,
-            y0: 0,
+            y0: 1,  // Start from 1 since we're using log scale
             y1: Math.max(...plotData.map(d => d.occurrences)),
             line: {
                 color: line.color,
@@ -330,22 +333,32 @@ async function createActorAgePlot() {
             }
         }));
 
-        const layout = createPlotlyLayout(
-            'Total Number of Occurrences vs. Youngest Age at First Occurrence',
-            'Youngest Age at First Occurrence',
-            'Total Number of Occurrences',
-            true
-        );
-
-        layout.shapes = verticalLines;
-        layout.yaxis.type = 'log';  // Set y-axis to logarithmic scale
-
-        console.log("Creating plot with data points:", scatterTrace.x.length); // Debug log
+        const layout = {
+            ...createPlotlyLayout(
+                'Total Number of Occurrences vs. Youngest Age at First Occurrence',
+                'Youngest Age at First Occurrence',
+                'Total Number of Occurrences',
+                true
+            ),
+            shapes: verticalLines,
+            yaxis: {
+                type: 'log',
+                autorange: true,
+                gridcolor: 'gray',
+                color: 'white'
+            },
+            xaxis: {
+                range: [0, 20],  // Limit x-axis to focus on relevant age range
+                gridcolor: 'gray',
+                color: 'white'
+            }
+        };
 
         Plotly.newPlot('actor-age-plot', [scatterTrace, meanTrace], layout);
 
     } catch (error) {
         console.error('Error creating actor age plot:', error);
-        console.error('Error details:', error.message);
+        document.getElementById('actor-age-plot-error').textContent = 
+            `Error loading data: ${error.message}`;
     }
 }
