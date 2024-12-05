@@ -158,3 +158,30 @@ img {
     padding: 20px;
   }
 }
+
+/* Plot containers */
+.plot-container {
+  width: 100%;
+  margin: 20px 0;
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+
+/* Remove default Plotly modebar background */
+.js-plotly-plot .plotly .modebar {
+  background: transparent !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.js-plotly-plot .plotly .modebar-btn:hover {
+  color: white !important;
+}
+
+/* Remove any border from plot divs */
+[id$="-plot"] {
+  border: none !important;
+  background: transparent !important;
+}

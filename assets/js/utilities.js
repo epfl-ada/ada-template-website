@@ -10,13 +10,17 @@ function createPlotlyLayout(title, xTitle, yTitle, logY = false) {
         xaxis: {
             title: xTitle,
             gridcolor: 'gray',
-            color: 'white'
+            color: 'white',
+            showline: false,  // Remove axis line
+            zeroline: false   // Remove zero line
         },
         yaxis: {
             title: yTitle,
             type: logY ? 'log' : 'linear',
             gridcolor: 'gray',
-            color: 'white'
+            color: 'white',
+            showline: false,  // Remove axis line
+            zeroline: false   // Remove zero line
         },
         plot_bgcolor: '#1e1e1e',
         paper_bgcolor: '#1e1e1e',
@@ -24,6 +28,12 @@ function createPlotlyLayout(title, xTitle, yTitle, logY = false) {
         showlegend: true,
         legend: {
             font: { color: 'white' }
+        },
+        margin: {  // Adjust margins to remove spacing
+            l: 80,
+            r: 30,
+            t: 100,
+            b: 80
         }
     };
 }
@@ -40,8 +50,7 @@ function calculateStatistics(array) {
     return { mean, median, std };
 }
 
-// Update in assets/js/utilities.js
-
+// Data transformation utilities
 function processYearlyData(data, startYear = 1920) {
     const yearStats = {};
     
@@ -56,7 +65,6 @@ function processYearlyData(data, startYear = 1920) {
                         revenues: [],
                         ratings: [],
                         votes: [],
-                        successes: [],
                         movies: []
                     };
                 }
@@ -74,21 +82,9 @@ function processYearlyData(data, startYear = 1920) {
                 if (rating > 0) yearStats[year].ratings.push(rating);
                 if (votes > 0) yearStats[year].votes.push(votes);
                 
-                yearStats[year].movies.push({
-                    revenue,
-                    rating,
-                    votes,
-                    success: rating > 0 && votes > 0 ? rating * Math.log(votes) : null
-                });
+                yearStats[year].movies.push({ revenue, rating, votes });
             }
         }
-    });
-    
-    // Calculate successes after all movies are processed
-    Object.keys(yearStats).forEach(year => {
-        yearStats[year].successes = yearStats[year].movies
-            .map(m => m.success)
-            .filter(s => s !== null);
     });
     
     return yearStats;
@@ -102,7 +98,6 @@ const COLORS = {
     highlight: 'magenta',
     neutral: 'white'
 };
-
 // Data validation utilities
 function isValidNumber(value) {
     return !isNaN(value) && value !== null && value !== undefined;
