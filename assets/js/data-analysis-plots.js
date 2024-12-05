@@ -233,12 +233,14 @@ function createActorAgePlot(movieData) {
         // Process actor data from the movie dataset
         const actorStats = new Map();
         
-        movieData.forEach(row => {
-            if (row.actor_age) {
+        // Filter and process valid actor data
+        movieData
+            .filter(row => row.actor_age && row.actor_name)
+            .forEach(row => {
                 const actorName = row.actor_name;
                 const age = parseFloat(row.actor_age);
                 
-                if (actorName && !isNaN(age) && age > 0 && age < 100) {
+                if (!isNaN(age) && age > 0 && age < 100) {
                     if (!actorStats.has(actorName)) {
                         actorStats.set(actorName, {
                             youngest_age: age,
@@ -250,13 +252,18 @@ function createActorAgePlot(movieData) {
                         stats.occurrences += 1;
                     }
                 }
-            }
-        });
+            });
 
-        // Convert Map to array
-        const plotData = Array.from(actorStats.values());
-        
-        // Create scatter plot with more opacity and larger markers
+        // Convert Map to array and filter out any invalid entries
+        const plotData = Array.from(actorStats.values())
+            .filter(d => d.youngest_age > 0 && d.occurrences > 0);
+
+        // Debug logging
+        console.log("Number of valid actors:", plotData.length);
+        console.log("Age range:", Math.min(...plotData.map(d => d.youngest_age)), 
+                   "to", Math.max(...plotData.map(d => d.youngest_age)));
+
+        // Create scatter plot with improved visibility
         const scatterTrace = {
             x: plotData.map(d => d.youngest_age),
             y: plotData.map(d => d.occurrences),
@@ -265,12 +272,12 @@ function createActorAgePlot(movieData) {
             name: 'Actors',
             marker: {
                 color: 'magenta',
-                size: 6,           // Increased marker size
-                opacity: 0.05      // Lower opacity for better density visualization
+                size: 5,
+                opacity: 0.3
             }
         };
 
-        // Calculate and create mean line
+        // Calculate mean line with proper binning
         const ageGroups = new Map();
         plotData.forEach(d => {
             const age = Math.floor(d.youngest_age);
@@ -285,67 +292,61 @@ function createActorAgePlot(movieData) {
                 age: parseInt(age),
                 mean: occurrences.reduce((a, b) => a + b, 0) / occurrences.length
             }))
-            .sort((a, b) => a.age - b.age);
+            .sort((a, b) => a.age - b.age)
+            .filter(d => !isNaN(d.mean)); // Filter out any NaN values
 
         const meanTrace = {
             x: meanLine.map(d => d.age),
             y: meanLine.map(d => d.mean),
             mode: 'lines',
             type: 'scatter',
-            name: 'Mean Occurrences per Age',
+            name: 'Mean Occurrences',
             line: {
                 color: 'cyan',
-                width: 2
+                width: 3
             }
         };
 
-        // Vertical lines
-        const verticalLines = [
-            { x: 1, color: 'white', style: 'dash', width: 0.5 },
-            { x: 3, color: 'yellow', style: 'solid', width: 1 },
-            { x: 5, color: 'white', style: 'dash', width: 0.5 },
-            { x: 15, color: 'white', style: 'dash', width: 0.5 },
-            { x: 17, color: 'yellow', style: 'solid', width: 1 },
-            { x: 19, color: 'white', style: 'dash', width: 0.5 }
-        ].map(line => ({
-            type: 'line',
-            x0: line.x,
-            x1: line.x,
-            y0: 1,
-            y1: 1000,  // Fixed upper limit for vertical lines
-            line: {
-                color: line.color,
-                width: line.width,
-                dash: line.style === 'dash' ? 'dash' : 'solid'
-            }
-        }));
-
+        // Create layout with improved visibility
         const layout = {
-            ...createPlotlyLayout(
-                'Total Number of Occurrences vs. Youngest Age at First Occurrence',
-                'Youngest Age at First Occurrence',
-                'Total Number of Occurrences'
-            ),
-            shapes: verticalLines,
-            showlegend: true,
-            legend: {
-                x: 1,
-                xanchor: 'right',
-                y: 1
+            title: {
+                text: 'Actor Career Analysis: Age vs. Number of Appearances',
+                font: { size: 24, color: 'white' }
             },
-            yaxis: {
-                type: 'log',
-                range: [0, 3],     // log10 scale from 1 to 1000
+            xaxis: {
+                title: 'Age at First Appearance',
+                range: [0, 40], // Adjusted range for better visibility
                 gridcolor: 'gray',
                 color: 'white'
             },
-            xaxis: {
-                range: [0, 100],   // Extended x-axis range to match desired plot
+            yaxis: {
+                title: 'Number of Appearances',
+                type: 'log',
                 gridcolor: 'gray',
                 color: 'white'
             },
             plot_bgcolor: '#1e1e1e',
-            paper_bgcolor: '#1e1e1e'
+            paper_bgcolor: '#1e1e1e',
+            showlegend: true,
+            legend: {
+                font: { color: 'white' }
+            },
+            shapes: [
+                // Key age markers
+                { type: 'line', x0: 3, x1: 3, y0: 1, y1: 1000, 
+                  line: { color: 'yellow', width: 1 } },
+                { type: 'line', x0: 17, x1: 17, y0: 1, y1: 1000, 
+                  line: { color: 'yellow', width: 1 } },
+                // Additional reference lines
+                { type: 'line', x0: 1, x1: 1, y0: 1, y1: 1000, 
+                  line: { color: 'white', width: 0.5, dash: 'dash' } },
+                { type: 'line', x0: 5, x1: 5, y0: 1, y1: 1000, 
+                  line: { color: 'white', width: 0.5, dash: 'dash' } },
+                { type: 'line', x0: 15, x1: 15, y0: 1, y1: 1000, 
+                  line: { color: 'white', width: 0.5, dash: 'dash' } },
+                { type: 'line', x0: 19, x1: 19, y0: 1, y1: 1000, 
+                  line: { color: 'white', width: 0.5, dash: 'dash' } }
+            ]
         };
 
         Plotly.newPlot('actor-age-plot', [scatterTrace, meanTrace], layout);
