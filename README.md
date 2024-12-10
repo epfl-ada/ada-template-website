@@ -9,4 +9,5 @@
 6. Go back to "Settings" -> "Pages" to find your website link.
 
 
-{% include grass_map.html %}
+[View the HTML file](assets/grass_map.html)
+<iframe src="assets/grass_map.html" width="100%" height="500px"></iframe>
