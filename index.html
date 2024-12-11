@@ -8,49 +8,50 @@
     body {
       margin: 0;
       padding: 0;
-      height: 100vh; /* Viewport height */
-      width: 100vw; /* Viewport width */
-      position: relative; /* Make body the reference point for absolute positioning */
+      height: 100vh; /* Full viewport height */
+      width: 100vw; /* Full viewport width */
+      position: relative; /* Reference point for positioning */
     }
     img {
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Ensures the image scales to fit without distortion */
+      object-fit: cover; /* Scale the image without distortion */
       position: absolute;
     }
     .clickable-area {
       position: absolute;
-      top: 50%; /* Adjust to position the rectangle */
-      left: 50%; /* Adjust to position the rectangle */
-      width: 5%; /* Adjust the width of the rectangle */
+      top: 60%; /* Adjust this value to move the rectangle lower */
+      left: 50%; /* Horizontally center */
+      width: 10%; /* Adjust the width of the rectangle */
       height: 10%; /* Adjust the height of the rectangle */
-      border: 3px solid red; /* Red border to highlight the area */
-      background-color: rgba(255, 0, 0, 0.3); /* Semi-transparent red background */
+      border: 3px solid red; /* Red border for visibility */
+      background-color: rgba(255, 0, 0, 0.3); /* Semi-transparent red for visibility */
       cursor: pointer; /* Change cursor to pointer for interactivity */
+      transform: translate(-50%, -50%); /* Center the rectangle relative to its top-left corner */
       z-index: 10; /* Ensure it appears above the image */
     }
     .title {
       position: absolute;
-      top: 20%; /* Adjust to position the title */
-      width: 100%; /* Full width for centering */
-      text-align: center;
+      top: 20%; /* Adjust vertical position of the title */
+      width: 100%; /* Make the title span full width */
+      text-align: center; /* Center the text */
       font-size: 3rem; /* Adjust font size */
       color: white; /* White text for contrast */
       text-shadow: 2px 2px 5px black; /* Add a shadow for readability */
-      z-index: 15; /* Ensure the title is above the image and clickable area */
-      font-family: Arial, sans-serif; /* Choose a font */
+      z-index: 15; /* Ensure the title is above the image and rectangle */
+      font-family: Arial, sans-serif; /* Choose a readable font */
     }
   </style>
 </head>
 <body>
-  <!-- Image filling the entire viewport -->
+  <!-- Full-page background image -->
   <img src="assets/img/website_entry.png" alt="Decorative Image">
 
-  <!--Title-->
+  <!-- Title on the image -->
   <div class="title">Welcome to My Website</div>
 
-  <!-- Highlighted clickable area -->
+  <!-- Adjusted clickable area -->
   <a href="example.html" class="clickable-area" title="Clickable Letter"></a>
 </body>
 </html>
