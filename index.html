@@ -5,28 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Full-Page Image</title>
   <style>
-    body {
+    body, html {
       margin: 0;
       padding: 0;
-      height: 100vh; /* Viewport height */
-      width: 100vw; /* Viewport width */
-      background-image: url('assets/img/website_entry.png');
-      background-size: cover; /* Ensures the image covers the entire page */
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat; /* Prevent tiling */
+      height: 100%;
+      width: 100%;
     }
-
-    @media (max-width: 786px){
-        body{
-            background-position: top;
-        }
+    img {
+      display: block; /* Remove default inline spacing for images */
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the image scales proportionally */
     }
   </style>
 </head>
 <body>
+  <img src="assets/img/website_entry.png" alt="Decorative Image" usemap="#image-map">
+
   <map name="image-map">
     <!-- Define the clickable area -->
-    <area shape="rect" coords="200,100,300,200" href="example.html" alt="Clickable Letter">
+    <area shape="rect" coords="200,100,300,200" href="example.md" alt="Clickable Letter">
   </map>
 </body>
 </html>
