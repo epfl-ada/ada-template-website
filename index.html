@@ -10,6 +10,7 @@
       padding: 0;
       height: 100vh; /* Viewport height */
       width: 100vw; /* Viewport width */
+      position: relative; /* Make body the reference point for absolute positioning */
     }
     img {
       display: block;
@@ -20,12 +21,14 @@
     }
     .clickable-area {
       position: absolute;
-      top: 10%; /* Adjust based on your image */
-      left: 25%; /* Adjust based on your image */
-      width: 10%; /* Adjust width to match the clickable area */
-      height: 10%; /* Adjust height to match the clickable area */
-      border: 2px solid black; /* Black rectangle to highlight */
+      top: 15%; /* Adjust to position the rectangle */
+      left: 20%; /* Adjust to position the rectangle */
+      width: 15%; /* Adjust the width of the rectangle */
+      height: 20%; /* Adjust the height of the rectangle */
+      border: 3px solid red; /* Red border to highlight the area */
+      background-color: rgba(255, 0, 0, 0.3); /* Semi-transparent red background */
       cursor: pointer; /* Change cursor to pointer for interactivity */
+      z-index: 10; /* Ensure it appears above the image */
     }
   </style>
 </head>
@@ -34,6 +37,7 @@
   <img src="assets/img/website_entry.png" alt="Decorative Image">
 
   <!-- Highlighted clickable area -->
-  <a href="example.html" class="clickable-area" title="Clickable Letter"></a>
+  <a href="example.md" class="clickable-area" title="Clickable Letter"></a>
 </body>
 </html>
+
