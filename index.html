@@ -1,23 +1,26 @@
----
-layout: null
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clickable Image Example</title>
+  <title>Full-Page Image</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh; /* Viewport height */
+      width: 100vw; /* Viewport width */
+      background-image: url('assets/img/website_entry.png');
+      background-size: cover; /* Ensures the image covers the entire page */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Prevent tiling */
+    }
+  </style>
 </head>
 <body>
-  <img src="assets/img/website_entry.png" alt="Decorative Image" usemap="#image-map" style="width: 100%; max-width: 1200px;">
-
-  <!-- Defining a map for clickable areas -->
   <map name="image-map">
-    <area shape="rect" coords="200,100,300,200" href="example.md" alt="Clickable Letter">
+    <!-- Define the clickable area -->
+    <area shape="rect" coords="200,100,300,200" href="example.html" alt="Clickable Letter">
   </map>
-
-  <!-- Placeholder for the new page -->
-  <p><a href="example.md">Go to the new page</a></p>
 </body>
 </html>
