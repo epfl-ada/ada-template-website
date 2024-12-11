@@ -7,3 +7,5 @@ navigation:
     url: /
   - title: Example
     url: example
+  - title: Test Plot
+    url: test_plot
