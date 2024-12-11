@@ -3,8 +3,7 @@ layout: default
 ---
 
 Example of embedded plotly graph in markdown:
-<iframe src="assets/plots/budget_vs_revenue_log_plot.html" width="820px" height="820px"></iframe>
-
+<iframe src="assets/plots/budget_vs_revenue_log_plot.html" width="800px" height="800px" style="border:none;"></iframe>
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
