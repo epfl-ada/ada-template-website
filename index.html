@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Full-Page Image</title>
+  <title>Full-Page Image with Highlighted Clickable Area</title>
   <style>
     body {
       margin: 0;
@@ -16,16 +16,24 @@
       width: 100%;
       height: 100%;
       object-fit: cover; /* Ensures the image scales to fit without distortion */
+      position: relative;
+    }
+    .clickable-area {
+      position: absolute;
+      top: 10%; /* Adjust based on your image */
+      left: 25%; /* Adjust based on your image */
+      width: 10%; /* Adjust width to match the clickable area */
+      height: 10%; /* Adjust height to match the clickable area */
+      border: 2px solid black; /* Black rectangle to highlight */
+      cursor: pointer; /* Change cursor to pointer for interactivity */
     }
   </style>
 </head>
 <body>
-  <!-- Use an image tag to associate the map -->
-  <img src="assets/img/website_entry.png" alt="Decorative Image" usemap="#image-map">
+  <!-- Image filling the entire viewport -->
+  <img src="assets/img/website_entry.png" alt="Decorative Image">
 
-  <!-- Define the clickable area -->
-  <map name="image-map">
-    <area shape="rect" coords="300,200,400,300" href="example.md" alt="Clickable Letter">
-  </map>
+  <!-- Highlighted clickable area -->
+  <a href="example.html" class="clickable-area" title="Clickable Letter"></a>
 </body>
 </html>
