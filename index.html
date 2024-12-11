@@ -10,17 +10,22 @@
       padding: 0;
       height: 100vh; /* Viewport height */
       width: 100vw; /* Viewport width */
-      background-image: url('assets/img/website_entry.png');
-      background-size: 100% 100%; /* Ensures the image covers the entire page */
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat; /* Prevent tiling */
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the image scales to fit without distortion */
     }
   </style>
 </head>
 <body>
+  <!-- Use an image tag to associate the map -->
+  <img src="assets/img/website_entry.png" alt="Decorative Image" usemap="#image-map">
+
+  <!-- Define the clickable area -->
   <map name="image-map">
-    <!-- Define the clickable area -->
-    <area shape="rect" coords="200,100,300,200" href="example.html" alt="Clickable Letter">
+    <area shape="rect" coords="300,200,400,300" href="example.md" alt="Clickable Letter">
   </map>
 </body>
 </html>
