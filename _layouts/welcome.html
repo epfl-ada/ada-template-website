@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            display: flex;
+            height: 100vh; /* Full viewport height */
+            background-color: #f5f3e6; /* Soft cream */
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px; /* Adjust sidebar width */
+            background-color: #2c2c2c; /* Cinema black */
+            color: #d4af37; /* Gold */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            color: #d4af37;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sidebar a {
+            color: #ffd700; /* Gold */
+            text-decoration: none;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+            color: #f5f3e6; /* Cream hover */
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1; /* Take up the remaining space */
+            padding: 20px;
+            background-color: #fff; /* Soft white for content */
+            overflow-y: auto; /* Scroll if content overflows */
+            border-left: 4px solid #d4af37; /* Gold divider */
+        }
+
+        .main-content h1 {
+            color: #d4af37;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #2c2c2c;
+            color: #fff;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <a href="/">Home</a>
+        <a href="/genres">Genres</a>
+        <a href="/movies">Movies</a>
+        <a href="/actors">Actors</a>
+        <a href="/cult_characters">Cult Characters</a>
+        <a href="/predictors">Our Interactive Predictor</a>
+    </div>
+    <div class="main-content">
+        {{ content }}
+        <footer>
+            <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

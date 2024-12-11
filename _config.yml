@@ -1,9 +1,6 @@
 theme: jekyll-theme-minimal
-title: ADA Template Website
-description: A template website for ADA
-show_downloads: True
-navigation:
-  - title: Home
-    url: /
-  - title: Example
-    url: example
+title: "Decoding the Silver Screen: Key Drivers of Cinematic Success"
+description: "An analysis of key factors to critical and commercial successes in the movie industry over time."
+show_downloads: true
+
+
