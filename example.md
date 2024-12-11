@@ -48,6 +48,8 @@ GitHubPages::Dependencies.gems.each do |gem, version|
 end
 ```
 
+<iframe src="assets/plots/budget_vs_revenue_log_plot.html" width="820px" height="820px"></iframe>
+
 #### Header 4
 
 *   This is an unordered list following a header.
