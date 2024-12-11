@@ -10,7 +10,6 @@ Click on the letter to hear our advice for the Director!
   <area shape="rect" coords="200,100,300,200" href="example.md" alt="Clickable Letter">
 </map>
 
-
 # ADA Template Website
 ## Usage
 1. Fork (copy) this repository by clicking the "Fork" button on the top right corner.
