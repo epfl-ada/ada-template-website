@@ -23,12 +23,23 @@
       position: absolute;
       top: 50%; /* Adjust to position the rectangle */
       left: 50%; /* Adjust to position the rectangle */
-      width: 10%; /* Adjust the width of the rectangle */
+      width: 5%; /* Adjust the width of the rectangle */
       height: 10%; /* Adjust the height of the rectangle */
       border: 3px solid red; /* Red border to highlight the area */
       background-color: rgba(255, 0, 0, 0.3); /* Semi-transparent red background */
       cursor: pointer; /* Change cursor to pointer for interactivity */
       z-index: 10; /* Ensure it appears above the image */
+    }
+    .title {
+      position: absolute;
+      top: 20%; /* Adjust to position the title */
+      width: 100%; /* Full width for centering */
+      text-align: center;
+      font-size: 3rem; /* Adjust font size */
+      color: white; /* White text for contrast */
+      text-shadow: 2px 2px 5px black; /* Add a shadow for readability */
+      z-index: 15; /* Ensure the title is above the image and clickable area */
+      font-family: Arial, sans-serif; /* Choose a font */
     }
   </style>
 </head>
@@ -36,8 +47,11 @@
   <!-- Image filling the entire viewport -->
   <img src="assets/img/website_entry.png" alt="Decorative Image">
 
+  <!--Title-->
+  <div class="title">Welcome to My Website</div>
+
   <!-- Highlighted clickable area -->
-  <a href="example.md" class="clickable-area" title="Clickable Letter"></a>
+  <a href="/" class="clickable-area" title="Clickable Letter"></a>
 </body>
 </html>
 
