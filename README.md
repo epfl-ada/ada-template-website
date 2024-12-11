@@ -1,3 +1,16 @@
+
+![Decorative Image](assets/img/website_entry.png)
+
+Click on the letter to hear our advice for the Director!
+
+<img src="assets/img/website_entry.png" alt="Decorative Image" usemap="#image-map" style="width: 100%; max-width: 1200px;">
+
+<map name="image-map">
+  <!-- Define the clickable square area. Adjust coords as needed. -->
+  <area shape="rect" coords="200,100,300,200" href="example.md" alt="Clickable Letter">
+</map>
+
+
 # ADA Template Website
 ## Usage
 1. Fork (copy) this repository by clicking the "Fork" button on the top right corner.

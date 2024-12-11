@@ -2,18 +2,6 @@
 layout: default
 ---
 
-![Decorative Image](assets/img/website_entry.png)
-
-Click on the letter to hear our advice for the Director!
-
-<img src="assets/img/website_entry.png" alt="Decorative Image" usemap="#image-map" style="width: 100%; max-width: 1200px;">
-
-<map name="image-map">
-  <!-- Define the clickable square area. Adjust coords as needed. -->
-  <area shape="rect" coords="200,100,300,200" href="newpage.html" alt="Clickable Letter">
-</map>
-
-
 Example of embedded plotly graph in markdown:
 <iframe src="assets/plots/budget_vs_revenue_log_plot.html" width="820px" height="820px" style="border:none;"></iframe>
 
