@@ -7,3 +7,5 @@ navigation:
     url: /
   - title: Example
     url: example
+  - title: Data Story
+    url: datastory
