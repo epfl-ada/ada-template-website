@@ -4,6 +4,6 @@ description: Je veux aller dormir, je veux me coucher, je veux fermer les yeux, 
 show_downloads: True
 navigation:
   - title: Home
-    url: README
+    url: /
   - title: Example
     url: example
