@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letter Design Page</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Dancing Script', cursive; /* Handwritten font */
+      background-color: #fdf9f3; /* Slight beige background */
+      line-height: 1.6;
+      color: #3e3e3e;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    /* Letter Container */
+    .letter {
+      width: 60%;
+      background: #fbf7e9; /* Light paper beige */
+      border: 1px solid #e2d4b7;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      line-height: 2;
+      position: relative;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 24px,
+        #e2d4b7 25px
+      ); /* Horizontal lines on the paper */
+      background-size: 100% 25px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      font-family: 'Great Vibes', cursive; /* Elegant handwritten font */
+      margin-bottom: 1rem;
+    }
+
+    p {
+      text-indent: 2em; /* Paragraph indentation */
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    /* Optional: Add a signature */
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      text-align: right;
+      font-size: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Link to Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap');
+  </style>
+</head>
+<body>
+  <div class="letter">
+    <h1>Dear Reader,</h1>
+    <p>
+      This is an example of a letter-like design that you can scroll through. The background mimics the appearance of beige paper, and the text is styled to look handwritten. Lines run horizontally across the page, just like traditional lined paper.
+    </p>
+    <p>
+      You can continue writing your content here, adding paragraphs, headings, and anything you’d like. As the reader scrolls, it will feel like they are reading a physical letter, but in digital form.
+    </p>
+    <p>
+      Feel free to customize this design further to suit your style or purpose. Add images, change fonts, or adjust the colors—it's all up to you!
+    </p>
+    <div class="signature">
+      Yours sincerely,<br>
+      Your Name
+    </div>
+  </div>
+</body>
+</html>
