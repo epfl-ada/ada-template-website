@@ -1,8 +1,5 @@
 ---
 layout: default
-title: Stars or Storyline 
-subtitle: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
-cover-img: /assets/img/movie.png
 ---
 
 # Stars or Storyline: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
