@@ -12,7 +12,7 @@ use-site-title: true
 
 ## Introduction
 
-In the world of cinema, understanding what makes a movie successful is complex and multi-faceted. Does the star power of its cast drive success, or does a captivating storyline influence audience perception more significantly? Our project seeks to unravel these elements, focusing on how both actor fame and the emotional journey of the plot contribute to a movie's critical success.
+In the world of cinema (changed), understanding what makes a movie successful is complex and multi-faceted. Does the star power of its cast drive success, or does a captivating storyline influence audience perception more significantly? Our project seeks to unravel these elements, focusing on how both actor fame and the emotional journey of the plot contribute to a movie's critical success.
 
 ### Project Overview
 
