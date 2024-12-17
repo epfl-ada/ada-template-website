@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Network Analysis: Actor Collaborations and Success Wierd
+# Network Analysis: Actor Collaborations and Success 
 
 ## Actor Network Visualization
 

@@ -7,7 +7,7 @@ baseurl: "/ada-template-website"
 url: "https://pierrelts.github.io"
 navigation:
   - title: Home
-    url: /
+    url: /home
   - title: Data Analysis
     url: /data-analysis
   - title: Sentiment Analysis
