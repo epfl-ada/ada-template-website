@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+
+</head>
+<body>
+    <!-- Search Bar -->
+    <input type="text" id="movieSearch" placeholder="Enter movie name..." />
+    <button onclick="highlightMovie()">Search</button>
+
+    <!-- Plotly Chart -->
+    <div id="scatterplot"></div>
+
+    <script>
+        async function fetchData() {
+            const response = await fetch('final_dataset.csv');
+            const csvText = await response.text();
+            
+            // Parse CSV using PapaParse
+            const result = Papa.parse(csvText, {
+                header: true,  // Use the first row as headers
+                skipEmptyLines: true,  // Ignore empty lines
+                dynamicTyping: true,   // Automatically typecast numbers and booleans
+            });
+        
+            if (result.errors.length) {
+                console.error("Errors during CSV parsing:", result.errors);
+            }
+        
+            let data = result.data;
+        
+            // Drop rows where 'revenue' is null or 0
+            data = data.filter(row => row.revenue !== null && row.revenue !== 0);
+        
+            console.log("Filtered data:", data.slice(0, 10)); // Debug: log first 10 rows
+            return data;
+        }
+        
+        
+        
+
+        function calculateMedians(data, revenueKey, ratingKey) {
+            const revenues = data.map(d => parseFloat(d[revenueKey])); //.filter(v => !isNaN(v));
+            const ratings = data.map(d => parseFloat(d[ratingKey])); //.filter(v => !isNaN(v));
+
+            console.log('Revenues first 10 entries:', revenues.slice(0, 10));
+            console.log('Ratings length:', ratings.slice(0, 10));
+            return {
+                revenueMedian: d3.median(revenues),
+                ratingMedian: d3.median(ratings)
+            };
+        }
+
+        function assignQuadrant(data, revenueMedian, ratingMedian, revenueKey, ratingKey) {
+            return data.map(d => {
+                const revenue = parseFloat(d[revenueKey]);
+                const rating = parseFloat(d[ratingKey]);
+                if (isNaN(revenue) || isNaN(rating)) return { ...d, category: null };
+
+                if (revenue < revenueMedian && rating < ratingMedian) {
+                    return { ...d, category: 'Low Rating & Low Revenue' };
+                } else if (revenue < revenueMedian && rating >= ratingMedian) {
+                    return { ...d, category: 'High Rating & Low Revenue' };
+                } else if (revenue >= revenueMedian && rating < ratingMedian) {
+                    return { ...d, category: 'Low Rating & High Revenue' };
+                } else {
+                    return { ...d, category: 'High Rating & High Revenue' };
+                }
+            });
+        }
+
+        let plotData = [];  // Variable to store plot data
+
+        async function initPlot() {
+            const data = await fetchData();
+
+            // Median calculations
+            const { revenueMedian, ratingMedian } = calculateMedians(data, 'revenue', 'normalized_rating_x');
+
+            console.log('Medians:', revenueMedian, ratingMedian);
+
+            // Assign quadrants
+            const categorizedData = assignQuadrant(data, revenueMedian, ratingMedian, 'revenue', 'normalized_rating_x');
+
+            // Scatter plot data preparation
+            const categories = [...new Set(categorizedData.map(d => d.category))].filter(c => c !== null);
+            const colorblindPalette = ['#117733', '#44AA99', '#88CCEE', '#DDCC77'];
+            const traces = categories.map((category, idx) => ({
+                x: categorizedData.filter(d => d.category === category).map(d => parseFloat(d.revenue)),
+                y: categorizedData.filter(d => d.category === category).map(d => parseFloat(d.normalized_rating_x)),
+                text: categorizedData.filter(d => d.category === category).map(d => d.movie_name),
+                mode: 'markers',
+                type: 'scatter',
+                name: category,
+                marker: { size: 5, color: colorblindPalette[idx] }
+            }));
+
+            // Median lines
+            const shapes = [
+                {
+                    type: 'line',
+                    x0: revenueMedian,
+                    x1: revenueMedian,
+                    y0: Math.min(...categorizedData.map(d => parseFloat(d.normalized_rating_x))),
+                    y1: Math.max(...categorizedData.map(d => parseFloat(d.normalized_rating_x))),
+                    line: { color: 'gray', dash: 'dash', width: 1 }
+                },
+                {
+                    type: 'line',
+                    x0: Math.min(...categorizedData.map(d => parseFloat(d.revenue))),
+                    x1: Math.max(...categorizedData.map(d => parseFloat(d.revenue))),
+                    y0: ratingMedian,
+                    y1: ratingMedian,
+                    line: { color: 'gray', dash: 'dash', width: 1 }
+                }
+            ];
+
+            const layout = {
+                title: 'Revenue vs Normalized Rating',
+                xaxis: { title: 'Movie Revenue (logscale)', type: 'log' },
+                yaxis: { title: 'Normalized Movie Rating' },
+                shapes
+            };
+
+            // Render the plot
+            Plotly.newPlot('scatterplot', traces, layout);
+
+            // Store data for highlighting
+            window.movieData = categorizedData;
+        }
+
+        function highlightMovie() {
+            const movieName = document.getElementById('movieSearch').value.toLowerCase();
+        
+            if (movieName === "") {
+                return; // Do nothing if the search bar is empty
+            }
+        
+            // Find all movies matching the search term
+            const highlightedMovies = window.movieData.filter(d => d.movie_name && d.movie_name.toLowerCase().includes(movieName));
+
+            let existingTraceIndex = -1;
+            if (plotData.length > 0) {
+                existingTraceIndex = plotData.findIndex(trace => trace.name === 'Highlighted Movies');
+            }
+            console.log('Existing trace index:', existingTraceIndex);
+
+            if (existingTraceIndex > -1) {
+                // Remove the existing trace
+                Plotly.deleteTraces('scatterplot', existingTraceIndex + 4); // +4 because we have the 4 other traces already
+                plotData.splice(existingTraceIndex, 1); // Remove the trace from plotData
+            }
+            
+            if (highlightedMovies.length > 0) {
+                const xValues = highlightedMovies.map(movie => parseFloat(movie.revenue)); // Log scale for revenue
+                const yValues = highlightedMovies.map(movie => parseFloat(movie.normalized_rating_x)); // Normalized rating value
+                const textValues = highlightedMovies.map(movie => movie.movie_name);
+                const circleSize = 10; // Define the size of the circles
+
+                
+        
+                // Add a trace for the highlighted movies
+                const highlightTrace = {
+                    x: xValues,
+                    y: yValues,
+                    text: textValues,
+                    mode: 'markers',
+                    type: 'scatter',
+                    name: 'Highlighted Movies',
+                    marker: { size: circleSize, color: 'rgba(0,0,0,0)', opacity: 1, line: { color: 'red', width: 2 } }
+                };
+        
+                // Add the highlight trace
+                Plotly.addTraces('scatterplot', highlightTrace);
+                plotData.push(highlightTrace); // Add the new trace to plotData
+            }
+        }
+            
+        // Initialize the plot
+        initPlot();
+    </script>
+</body>
+</html>
