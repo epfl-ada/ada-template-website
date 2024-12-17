@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: The Recipe For A Movie's Success 🎬
 subtitle: Analysis of various factors that lead to high box office revenue
 cover-img: /assets/img/movie.png
