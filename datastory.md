@@ -29,7 +29,7 @@ In the following, we will show that your next movie should be based on a book. W
 
 
 <!-- <iframe src="assets/plots/test_plot copy.html" width="1020px" height="620px" style="border:none;"></iframe> -->
-<iframe src="assets/plots/test_plot.html" width="1020px" height="620px" style="border:none;"></iframe>
+<iframe src="assets/plots/test_plot.html" width="830px" height="700px" style="border:none;"></iframe>
 
 
 

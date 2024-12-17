@@ -8,8 +8,43 @@
 </head>
 <body>
     <!-- Search Bar -->
-    <input type="text" id="movieSearch" placeholder="Enter movie name..." />
-    <button onclick="highlightMovie()">Search</button>
+    <style>
+        #searchContainer {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            max-width: 600px; /* Set a maximum width */
+            margin: 0 auto; /* Center the container */
+        }
+
+        #movieSearch {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #searchButton {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #searchButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <div id="searchContainer">
+        <input type="text" id="movieSearch" placeholder="Enter movie name..." />
+        <button id="searchButton" onclick="highlightMovie()">Search</button>
+    </div>
 
     <!-- Plotly Chart -->
     <div id="scatterplot"></div>
