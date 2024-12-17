@@ -1,0 +1,51 @@
+---
+layout: base
+---
+
+<!DOCTYPE html>
+<html lang="{{ page.language | default: site.language | default: 'en' }}">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+  </head>
+  <body>
+
+    {% include nav.html %}
+
+    <!-- Optional Cover Image -->
+    {% if page.cover-img %}
+      <div class="cover-image text-center mb-4">
+        <img src="{{ page.cover-img }}" alt="Cover Image" style="max-width: 100%; height: auto;">
+      </div>
+    {% endif %}
+
+    <!-- Main Wrapper -->
+    <div class="wrapper container-md">
+      <div class="row">
+        <!-- Sidebar Navigation -->
+        <aside class="col-md-3">
+          <nav class="nav flex-column">
+            <a class="nav-link" href="/ada-template-website/">Home</a>
+            <a class="nav-link" href="/ada-template-website/data-analysis">Data Analysis</a>
+            <a class="nav-link" href="/ada-template-website/sentiment-analysis">Sentiment Analysis</a>
+            <a class="nav-link" href="/ada-template-website/network-analysis">Network Analysis</a>
+            <a class="nav-link" href="/ada-template-website/results">Results</a>
+          </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="col-md-9" role="main">
+          {% if page.subtitle %}
+            <h2>{{ page.subtitle }}</h2>
+          {% endif %}
+
+          {{ content }}
+        </main>
+      </div>
+    </div>
+
+    {% include footer.html %}
+    {% include footer-scripts.html %}
+  </body>
+</html>

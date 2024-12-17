@@ -1,11 +1,8 @@
 ---
-layout: default
-title: The Recipe For A Movie's Success 🎬
-subtitle: Analysis of various factors that lead to high box office revenue
+layout: page
+title: Stars or Storyline 
+subtitle: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
 cover-img: /assets/img/movie.png
-thumbnail-img: /assets/img/movie.png
-share-img: /assets/img/movie.png
-use-site-title: true
 ---
 
 # Stars or Storyline: How Actor Fame and Sentiment Trajectories Shape a Movie's Critical Success
@@ -25,11 +22,3 @@ Our approach investigates two main factors:
 - How does an actor's network of collaborations influence a movie's success?
 - What role does the emotional journey of a plot play in audience reception?
 - Can we identify patterns in successful movies through sentiment analysis?
-
-### Navigation
-
-Explore our findings through these detailed sections:
-- [Data Analysis](./data-analysis)
-- [Sentiment Analysis](./sentiment-analysis)
-- [Network Analysis](./network-analysis)
-- [Results](./results)
