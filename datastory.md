@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <style>
   body {
     /*font-family: "Comic Sans MS", cursive, sans-serif;*/

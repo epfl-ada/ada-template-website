@@ -35,7 +35,6 @@
             // Drop rows where 'revenue' is null or 0
             data = data.filter(row => row.revenue !== null && row.revenue !== 0);
         
-            console.log("Filtered data:", data.slice(0, 10)); // Debug: log first 10 rows
             return data;
         }
         
@@ -46,8 +45,6 @@
             const revenues = data.map(d => parseFloat(d[revenueKey])); //.filter(v => !isNaN(v));
             const ratings = data.map(d => parseFloat(d[ratingKey])); //.filter(v => !isNaN(v));
 
-            console.log('Revenues first 10 entries:', revenues.slice(0, 10));
-            console.log('Ratings length:', ratings.slice(0, 10));
             return {
                 revenueMedian: d3.median(revenues),
                 ratingMedian: d3.median(ratings)
@@ -79,8 +76,6 @@
 
             // Median calculations
             const { revenueMedian, ratingMedian } = calculateMedians(data, 'revenue', 'normalized_rating_x');
-
-            console.log('Medians:', revenueMedian, ratingMedian);
 
             // Assign quadrants
             const categorizedData = assignQuadrant(data, revenueMedian, ratingMedian, 'revenue', 'normalized_rating_x');
@@ -122,7 +117,9 @@
                 title: 'Revenue vs Normalized Rating',
                 xaxis: { title: 'Movie Revenue (logscale)', type: 'log' },
                 yaxis: { title: 'Normalized Movie Rating' },
-                shapes
+                shapes,
+                width: 800,  // Set the width in pixels
+                height: 600  // Set the height in pixels            
             };
 
             // Render the plot
@@ -135,24 +132,22 @@
         function highlightMovie() {
             const movieName = document.getElementById('movieSearch').value.toLowerCase();
         
-            if (movieName === "") {
-                return; // Do nothing if the search bar is empty
-            }
-        
-            // Find all movies matching the search term
-            const highlightedMovies = window.movieData.filter(d => d.movie_name && d.movie_name.toLowerCase().includes(movieName));
-
             let existingTraceIndex = -1;
             if (plotData.length > 0) {
                 existingTraceIndex = plotData.findIndex(trace => trace.name === 'Highlighted Movies');
             }
-            console.log('Existing trace index:', existingTraceIndex);
-
+            
             if (existingTraceIndex > -1) {
                 // Remove the existing trace
                 Plotly.deleteTraces('scatterplot', existingTraceIndex + 4); // +4 because we have the 4 other traces already
                 plotData.splice(existingTraceIndex, 1); // Remove the trace from plotData
             }
+            
+            if (movieName === "") {
+                return; // Do nothing if the search bar is empty
+            }
+            // Find all movies matching the search term
+            const highlightedMovies = window.movieData.filter(d => d.movie_name && d.movie_name.toLowerCase().includes(movieName));
             
             if (highlightedMovies.length > 0) {
                 const xValues = highlightedMovies.map(movie => parseFloat(movie.revenue)); // Log scale for revenue
