@@ -80,3 +80,9 @@ Not overlaid:
 
 ### Sentiment Similarity
 <iframe src="assets/plots/Book-Movie Summary Sentiment Difference per 3-Year Interval.html" width="1020px" height="620px" style="border:none;"></iframe>
+
+
+
+### Movie Revenue Quiz
+
+<iframe src="assets/quizz.html" width="1020px" height="720px" style="border:none;"></iframe>

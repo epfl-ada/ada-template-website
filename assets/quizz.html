@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Revenue Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .quiz-container {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .movie {
+            display: inline-block;
+            margin: 20px;
+            cursor: pointer;
+        }
+        .movie img {
+            width: 150px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .movie:hover img {
+            border-color: #333;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .icon {
+            font-size: 50px;
+        }
+        .icon.correct {
+            color: green;
+        }
+        .icon.wrong {
+            color: red;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: darkgreen;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .button_next {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: darkgrey;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Guess Which Movie Made More Revenue</h1>
+
+    <div id="question" class="question">
+        <!-- Questions will be populated dynamically -->
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <div class="summary" id="summary"></div>
+
+    <!-- Next Question Button -->
+    <button class="button_next" id="nextButton" style="display: none;" onclick="nextQuestion()">Next Question</button>
+    <!-- Repeat Quiz Button -->
+    <button class="button" id="repeatButton" style="display: none;" onclick="resetQuiz()">Repeat Quiz</button>
+</div>
+
+<script>
+    const movies = [
+        {
+            title1: "LoTR: Fellowship of the Ring",
+            title2: "Pulp Fiction",
+            revenue1: 1165,
+            revenue2: 342,
+            cover1: "img/covers/drchönigvoderinge.jpg",
+            cover2: "img/covers/pulpigifiktion.jpg"
+        },
+        {
+            title1: "Jaws",
+            title2: "Mulan",
+            revenue1: 2070,
+            revenue2: 442,
+            cover1: "img/covers/chiefer.jpg",
+            cover2: "img/covers/mulan.jpg"
+        },
+        {
+            title1: "Saw",
+            title2: "Pinocchio",            
+            revenue1: 130,
+            revenue2: 1424,
+            cover1: "img/covers/saw.jpg",
+            cover2: "img/covers/pinocchio.jpg"
+        },
+        {
+            title1: "The Social Network",
+            title2: "The Da Vinci Code",
+            revenue1: 244,
+            revenue2: 902,
+            cover1: "img/covers/socialnetwork.jpg",
+            cover2: "img/covers/davinci.jpg"
+        }
+    ];
+
+    let currentQuestion = 0;
+    let correctAnswers = 0;
+
+    function showQuestion() {
+        const questionDiv = document.getElementById('question');
+        const resultDiv = document.getElementById('result');
+        const summaryDiv = document.getElementById('summary');
+        const nextButton = document.getElementById('nextButton');
+        const repeatButton = document.getElementById('repeatButton');
+        
+        resultDiv.innerHTML = "";
+        summaryDiv.innerHTML = "";
+        nextButton.style.display = "none"; // Hide next button initially
+
+        if (currentQuestion < movies.length) {
+            const movie = movies[currentQuestion];
+
+            questionDiv.innerHTML = `
+                <div class="movie" onclick="checkAnswer(${movie.revenue1}, ${movie.revenue2}, true, '${movie.title1}', '${movie.title2}')">
+                    <img src="${movie.cover1}" alt="${movie.title1}">
+                    <p>${movie.title1}</p>
+                </div>
+                <div class="movie" onclick="checkAnswer(${movie.revenue1}, ${movie.revenue2}, false, '${movie.title1}', '${movie.title2}')">
+                    <img src="${movie.cover2}" alt="${movie.title2}">
+                    <p>${movie.title2}</p>
+                </div>
+            `;
+        }
+    }
+
+    function checkAnswer(revenue1, revenue2, isFirstSelected, title1, title2) {
+        const questionDiv = document.getElementById('question');
+        const resultDiv = document.getElementById('result');
+        const summaryDiv = document.getElementById('summary');
+        const nextButton = document.getElementById('nextButton');
+        const repeatButton = document.getElementById('repeatButton');
+        
+        resultDiv.innerHTML = "";
+        summaryDiv.innerHTML = "";
+
+        const correct = (isFirstSelected && revenue1 > revenue2) || (!isFirstSelected && revenue2 > revenue1);
+
+        if (correct) {
+            correctAnswers++;
+            resultDiv.innerHTML = `
+                <span class="icon correct">✅</span>
+                <p>Correct! ${title1}: $${revenue1.toLocaleString()} million vs ${title2}: $${revenue2.toLocaleString()} million</p>
+            `;
+        } else {
+            resultDiv.innerHTML = `
+                <span class="icon wrong">❌</span>
+                <p>Wrong! ${title1}: $${revenue1.toLocaleString()} million vs ${title2}: $${revenue2.toLocaleString()} million</p>
+            `;
+        }
+
+        // If it's the last question, directly show results and hide "Next Question" button
+        if (currentQuestion === movies.length - 1) {
+            document.getElementById('nextButton').style.display = "none";
+            document.getElementById('repeatButton').style.display = "inline-block";
+            summaryDiv.innerHTML = `You finished the Quiz! You got ${correctAnswers} out of ${movies.length} correct.`;
+        } else {
+            // Show "Next Question" button if there are more questions
+            document.getElementById('nextButton').style.display = "inline-block";
+        }
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        showQuestion(); // Show the next question
+    }
+
+    function resetQuiz() {
+        currentQuestion = 0;
+        correctAnswers = 0;
+        const repeatButton = document.getElementById('repeatButton');
+        repeatButton.style.display = "none"; 
+        showQuestion(); // Restart the quiz
+    }
+
+    showQuestion();
+</script>
+
+</body>
+</html>
