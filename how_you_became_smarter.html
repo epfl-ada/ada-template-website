@@ -9,80 +9,62 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0f0f0f;
-            color: #fff;
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text */
         }
-        header {
-            text-align: center;
-            background-color: #181818;
-            padding: 0.5rem 0;
-        }
-        img.video-banner {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .video-container {
+
+        .header {
             padding: 1rem;
         }
+
+        .thumbnail {
+            display: block;
+            width: 300px; /* Smaller size */
+            height: auto;
+            margin: 0; /* Remove centering margin */
+        }
+
+        .video-container {
+            padding: 1rem 2rem;
+        }
+
         .video-title {
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin: 1rem 0;
         }
+
         .channel-info {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
         }
+
         .channel-info img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             margin-right: 1rem;
         }
-        .channel-details h3 {
-            margin: 0;
-            font-size: 1.1rem;
-        }
-        .channel-details p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #aaa;
-        }
+
         .stats {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 1rem;
-            color: #aaa;
+            font-size: 0.9rem;
         }
+
         .description {
-            background-color: #181818;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        .centered-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 1rem auto;
-        }
-    
-        .centered-image img.video-banner {
-            max-width: 80%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
-
-    <header>
-    <div class="centered-image">
-        <img class="video-banner" src="assets/thumbnail1.jpg" alt="Video Banner">
+    <!-- Header with Thumbnail -->
+    <div class="header">
+        <img class="thumbnail" src="assets/thumbnail1.jpg" alt="Video Thumbnail">
     </div>
-</header>
 
     <!-- Video Content -->
     <div class="video-container">
@@ -92,12 +74,12 @@
         <!-- Channel Info -->
         <div class="channel-info">
             <img src="assets/profile.jpeg" alt="Channel Profile">
-            <div class="channel-details">
+            <div>
                 <h3>SickADA</h3>
                 <p>2.26K subscribers</p>
             </div>
         </div>
-        
+
         <!-- Video Stats -->
         <div class="stats">
             <span>👍 316 likes</span>
@@ -111,6 +93,5 @@
             A deep dive into the phenomenon of smarter decision-making, habits, and learning.
         </div>
     </div>
-
 </body>
 </html>
