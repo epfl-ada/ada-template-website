@@ -46,7 +46,7 @@ Before diving into detailed modeling, we ensure:
 
 This **preliminary exploration** forms the backbone of our data-driven strategy, setting the stage for the deeper insights that follow. From here, we move forward with confidence, equipped with the metrics that matter most for predicting a movie’s success.
 
-## *The Evolution of Movie Releases*
+### *The Evolution of Movie Releases*
 
 <div id="releases-plot" style="width: 100%; height: 600px;"></div>
 
@@ -58,7 +58,7 @@ This growth in releases isn’t just a statistic; it sets the stage for everythi
 
 ---
 
-## *The Story of Revenue: From Modest Beginnings to Box Office Titans*
+### *The Story of Revenue: From Modest Beginnings to Box Office Titans*
 
 <div id="revenue-plot" style="width: 100%; height: 600px;"></div>
 
@@ -70,7 +70,7 @@ What’s driving this growth? A rising number of releases, yes, but also inflati
 
 ---
 
-## *The Nuanced Revenue Landscape: Blockbusters, Indies, and Everything In-Between*
+### *The Nuanced Revenue Landscape: Blockbusters, Indies, and Everything In-Between*
 
 <div id="revenue-stats-plot" style="width: 100%; height: 600px;"></div>
 <div id="revenue-scatter-plot" style="width: 100%; height: 600px;"></div>
@@ -83,7 +83,7 @@ But here’s the twist: while revenue paints a broad picture of financial succes
 
 ---
 
-## *Why Revenue Isn’t Enough*
+### *Why Revenue Isn’t Enough*
 
 The data tells us this much: the movie industry is growing, financially and creatively. But focusing on revenue alone misses the bigger picture. A movie’s success isn’t just about box office numbers; it’s about emotional connection, cultural impact, and the stories that resonate.
 
@@ -92,76 +92,69 @@ Our analysis doesn’t stop here. While the industry’s financial growth is imp
 So, does a star-studded cast or an unforgettable storyline hold the key to success? The answer is coming — and it’s worth sticking around for.
 
 
-## Ratings and Vote Count Evaluation
+## *The Story Behind Movie Ratings: Audience Perception Unmasked*
 
 ### Ratings Analysis
-
-In this section, we examine the evolution of movie ratings over time to identify any underlying trends and patterns. Ratings provide a measure of audience perception that is less influenced by external economic factors than revenue, offering a potentially more stable metric.
 
 <div id="ratings-stats-plot" style="width: 100%; height: 600px;"></div>
 <div id="ratings-scatter-plot" style="width: 100%; height: 600px;"></div>
 
-**Observations**:
-The ratings trend shows significantly less fluctuation compared to the revenue analysis, suggesting that audience perception, as reflected in ratings, has remained relatively stable over time. However, at the beginning of the observed period, we see larger fluctuations in the mean ratings, which could be attributed to a smaller number of votes per movie. With fewer ratings, the averages are less consistent, leading to greater variability. This initial volatility gradually stabilizes, and overall, the average rating hovers within a consistent range, indicating a steady audience response to movies throughout the years.
+Every movie tells a story, but what about the story told by its ratings? Early on, movie ratings were a bit like untamed scripts — volatile, inconsistent, and shaped by a limited audience. In the industry's early years, ratings swung unpredictably due to sparse viewer feedback. As more people tuned in, these fluctuations smoothed out, creating a consistent, audience-driven metric. 
+
+Today, movie ratings remain a steady guide, capturing audience sentiment independent of revenue-driven market forces. This makes ratings a core element of our success metric, offering a grounded perspective on a film’s lasting appeal.
+
+---
 
 ### Vote Count Analysis
-
-In this part, we examine the distribution and evolution of vote counts per movie over time. By analyzing vote counts, we can assess trends in audience engagement and a film's reach over time.
 
 <div id="votes-stats-plot" style="width: 100%; height: 600px;"></div>
 <div id="votes-scatter-plot" style="width: 100%; height: 600px;"></div>
 
-**Observations**:
-1. **Early Years with Lower Vote Counts**: As hypothesized in the ratings analysis, we observe fewer votes per movie in the early years, leading to greater variability. This trend aligns with our previous observations, confirming that early movies have less audience engagement or records.
-2. **Increasing Engagement Over Time**: Over the years, both mean and median vote counts have increased, reflecting the growth of movie audiences and the rise of global platforms that make films more accessible for voting and reviews.
-3. **Fluctuations in Mean Vote Counts**: The variability in mean vote counts suggests shifts in audience attention, likely due to the release of particularly popular films in certain years.
+Movie ratings tell us *what* audiences think, but vote counts tell us *how many* people care enough to voice that opinion. Early movies gathered only a handful of votes — cinema was still a niche experience. Over time, the industry grew, audiences expanded, and voting became commonplace.
 
-**Conclusion**:
-The trends in vote counts and ratings together provide a more comprehensive picture of a movie's impact over time. While ratings reflect audience satisfaction, vote counts indicate the level of engagement. The combination of these metrics offers valuable insights into how movies resonate with audiences across different periods.
+This surge in engagement wasn’t linear. Certain years saw sudden spikes, likely driven by cultural phenomena or blockbuster releases. These trends reveal more than viewership; they reflect engagement, passion, and a global audience becoming active participants in a movie’s journey.
 
-## Definition of Success
+---
 
-To conduct meaningful analysis, it's crucial to first define what "success" means in the context of movies. Success is a multifaceted concept that can vary widely depending on goals, stakeholders, and industry standards.
+## *Defining Success: Beyond Box Office Numbers*
 
-We define success using a combination of ratings and audience engagement:
+What makes a movie truly successful? In our story, success goes beyond the ticket counter. We crafted a success metric that blends quality and popularity:
 
-**S = rating * log(number of votes)**
+**S = rating × log(number of votes)**
 
-This formula effectively combines both quality (ratings) and popularity (vote count) into a single metric. The logarithmic adjustment of vote count helps balance the influence of highly-voted movies without letting them disproportionately skew the results.
+This formula ensures that both a film's approval rating and its audience reach are counted — balancing the art of filmmaking with its global reception.
 
-### Success Metric Analysis
+### Success Metric in Action
 
 <div id="success-stats-plot" style="width: 100%; height: 600px;"></div>
 <div id="success-scatter-plot" style="width: 100%; height: 600px;"></div>
 
-**Observations:**
-1. **Early Fluctuations**: Higher variability in early years (1920s-1940s) likely due to fewer ratings and votes.
-2. **Stabilizing Trends**: Success metric stabilizes over time, with a gradual increase in the mean.
-3. **Overall Growth**: The rise in mean success reflects increased movie output, audience engagement, and influential blockbusters.
+Early cinema was unpredictable. Fewer votes and scattered ratings created erratic success scores. But with time, our metric stabilizes, reflecting how modern movies consistently engage and resonate with large audiences. This trend shows how industry growth parallels increased viewer participation and emotional investment.
 
-### Success vs Revenue Analysis
+---
+
+### Success vs. Revenue
 
 <div id="success-revenue-plot" style="width: 100%; height: 600px;"></div>
 
-We can observe a clear correlation between success and revenue: Revenue tends to grow exponentially with our definition of success, which validates our success metric. Additionally, movies with lower success generally have lower ratings, with some exceptions that had little attention despite their high rating and vice versa.
+A quick glance reveals a strong relationship between success and revenue — but with notable exceptions. Some highly-rated movies earned modest revenue due to limited release or niche appeal. Conversely, some financially dominant films may have sacrificed quality for commercial appeal. This duality affirms that success isn’t solely about money — it’s about reaching hearts *and* wallets.
 
-## Understanding Actor Trajectories
+---
 
-Understanding actors' trajectories can offer valuable insights into their influence in the industry. Generally, actors who start their careers at a younger age tend to have more connections and experience, which could positively impact a movie's success. In this section, we examine how the age of an actor at their first movie appearance correlates with the total number of movies they appear in.
+## *The Actor's Journey: Age, Experience, and Cinematic Legacy*
+
+### Understanding Actor Trajectories
 
 <div id="actor-age-plot" style="width: 100%; height: 600px;"></div>
-<div id="actor-age-plot-error" style="color: red;"></div>
 
-**Observations**:
+An actor’s career arc mirrors a movie's narrative: beginnings, climaxes, and resolutions. Our analysis reveals that actors starting young are more likely to build extensive filmographies. Two standout starting points emerged:
 
-1. **Age Intervals of High Activity**: There are two key age ranges where actors are more likely to appear in additional movies:
-   - **1-5 years**: Very early career starts
-   - **15-19 years**: Teenage career beginnings
-   These intervals suggest that actors starting young or during teenage years often have longer, more prolific careers.
+- **1-5 Years Old:** The child star phenomenon.
+- **15-19 Years Old:** Teenage career launches.
 
-2. **Declining Trend**: An overall decline in appearances with increasing starting age indicates that actors beginning their careers later are less likely to have extensive filmographies. This trend suggests a strong correlation between early career start and accumulated experience.
+Actors entering the scene later face a tougher climb, with decreasing movie counts as starting age increases. This pattern underscores experience as a key driver in career longevity — and movie success.
 
-These findings support our hypothesis that an experienced actor contributes to a movie's success. To incorporate this, we considered the most experienced actor in each movie (i.e., the actor with the most previous appearances by the movie's release date) as a factor in our success metric.
+By tracking the most experienced actor in each film, we captured a critical piece of the success puzzle. After all, in the cinematic universe, experience isn’t just an asset — it’s a legacy in motion.
 
 # 3. Sentiment Analysis
 
