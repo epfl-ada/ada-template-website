@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.jpeg" alt="My Banner" width="100%" height="350px">
+</p>
+
 # ADA Template Website
 ## Usage
 1. Fork (copy) this repository by clicking the "Fork" button on the top right corner.
@@ -14,5 +18,4 @@
 ### test
 
 
-[View the HTML file](assets/grass_map.html)
 <iframe src="assets/grass_map.html" width="100%" height="500px"></iframe>
