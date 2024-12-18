@@ -283,13 +283,13 @@ plugins:
 # 2fc73a3a967e97599c9763d05e564189
 
 # New style------------------------
-navbar-col: "#FFA500" #--------
+navbar-col: "#FF7E1D" #--------
 navbar-text-col: "#FFFFFF"
-navbar-border-col: "#FFA500"
+navbar-border-col: "#FF7E1D"
 page-col: "#1e1e1e"
 text-col: "#FFFFFF"
 link-col: "#FF1DCE"
-hover-col: "#FFA500"
-footer-col: "#FFA500" #------------
+hover-col: "#FF7E1D"
+footer-col: "#FF7E1D" #------------
 footer-text-col: "#FFFFFF"
 footer-link-col: "#FF1DCE"
