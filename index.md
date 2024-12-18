@@ -32,6 +32,8 @@ At **MKA®**, we bridge the gap between storytelling and data science to empower
 Discover the **data story** behind what makes a movie succeed. Let us guide you to the next big hit.
 
 -----------------
+Test bibitch
+<div id="releases-plot" style="width: 100%; height: 600px;"></div>
 
 ## When to strike gold: the perfect release date for your movie
 
