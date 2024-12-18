@@ -22,8 +22,8 @@ function createPlotlyLayout(title, xTitle, yTitle, logY = false) {
             showline: false,  // Remove axis line
             zeroline: false   // Remove zero line
         },
-        plot_bgcolor: '#1e1e1e',
-        paper_bgcolor: '#1e1e1e',
+        plot_bgcolor: '#000000',
+        paper_bgcolor: '#000000',
         font: { color: 'white' },
         showlegend: true,
         legend: {
