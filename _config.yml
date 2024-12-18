@@ -293,3 +293,6 @@ hover-col: "#FF7E1D"
 footer-col: "#FF7E1D" #------------
 footer-text-col: "#FFFFFF"
 footer-link-col: "#FF1DCE"
+
+site-css: 
+  - "/assets/css/custom.css"

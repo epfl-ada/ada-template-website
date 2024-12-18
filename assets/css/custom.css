@@ -1,5 +1,10 @@
 /* In C:\Users\Pierre\Desktop\ADA\ada-2024-project-spaghetti-raclette-tangyuan-horizon-nexus\ada-template-website\ada-template-website\assets\css\custom.css */
-
+/* Remove title shadow */
+.intro-header .page-heading,
+.intro-header.big-img .page-heading,
+.intro-header .post-heading {
+    text-shadow: none;
+}
 /* Plot containers */
 .plot-container {
     background-color: #1e1e1e;
