@@ -32,36 +32,171 @@ At **MKA®**, we bridge the gap between storytelling and data science to empower
 Discover the **data story** behind what makes a movie succeed. Let us guide you to the next big hit.
 
 -----------------
-Test bibitch
+# Preliminary Analysis and Metric Selection 3:37
+
+Before diving into in-depth analysis, it's essential to perform preliminary exploration of our datasets. This helps us understand the general structure, identify key features, and establish metrics that will guide our subsequent analysis. By visualizing and examining basic characteristics, we can set the foundation for our study and determine which metrics will best represent a movie's success.
+
+For all visualizations in this analysis, we decided to apply a cutoff at the year 1920. This decision was made due to the limited availability of ratings and vote data for movies released before 1920, which could skew results and impact the clarity of trends observed in more recent years.
+
+## Total Movie Releases
+
 <div id="releases-plot" style="width: 100%; height: 600px;"></div>
 
-## When to strike gold: the perfect release date for your movie
+**Observation**:
 
-To begin with, we aim to investigate the influence of a movie's release date on its box office revenue. Since our goal is to create a recipe for successfull movies in the future, we will focus on determining the best time of a year to release a movie by comparing the mean revenue of the different months. But with data spanning multiple decades, we knew we had to account for inflation to get an accurate picture. So let's dive in and see what the data reveals about the perfect release date for a blockbuster movie.
+The plot illustrates an overall growth in the number of movies released yearly from 1920 onward, with notable fluctuations. Hypothetically, early stability may be due to historical constraints, while the post-1980s increase could reflect technological and industry expansion. This growth trend will be an important consideration in our subsequent analysis.
 
-#### Inflation-Adjusted Box Office Revenue: Can Older Movies Compete?
+## Revenue Analysis
 
-Our analysis shows that there is a clear need to adjust for inflation when looking at the correlation between release year and revenue. In fact, the Spearman Correlation Coefficient of 0.01 and p-value of 0.4 reveal that there is little to no correlation between the two variables after correcting for inflation. But don't worry, we're not done yet! Next, we'll delve into the specific months of the year and see if there are any standout performers in terms of revenue. Stay tuned!
+<div id="revenue-plot" style="width: 100%; height: 600px;"></div>
 
-<iframe src="assets/plot/inflation-plot.html" width="750px" height="530px" frameborder="0" position="relative">Genre plot</iframe>
+**Observations**:
 
-#### What's the Best Month to Release a Movie? 
+We observe a near-exponential growth in total box office revenue per year. This trend may be driven by:
+- An increasing number of movie releases
+- Inflation over time
+- Growing interest in the film industry
+- Expansion of global markets
 
-We dive into the data to discover if certain months are more likely to lead to blockbuster hits. By analyzing the correlation between the month of release and revenue, we find that most months have statistically significant differences in mean revenue. In particular, June emerges as the clear winner with the highest mean and lowest p-value when performing a One-way ANOVA test. But is June the best month for all genres? We take a closer look at the top ten most common genres and find that the most promising month varies for each. Get ready to mark your calendars and plan for box office success!
+## Detailed Revenue Analysis
+
+<div id="revenue-stats-plot" style="width: 100%; height: 600px;"></div>
+<div id="revenue-scatter-plot" style="width: 100%; height: 600px;"></div>
+
+**Observations**:
+
+1. **Variance in Revenue**: Over time, the variance in box office revenue has increased significantly, which may reflect the polarized landscape of modern cinema. This could indicate the simultaneous rise of high-grossing blockbusters and lower-budget independent films, appealing to increasingly diverse audience preferences.
+
+2. **Revenue Trends**: Notable spikes in mean revenue can be observed in certain years, with peaks in the 1960s, 1970s, and the 2000s, potentially reflecting trends in cinema consumption or the success of particularly influential movies.
+
+3. **Overall Growth**: An upward trend in overall revenue is apparent, which may be influenced by inflation as well as increased global interest in cinema over time. This growth highlights both the industry's expansion and the rising financial impact of movies as cultural products.
+
+**Revenue Conclusion**:
+While box office revenue provides valuable insight into the financial success of movies, it is an incomplete metric for gauging overall success. This preliminary analysis suggests that revenue alone does not fully capture a movie's impact or popularity, and additional metrics are necessary to achieve a comprehensive understanding of cinematic success.
+
+## Ratings and Vote Count Evaluation
+
+### Ratings Analysis
+
+In this section, we examine the evolution of movie ratings over time to identify any underlying trends and patterns. Ratings provide a measure of audience perception that is less influenced by external economic factors than revenue, offering a potentially more stable metric.
+
+<div id="ratings-stats-plot" style="width: 100%; height: 600px;"></div>
+<div id="ratings-scatter-plot" style="width: 100%; height: 600px;"></div>
+
+**Observations**:
+The ratings trend shows significantly less fluctuation compared to the revenue analysis, suggesting that audience perception, as reflected in ratings, has remained relatively stable over time. However, at the beginning of the observed period, we see larger fluctuations in the mean ratings, which could be attributed to a smaller number of votes per movie. With fewer ratings, the averages are less consistent, leading to greater variability. This initial volatility gradually stabilizes, and overall, the average rating hovers within a consistent range, indicating a steady audience response to movies throughout the years.
+
+### Vote Count Analysis
+
+In this part, we examine the distribution and evolution of vote counts per movie over time. By analyzing vote counts, we can assess trends in audience engagement and a film's reach over time.
+
+<div id="votes-stats-plot" style="width: 100%; height: 600px;"></div>
+<div id="votes-scatter-plot" style="width: 100%; height: 600px;"></div>
+
+**Observations**:
+1. **Early Years with Lower Vote Counts**: As hypothesized in the ratings analysis, we observe fewer votes per movie in the early years, leading to greater variability. This trend aligns with our previous observations, confirming that early movies have less audience engagement or records.
+2. **Increasing Engagement Over Time**: Over the years, both mean and median vote counts have increased, reflecting the growth of movie audiences and the rise of global platforms that make films more accessible for voting and reviews.
+3. **Fluctuations in Mean Vote Counts**: The variability in mean vote counts suggests shifts in audience attention, likely due to the release of particularly popular films in certain years.
+
+**Conclusion**:
+The trends in vote counts and ratings together provide a more comprehensive picture of a movie's impact over time. While ratings reflect audience satisfaction, vote counts indicate the level of engagement. The combination of these metrics offers valuable insights into how movies resonate with audiences across different periods.
+
+## Definition of Success
+
+To conduct meaningful analysis, it's crucial to first define what "success" means in the context of movies. Success is a multifaceted concept that can vary widely depending on goals, stakeholders, and industry standards.
+
+We define success using a combination of ratings and audience engagement:
+
+**S = rating * log(number of votes)**
+
+This formula effectively combines both quality (ratings) and popularity (vote count) into a single metric. The logarithmic adjustment of vote count helps balance the influence of highly-voted movies without letting them disproportionately skew the results.
+
+### Success Metric Analysis
+
+<div id="success-stats-plot" style="width: 100%; height: 600px;"></div>
+<div id="success-scatter-plot" style="width: 100%; height: 600px;"></div>
+
+**Observations:**
+1. **Early Fluctuations**: Higher variability in early years (1920s-1940s) likely due to fewer ratings and votes.
+2. **Stabilizing Trends**: Success metric stabilizes over time, with a gradual increase in the mean.
+3. **Overall Growth**: The rise in mean success reflects increased movie output, audience engagement, and influential blockbusters.
+
+### Success vs Revenue Analysis
+
+<div id="success-revenue-plot" style="width: 100%; height: 600px;"></div>
+
+We can observe a clear correlation between success and revenue: Revenue tends to grow exponentially with our definition of success, which validates our success metric. Additionally, movies with lower success generally have lower ratings, with some exceptions that had little attention despite their high rating and vice versa.
+
+## Understanding Actor Trajectories
+
+Understanding actors' trajectories can offer valuable insights into their influence in the industry. Generally, actors who start their careers at a younger age tend to have more connections and experience, which could positively impact a movie's success. In this section, we examine how the age of an actor at their first movie appearance correlates with the total number of movies they appear in.
+
+<div id="actor-age-plot" style="width: 100%; height: 600px;"></div>
+<div id="actor-age-plot-error" style="color: red;"></div>
+
+**Observations**:
+
+1. **Age Intervals of High Activity**: There are two key age ranges where actors are more likely to appear in additional movies:
+   - **1-5 years**: Very early career starts
+   - **15-19 years**: Teenage career beginnings
+   These intervals suggest that actors starting young or during teenage years often have longer, more prolific careers.
+
+2. **Declining Trend**: An overall decline in appearances with increasing starting age indicates that actors beginning their careers later are less likely to have extensive filmographies. This trend suggests a strong correlation between early career start and accumulated experience.
+
+These findings support our hypothesis that an experienced actor contributes to a movie's success. To incorporate this, we considered the most experienced actor in each movie (i.e., the actor with the most previous appearances by the movie's release date) as a factor in our success metric.
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
+<script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load the movie master dataset
+    Papa.parse('{{ site.baseurl }}/data/movie_master_dataset.csv', {
+        download: true,
+        header: true,
+        complete: function(movieResults) {
+            const yearStats = processYearlyData(movieResults.data);
+            const years = Object.keys(yearStats).sort((a,b) => a-b);
+            // Create movie-related plots
+            createReleasesPlot(yearStats, years);
+            createRevenuePlot(yearStats, years);
+            createStatsPlot('revenue-stats-plot', yearStats, years, 'revenues', 
+                'Box Office Revenue Statistics', 'Revenue [$]');
+            createScatterPlot('revenue-scatter-plot', yearStats, years, 'revenue', 
+                'Box Office Revenue per Movie (log)', 'Revenue [$] (log)', true);
+            createStatsPlot('ratings-stats-plot', yearStats, years, 'ratings',
+                'Yearly Rating Statistics', 'Rating');
+            createScatterPlot('ratings-scatter-plot', yearStats, years, 'rating',
+                'Ratings per Movie', 'Rating');
+            createStatsPlot('votes-stats-plot', yearStats, years, 'votes',
+                'Yearly Vote Count Statistics', 'Vote Count');
+            createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
+                'Vote Counts per Movie (log)', 'Vote Count (log)', true);
+            createSuccessPlots(yearStats, years);
+            
+            // Load the character metadata for actor age plot
+            Papa.parse('{{ site.baseurl }}/data/character_metadata_cleaned.csv', {
+                download: true,
+                header: true,
+                complete: function(characterResults) {
+                    console.log("Character data loaded:", characterResults.data.length);
+                    createActorAgePlot(characterResults.data);
+                },
+                error: function(error) {
+                    console.error('Error loading character data:', error);
+                }
+            });
+        },
+        error: function(error) {
+            console.error('Error loading movie data:', error);
+        }
+    });
+});
+</script>
 
 
-<iframe src="assets/plot/genre-plot-sm.html" width="750px" height="530px" frameborder="0" position="relative">Genre plot</iframe>
-
-Now let's delve into the specific release months that tend to bring in the most revenue for each genre. Adventure and action movies tend to perform best in May, while crime fiction, comedy, drama, romantic comedy, and thriller films see their highest mean revenues in June. On the other hand, romance films tend to perform best in November, and indie films see their highest mean revenues in December. It's clear that the best month for a movie's release depends on its genre, so it's crucial to consider this factor when deciding on a release date. 
-
------------------------
-
-## Spice Up Your Movie Recipe: The Importance of Diversity
-
-To analyze the effect diversity has on movie box office revenue, we first had to estimate the diversity of each movie. There are several ways to assess the diversity in a film which may lead to different results than we will present. The first thing we had to do was to figure out a way to estimate diversity based on our data. We decided to use ethnicity and gender as the estimates for the diversity of each movie. These two aspects will give a partial picture of diversity's effect on a movie's success. The next step was to give each film a “score of ethnicity” and a “score of gender.” We observed a high correlation between the number of actors in a film and the movie's box office revenue. It was, therefore, essential to find a score that considered the number of actors. To estimate ethnicity, we introduced the “ethnicity score,” which counts the number of ethnicities present in a movie and divides it by the total number of actors. We also considered different approaches, such as giving higher weight to rare ethnicities, but concluded that our approach would suffice for our analysis, which is to look at the effect of diversity on revenue and not to get a complete insight into the diversity in each movie. To estimate gender, we introduced the “fraction of females,” computed by counting the number of female actors and dividing it by the total number of actors in that film.
-
-
-### Ethnicity
+### NOT OUR PART
 
 #### The Evolution of Ethnicity
 
