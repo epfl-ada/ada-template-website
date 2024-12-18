@@ -1,0 +1,26 @@
+.progress-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 1000;
+}
+
+.progress-bar {
+    height: 0%;
+    width: 100%;
+    background: linear-gradient(to bottom, #4CAF50, #45a049);
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1001;
+    transition: height 0.1s ease;
+}
+
+@media (max-width: 768px) {
+    .progress-container {
+        width: 4px;
+    }
+}

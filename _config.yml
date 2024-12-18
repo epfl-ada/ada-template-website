@@ -296,3 +296,11 @@ footer-link-col: "#DE0099"
 
 site-css: 
   - "/assets/css/custom.css"
+
+# Add to the existing CSS files list
+css:
+  - "/assets/css/progress-bar.css"
+
+# Add to the existing JS files list
+js:
+  - "/assets/js/progress-bar.js"
