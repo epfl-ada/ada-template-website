@@ -1,9 +1,9 @@
-theme: jekyll-theme-minimal
-title: ADA sickada
-description: debut du projet sickada
-show_downloads: True
-navigation:
-  - title: Home
-    url: /
-  - title: Example
-    url: example
+# theme: jekyll-theme-minimal
+# title: ADA sickada
+# description: debut du projet sickada
+# show_downloads: True
+# navigation:
+#   - title: Home
+#     url: /
+#   - title: Example
+#     url: example
