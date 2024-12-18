@@ -10,7 +10,7 @@
 ############################
 
 # Name of website
-title: The Recipe For a Movie's Success
+title: MovieKinsey Analytics®
 
 # Your name to show in the footer
 author: Team Badass
@@ -23,7 +23,7 @@ navbar-links:
   Resources:
     - The dataset: "http://www.cs.cmu.edu/~ark/personas/"
   About:
-    - The project: "./about.md"
+    - The project: "https://epfl-ada.github.io/teaching/fall2024/cs401/projects/"
 
 ################
 # --- Logo --- #
