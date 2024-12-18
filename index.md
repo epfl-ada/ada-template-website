@@ -312,6 +312,99 @@ In this section, we evaluate how **actor collaborations** influence movie succes
 
 *By integrating sentiment analysis with actor networks, **MovieKinsey Analytics** unlocks a deeper understanding of what makes movies resonate with audiences and achieve lasting success.*
 
+# **5. Exploring Key Factors for Movie Success**
+
+Understanding the factors that influence movie success requires a deep dive into key variables that shape a film's reach, engagement, and reception. At **MovieKinsey Analytics**, we examined how exposure, release timing, genre popularity, and economic growth influence cinematic success. Here's what we uncovered:
+
+---
+
+## **5.1 Exposure: Language and Global Reach**
+
+A movie’s reach depends heavily on the languages it features, determining the potential size of its global audience. Using global language populations, we calculated a movie's **exposure score** by summing the number of speakers of all its spoken languages. For example:
+
+- **English:** 1.5 billion speakers
+- **Mandarin:** 1.1 billion speakers
+- **Hindi:** 609 million speakers
+
+The more widely spoken languages in a movie, the greater its potential audience. Movies featuring multiple languages or globally popular languages score highest on exposure.
+
+**EXPOSURE DISTRIBUTION PLOT**  
+
+---
+
+## **5.2 Holiday Releases: Timing the Premiere Right**
+
+Release timing can play a crucial role in a movie's success. We defined **holiday releases** as movies launched in November, December, or July—peak months for cinema attendance.
+
+Our analysis shows that movies released during these holiday months tend to perform better due to increased audience availability and holiday festivities.
+
+**SUCCESS BY HOLIDAY RELEASE PLOT**  
+
+---
+
+## **5.3 Genre Popularity: Audience Preferences in Storytelling**
+
+Certain genres resonate more strongly with audiences. We calculated each movie's **weighted genre popularity** by averaging the success scores of its genres. Additionally, we assigned a **primary genre** based on the movie's most successful genre.
+
+Movies with higher genre popularity scores often fall into well-loved categories such as action, adventure, and fantasy, reinforcing the importance of genre selection in boosting a film’s appeal.
+
+**HISTOGRAM OF WEIGHTED GENRE POPULARITY PLOT**  
+
+---
+
+## **5.4 Economic Growth: Riding the Market Waves**
+
+The global economy affects entertainment consumption. We tracked the **S&P 500 Index returns** to measure annual economic performance. Movies released in years of positive economic growth showed higher average success rates, suggesting that a thriving economy boosts movie attendance.
+
+**HISTOGRAM OF S&P 500 RETURNS PLOT**  
+
+---
+
+# **6. Results and Interpretations: What Drives Success?**
+
+Combining these factors, we explored their collective influence on a movie’s success. Our model identified six key variables:
+
+1. **Actor Fame**  
+2. **Budget (Log-Scaled)**  
+3. **Holiday Release Timing**  
+4. **Genre Popularity**  
+5. **Number of Languages**  
+6. **Economic Growth (S&P Returns)**  
+
+---
+
+### **Explained Variance in Success**
+
+We calculated each factor’s **percentage contribution** to the explained variance in movie success, accounting for residual noise. 
+
+**INFLUENCE OF FACTORS PIE CHART PLOT**  
+
+---
+
+### **Factor Correlation Heatmap**
+
+To understand how these variables interact, we visualized a **correlation heatmap**. This helped identify synergies between variables such as actor fame, budget, and exposure.
+
+**CORRELATION HEATMAP PLOT**  
+
+---
+
+# **Model Evaluation: Decision Tree Analysis**
+
+Finally, we used a **Decision Tree Regressor** to predict movie success based on our key factors. After testing various depths, we identified the **best depth of 4**, achieving an **R² score of 17.18%** with a **Mean Squared Error of 156.20**.
+
+**DECISION TREE VISUALIZATION PLOT**  
+
+---
+
+### **Key Takeaways**
+
+- **Exposure and Timing Matter:** Movies released during holidays and featuring globally popular languages have a clear edge.  
+- **Genre Popularity Shapes Success:** Strong storytelling aligned with audience preferences boosts success.  
+- **Economic Health Affects Viewership:** Positive economic growth correlates with higher movie success rates.  
+
+Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that predicting cinematic success is an intricate process shaped by industry dynamics, creative choices, and market conditions.
+
 
 
 <div class="plot-controls">
