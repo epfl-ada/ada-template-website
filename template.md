@@ -1,8 +1,3 @@
----
-layout: no-sidebar
-title: Template
----
-
 # Data Analysis Report Template
 
 ## **Main Title of the Report**
