@@ -61,14 +61,28 @@
             padding: 1rem;
             border-radius: 8px;
         }
+        .centered-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem auto;
+        }
+    
+        .centered-image img.video-banner {
+            max-width: 80%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
 
-    <!-- Video Banner -->
     <header>
-        <img class="video-banner" src="thumbnail1.jpg" alt="Video Banner">
-    </header>
+    <div class="centered-image">
+        <img class="video-banner" src="assets/thumbnail1.jpg" alt="Video Banner">
+    </div>
+</header>
 
     <!-- Video Content -->
     <div class="video-container">
