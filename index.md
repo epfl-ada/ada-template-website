@@ -1,6 +1,6 @@
 ---
 layout: page
-title: MovieKinsey Analytics®
+title: MovieKinsey Analytics®4:40
 subtitle: A Consulting Startup for Predicting Movie Success
 cover-img: /assets/img/stars.jpg
 thumbnail-img: /assets/img/stars.jpg
