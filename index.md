@@ -16,8 +16,8 @@ Success in our model isn’t just about box office revenue—it’s defined by a
 
 Our approach focuses on two critical factors:  
 
-1. *Actor Fame: Leveraging **social network analysis**, we assess an actor’s influence, connectivity, and prominence within the industry.  
-2. *Storyline Sentiment: Through **sentiment analysis**, we explore the emotional arcs within movie plots, identifying recurring patterns and trajectories that align with success.
+1. **Actor Fame**: Leveraging **social network analysis**, we assess an actor’s influence, connectivity, and prominence within the industry.  
+2. **Storyline Sentiment**: Through **sentiment analysis**, we explore the emotional arcs within movie plots, identifying recurring patterns and trajectories that align with success.
 
 ## *Why MKA®?*
 
