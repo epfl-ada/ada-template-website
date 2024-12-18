@@ -1,19 +1,35 @@
 ---
 layout: page
-title: The Recipe For A Movie's Success 🎬
-subtitle: Analysis of various factors that lead to high box office revenue
+title: MovieKinsey Analytics®
+subtitle: A Consulting Startup for Decoding Movie Success Through Data
 cover-img: /assets/img/stars.jpg
 thumbnail-img: /assets/img/stars.jpg
 share-img: /assets/img/stars.jpg
 use-site-title: true
 ---
 
-Ntm vrmt 4+ is a **$100 billion worth industry**. There is a vast potential to earn money, and the producers are willing to sacrifice considerable costs to become a movie success. Pirates of the Caribbean: On Stranger Tides, the most expensive film, cost $379 million. With such an amount at your disposal, you may wonder how you should spend the money. Should you use them to get one of the biggest movie stars in your cast? For many, this may be tempting. One of the most famous actors, Tom Cruise, was rewarded $100,000,000 for his performance in Top Gun: Maverick. But was it worth it? Or could the money be better spent? 
+## *Introduction*
 
-## Introduction
-Welcome to our interactive data story on the factors that influence box office success! We'll be exploring a range of questions about what drives a movie's financial performance. From analyzing the impact of release dates and the makeup of a film's cast, to examining the role of plot themes and movie length, we'll dive into the data to uncover the secrets of box office success.
+In the ever-evolving world of cinema, predicting a movie's success has become both an art and a science. At *MovieMind Analytics*, we bring a data-driven approach to help producers, studios, and filmmakers understand what drives a movie’s critical success.  
 
-So grab your popcorn and join us as we explore the data and see what insights we can uncover. And don't forget to try out the interactive visualizations – you can play around with the data and see what factors have the biggest impact on a movie's success. Let's get started!
+Success in our model isn’t just about box office revenue—it’s defined by a combination of critical acclaim, audience reception, and overall impact. By analyzing patterns in *actor fame* and *narrative structure*, we decode the essential elements that set successful movies apart.
+
+Our approach focuses on two critical factors:  
+
+1. *Actor Fame: Leveraging **social network analysis*, we assess an actor’s influence, connectivity, and prominence within the industry.  
+2. *Storyline Sentiment: Through **sentiment analysis*, we explore the emotional arcs within movie plots, identifying recurring patterns and trajectories that align with success.
+
+## *Why MovieMind Analytics?*
+
+We answer the questions that matter most to the industry:  
+
+- How does the *cast’s fame and influence* contribute to a movie’s success?  
+- What types of *emotional story arcs* resonate most with audiences and critics alike?  
+- Can data help predict whether a movie will achieve critical acclaim before its release?  
+
+At *MovieMind Analytics*, we bridge the gap between storytelling and data science to empower decision-makers. From script development to casting decisions, our insights provide a clear roadmap for creating impactful movies that resonate with critics and audiences.  
+
+Discover the *data story* behind what makes a movie succeed. Let us guide you to the next big hit.
 
 -----------------
 
