@@ -9,26 +9,94 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #0f0f0f;
+            color: #fff;
         }
         header {
-            background-color: #ff0000;
-            color: white;
-            padding: 1rem;
             text-align: center;
+            background-color: #181818;
+            padding: 0.5rem 0;
         }
-        main {
-            padding: 2rem;
+        img.video-banner {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .video-container {
+            padding: 1rem;
+        }
+        .video-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .channel-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .channel-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .channel-details h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .channel-details p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        .stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #aaa;
+        }
+        .description {
+            background-color: #181818;
+            padding: 1rem;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
+
+    <!-- Video Banner -->
     <header>
-        <h1>How You Became Smarter</h1>
+        <img class="video-banner" src="image.png" alt="Video Banner">
     </header>
-    <main>
-        <p>Welcome to the detailed explanation of "How You Became Smarter." Here, we dive deep into the concepts and stories that inspired this video.</p>
-    </main>
+
+    <!-- Video Content -->
+    <div class="video-container">
+        <!-- Title -->
+        <div class="video-title">How You Became Smarter</div>
+        
+        <!-- Channel Info -->
+        <div class="channel-info">
+            <img src="assets/profile.jpg" alt="Channel Profile">
+            <div class="channel-details">
+                <h3>SickADA</h3>
+                <p>2.26K subscribers</p>
+            </div>
+        </div>
+        
+        <!-- Video Stats -->
+        <div class="stats">
+            <span>👍 316 likes</span>
+            <span>👁️ 180K views</span>
+            <span>📅 2 years ago</span>
+        </div>
+
+        <!-- Video Description -->
+        <div class="description">
+            Particles silver bokeh glitter awards dust abstract seamless loop background. 
+            A deep dive into the phenomenon of smarter decision-making, habits, and learning.
+        </div>
+    </div>
+
 </body>
 </html>
