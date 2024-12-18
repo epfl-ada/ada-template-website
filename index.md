@@ -158,70 +158,32 @@ By tracking the most experienced actor in each film, we captured a critical piec
 
 
 
-# 3. Sentiment Analysis
+# **3. Sentiment Analysis: Understanding Emotional Dynamics**
 
-For the sentiment analysis component, we experimented with two different models to assess their effectiveness in capturing the sentiment of movie plot summaries:
-
-1. **VADER (Valence Aware Dictionary and Sentiment Reasoner)**:
-
-VADER (Valence Aware Dictionary and sEntiment Reasoner) is a lexicon- and rule-based sentiment analysis tool optimized for analyzing sentiment in short, informal, and emotive texts, such as those found on social media. Developed as a "gold standard" sentiment lexicon, VADER uses a combination of a pre-built word lexicon and five general grammatical and syntactical rules to detect sentiment intensity, accounting for nuances like:
-
-- **Intensifiers** (e.g., "extremely" in "extremely good") to increase sentiment strength.
-- **Negations** (e.g., "not" in "not great") to reverse sentiment.
-- **Punctuation** (e.g., exclamation marks) to heighten sentiment.
-
-VADER produces scores for **positive**, **neutral**, and **negative** sentiment, as well as a **compound score** that summarizes overall sentiment intensity on a scale from -1 (most negative) to +1 (most positive). While it is highly effective for informal social media text, it may face limitations with complex and nuanced contexts.
-
-For more details, check out VADER on [GitHub](https://github.com/cjhutto/vaderSentiment) or refer to the original paper: ["VADER: A Parsimonious Rule-Based Model for Sentiment Analysis of Social Media Text"](https://ojs.aaai.org/index.php/ICWSM/article/view/14550).
+In the cinematic world, a movie's ability to evoke emotions often defines its success. To explore this dimension, **MovieKinsey Analytics** conducted sentiment analysis on movie plot summaries, leveraging cutting-edge natural language processing tools.
 
 ---
 
-2. **DistilBERT (Distilled Bidirectional Encoder Representations from Transformers)**:
+### **Choosing the Right Sentiment Model**
 
-DistilBERT is a compact, faster, and lighter version of the BERT model. It is built using **knowledge distillation**, where a smaller "student" model is trained to mimic the performance of a larger "teacher" model. DistilBERT retains approximately 97% of BERT's accuracy while being **40% smaller** and **60% faster**, making it highly efficient for real-time or resource-constrained applications.
+We tested two sentiment analysis models to determine the best fit for our project:
 
-Key features of DistilBERT include:
-- **Transformer-based Architecture**: Captures deep contextual relationships in text to understand nuanced and subtle sentiment cues.
-- **Pre-training and Fine-tuning**: Pre-trained on large datasets and fine-tuned for specific tasks like sentiment analysis, enabling it to classify text sentiment (e.g., positive, negative, or neutral).
-- **Applicability to Complex Text**: Especially effective for datasets requiring an understanding of linguistic complexity, such as movie plot summaries.
+1. **VADER (Valence Aware Dictionary and Sentiment Reasoner)**:  
+   A highly efficient, rule-based tool designed for analyzing short and emotive text, VADER captures **positive**, **neutral**, and **negative** sentiment using a pre-defined word lexicon and sentiment rules. It calculates an overall **compound score** between -1 (most negative) and +1 (most positive). VADER’s simplicity and speed made it a practical choice for processing extensive movie datasets.
 
-For sentiment analysis, we used a fine-tuned version of DistilBERT that demonstrated strong performance on text with intricate language. It proved capable of capturing sentiment nuances better than rule-based models like VADER.
+2. **DistilBERT (Distilled Bidirectional Encoder Representations from Transformers)**:  
+   While more advanced, DistilBERT is a transformer-based language model capable of deep contextual understanding. It excels in complex linguistic analysis but was ultimately too intricate for our focus on sentiment polarity in plot summaries.
 
-You can learn more about DistilBERT in the paper ["DistilBERT: A distilled version of BERT"](https://arxiv.org/abs/1910.01108) or explore implementations such as [this GitHub repository](https://github.com/YonghaoZhao722/distilbert-base-uncased-finetuning).
+---
 
-### 3.1 DistilBERT
+### **Why We Chose VADER**
 
-### Sentiment Analysis of Movie Plot Summaries Using DistilBERT
+Given our objective of scoring sentiment efficiently across thousands of movie plots, we chose **VADER** for its balance of speed and interpretability. Its rule-based approach aligns well with detecting sentiment in structured summaries while remaining computationally efficient.
 
-We implemented sentiment analysis on movie plot summaries through a multi-step process to ensure accurate and nuanced sentiment detection:
+By leveraging VADER, **MovieKinsey Analytics** ensures robust sentiment analysis as part of our mission to predict a movie's success through data-driven insights.
 
-1. **Sentence Segmentation**:  
-   - Each plot summary was divided into individual sentences to capture sentiment shifts within the text. This was done using the `nltk` library's `sent_tokenize` function.  
+At **MovieKinsey Analytics**, we don't just analyze plots—we map emotions.
 
-2. **Sentence-Level Sentiment Analysis**:  
-   - We applied the `distilbert-base-uncased-finetuned-sst-2-english` model from Hugging Face to analyze each sentence. This pre-trained model classifies sentiment as either *positive* or *negative*, providing granular insights into sentiment at a sentence level.
-
-3. **Aggregation of Sentiment Scores**:  
-   - Sentiment scores (`1` for positive, `-1` for negative) were aggregated to create a sentiment trajectory for each plot summary. This approach enabled us to identify overall trends and shifts in sentiment throughout the summary.
-
-4. **Saving Results**:  
-   - The sentiment analysis data, including each sentence and its associated sentiment score, was stored in a CSV file. This allowed for easy retrieval and further analysis.
-
-By analyzing text at the sentence level, this approach ensures that both subtle and pronounced sentiment variations within a movie plot summary are accurately captured.
-
-All functions required for implementing DistilBERT sentiment analysis are located in the `tests/Sentiment_Analysis/distillBERT.py` file. This script includes functions for:
-
-- **Sentence Segmentation**: Breaking down plot summaries into individual sentences.
-- **Sentiment Analysis**: Using DistilBERT to determine the sentiment of each sentence.
-- **Result Saving**: Storing the output in a structured format.
-
-The processed sentiment analysis results are saved in a CSV file named `distillbert_sentiment_analysis.csv`. Each entry in this file contains:
-
-- The **movie ID**.
-- The **segmented sentences**.
-- The **corresponding sentiment scores**.
-
-Below, we provide an example of a sentiment analysis plot for a movie with ID 77856.
 
 <div id="distilbert-sentiment-plot" style="width: 100%; height: 600px;"></div>
 
