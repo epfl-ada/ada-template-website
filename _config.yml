@@ -3,7 +3,7 @@ description: Sickada
 baseurl: "" # Leave this empty unless your site is in a subfolder
 
 # Theme Configuration (Optional)
-theme: null # Disables default themes like Minima
+theme: minima # Disables default themes like Minima
 markdown: kramdown # Default Markdown processor for GitHub Pages
 
 # Exclude Jekyll default sidebar and other unwanted files
@@ -20,3 +20,5 @@ defaults:
       type: "pages"
     values:
       layout: no-sidebar # Use a custom layout without a sidebar
+
+show_sidebar: false
