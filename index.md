@@ -1,7 +1,7 @@
 ---
 layout: page
 title: MovieKinsey Analytics®
-subtitle: A Consulting Startup for Decoding Movie Success Through Data
+subtitle: A Consulting Startup for Predicting Movie Success
 cover-img: /assets/img/stars.jpg
 thumbnail-img: /assets/img/stars.jpg
 share-img: /assets/img/stars.jpg
@@ -10,26 +10,26 @@ use-site-title: true
 
 ## *Introduction*
 
-In the ever-evolving world of cinema, predicting a movie's success has become both an art and a science. At *MovieMind Analytics*, we bring a data-driven approach to help producers, studios, and filmmakers understand what drives a movie’s critical success.  
+In the ever-evolving world of cinema, predicting a movie's success has become both an art and a science. At **MKA® (MovieKinsey Analytics®)**, we bring a data-driven approach to help producers, studios, and filmmakers understand what drives a movie’s critical success.
 
-Success in our model isn’t just about box office revenue—it’s defined by a combination of critical acclaim, audience reception, and overall impact. By analyzing patterns in *actor fame* and *narrative structure*, we decode the essential elements that set successful movies apart.
+Success in our model isn’t just about box office revenue—it’s defined by a combination of critical acclaim, audience reception, and overall impact. By analyzing patterns in **actor fame** and **narrative structure**, we decode the essential elements that set successful movies apart.
 
 Our approach focuses on two critical factors:  
 
-1. *Actor Fame: Leveraging **social network analysis*, we assess an actor’s influence, connectivity, and prominence within the industry.  
-2. *Storyline Sentiment: Through **sentiment analysis*, we explore the emotional arcs within movie plots, identifying recurring patterns and trajectories that align with success.
+1. *Actor Fame: Leveraging **social network analysis**, we assess an actor’s influence, connectivity, and prominence within the industry.  
+2. *Storyline Sentiment: Through **sentiment analysis**, we explore the emotional arcs within movie plots, identifying recurring patterns and trajectories that align with success.
 
-## *Why MovieMind Analytics?*
+## *Why MKA®?*
 
 We answer the questions that matter most to the industry:  
 
-- How does the *cast’s fame and influence* contribute to a movie’s success?  
-- What types of *emotional story arcs* resonate most with audiences and critics alike?  
+- How does the **cast’s fame and influence** contribute to a movie’s success?  
+- What types of **emotional story arcs** resonate most with audiences and critics alike?  
 - Can data help predict whether a movie will achieve critical acclaim before its release?  
 
-At *MovieMind Analytics*, we bridge the gap between storytelling and data science to empower decision-makers. From script development to casting decisions, our insights provide a clear roadmap for creating impactful movies that resonate with critics and audiences.  
+At **MKA®**, we bridge the gap between storytelling and data science to empower decision-makers. From script development to casting decisions, our insights provide a clear roadmap for creating impactful movies that resonate with critics and audiences.  
 
-Discover the *data story* behind what makes a movie succeed. Let us guide you to the next big hit.
+Discover the **data story** behind what makes a movie succeed. Let us guide you to the next big hit.
 
 -----------------
 
