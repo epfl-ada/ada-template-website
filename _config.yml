@@ -285,11 +285,11 @@ plugins:
 # New style------------------------
 navbar-col: "#FFA500" #--------
 navbar-text-col: "#FFFFFF"
-navbar-border-col: "#333333"
+navbar-border-col: "#FFA500"
 page-col: "#1e1e1e"
 text-col: "#FFFFFF"
-link-col: "#00BFFF"
-hover-col: "#87CEEB"
+link-col: "#FF1DCE"
+hover-col: "#FFA500"
 footer-col: "#FFA500" #------------
 footer-text-col: "#FFFFFF"
-footer-link-col: "#00BFFF"
+footer-link-col: "#FF1DCE"
