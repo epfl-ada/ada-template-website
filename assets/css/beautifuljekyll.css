@@ -125,7 +125,7 @@ img {
 .navbar-custom {
   background-color: {{ site.navbar-col | default: "#FFA500" }};
   border-bottom: 1px solid {{ site.navbar-border-col | default: "#FFA500" }};
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Latin Modern Roman', 'Open Sans', 'Helvetica Neue';
   {% if site.navbar-img %}
     background-image: url({{ site.navbar-img | relative_url }});
     background-attachment: fixed;
