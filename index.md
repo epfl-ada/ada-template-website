@@ -2,13 +2,13 @@
 layout: page
 title: The Recipe For A Movie's Success 🎬
 subtitle: Analysis of various factors that lead to high box office revenue
-cover-img: /assets/img/stars.png
-thumbnail-img: /assets/img/stars.png
-share-img: /assets/img/stars.png
+cover-img: /assets/img/stars.jpg
+thumbnail-img: /assets/img/stars.jpg
+share-img: /assets/img/stars.jpg
 use-site-title: true
 ---
 
-Ntm vrmt +++ is a **$100 billion worth industry**. There is a vast potential to earn money, and the producers are willing to sacrifice considerable costs to become a movie success. Pirates of the Caribbean: On Stranger Tides, the most expensive film, cost $379 million. With such an amount at your disposal, you may wonder how you should spend the money. Should you use them to get one of the biggest movie stars in your cast? For many, this may be tempting. One of the most famous actors, Tom Cruise, was rewarded $100,000,000 for his performance in Top Gun: Maverick. But was it worth it? Or could the money be better spent? 
+Ntm vrmt 4+ is a **$100 billion worth industry**. There is a vast potential to earn money, and the producers are willing to sacrifice considerable costs to become a movie success. Pirates of the Caribbean: On Stranger Tides, the most expensive film, cost $379 million. With such an amount at your disposal, you may wonder how you should spend the money. Should you use them to get one of the biggest movie stars in your cast? For many, this may be tempting. One of the most famous actors, Tom Cruise, was rewarded $100,000,000 for his performance in Top Gun: Maverick. But was it worth it? Or could the money be better spent? 
 
 ## Introduction
 Welcome to our interactive data story on the factors that influence box office success! We'll be exploring a range of questions about what drives a movie's financial performance. From analyzing the impact of release dates and the makeup of a film's cast, to examining the role of plot themes and movie length, we'll dive into the data to uncover the secrets of box office success.
