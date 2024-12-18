@@ -92,9 +92,9 @@ Our analysis doesn’t stop here. While the industry’s financial growth is imp
 So, does a star-studded cast or an unforgettable storyline hold the key to success? The answer is coming — and it’s worth sticking around for.
 
 
-## *The Story Behind Movie Ratings: Audience Perception Unmasked*
+### *The Story Behind Movie Ratings: Audience Perception Unmasked*
 
-### Ratings Analysis
+#### Ratings Analysis
 
 <div id="ratings-stats-plot" style="width: 100%; height: 600px;"></div>
 <div id="ratings-scatter-plot" style="width: 100%; height: 600px;"></div>
@@ -105,7 +105,7 @@ Today, movie ratings remain a steady guide, capturing audience sentiment indepen
 
 ---
 
-### Vote Count Analysis
+#### Vote Count Analysis
 
 <div id="votes-stats-plot" style="width: 100%; height: 600px;"></div>
 <div id="votes-scatter-plot" style="width: 100%; height: 600px;"></div>
@@ -116,7 +116,7 @@ This surge in engagement wasn’t linear. Certain years saw sudden spikes, likel
 
 ---
 
-## *Defining Success: Beyond Box Office Numbers*
+### *Defining Success: Beyond Box Office Numbers*
 
 What makes a movie truly successful? In our story, success goes beyond the ticket counter. We crafted a success metric that blends quality and popularity:
 
@@ -124,7 +124,7 @@ What makes a movie truly successful? In our story, success goes beyond the ticke
 
 This formula ensures that both a film's approval rating and its audience reach are counted — balancing the art of filmmaking with its global reception.
 
-### Success Metric in Action
+#### Success Metric in Action
 
 <div id="success-stats-plot" style="width: 100%; height: 600px;"></div>
 <div id="success-scatter-plot" style="width: 100%; height: 600px;"></div>
@@ -133,7 +133,7 @@ Early cinema was unpredictable. Fewer votes and scattered ratings created errati
 
 ---
 
-### Success vs. Revenue
+#### Success vs. Revenue
 
 <div id="success-revenue-plot" style="width: 100%; height: 600px;"></div>
 
@@ -141,9 +141,9 @@ A quick glance reveals a strong relationship between success and revenue — but
 
 ---
 
-## *The Actor's Journey: Age, Experience, and Cinematic Legacy*
+### *The Actor's Journey: Age, Experience, and Cinematic Legacy*
 
-### Understanding Actor Trajectories
+#### Understanding Actor Trajectories
 
 <div id="actor-age-plot" style="width: 100%; height: 600px;"></div>
 
@@ -158,7 +158,7 @@ By tracking the most experienced actor in each film, we captured a critical piec
 
 
 
-# **3. Sentiment Analysis: Understanding Emotional Dynamics**
+## **Sentiment Analysis: Understanding Emotional Dynamics**
 
 In storytelling, emotions are key drivers of engagement. To capture the emotional journey of movies, **MovieKinsey Analytics** conducted sentiment analysis on movie plot summaries, leveraging cutting-edge natural language processing models.
 
@@ -207,9 +207,9 @@ We applied VADER sentiment analysis with the following approach:
 
 ---
 
-### **3.3 Analysis: Sentiment Trends and Success**
+### ** Analysis: Sentiment Trends and Success**
 
-#### **3.3.1 Sentiment Variability and Success**  
+#### **Sentiment Variability and Success**  
 
 We analyzed **sentiment variability** by computing the standard deviation of sentiment scores across each movie's plot, hypothesizing that emotional rollercoasters might enhance audience engagement.
 
@@ -222,7 +222,7 @@ We analyzed **sentiment variability** by computing the standard deviation of sen
 
 ---
 
-#### **3.3.2 Shape-Based Sentiment Features and Success**  
+#### **Shape-Based Sentiment Features and Success**  
 
 We examined the following sentiment-based features:
 
@@ -246,7 +246,7 @@ We examined the following sentiment-based features:
 
 ---
 
-#### **3.3.4 Narrative Types Across All Movies**
+#### **Narrative Types Across All Movies**
 
 By clustering sentiment arcs using **Time-Series KMeans Clustering**, we identified six narrative archetypes, inspired by **Kurt Vonnegut's Story Shapes**:
 
@@ -277,7 +277,7 @@ By clustering sentiment arcs using **Time-Series KMeans Clustering**, we identif
 
 ---
 
-# **4. Network Analysis: Exploring Actor Collaborations**
+## **Network Analysis: Exploring Actor Collaborations**
 
 In this section, we evaluate how **actor collaborations** influence movie success. Using a collaboration network model, we explore relationships between actors based on shared movie appearances.
 
@@ -296,7 +296,7 @@ In this section, we evaluate how **actor collaborations** influence movie succes
 
 ---
 
-### **4.2 Collaboration and Success**
+### **Collaboration and Success**
 
 - **Collaboration Count Distribution:** Most actors have around 100 collaborations, with a few notable outliers.
 - **Success vs Collaboration Correlation:** A positive correlation confirms that actors with more collaborations tend to be more successful.
@@ -312,13 +312,13 @@ In this section, we evaluate how **actor collaborations** influence movie succes
 
 *By integrating sentiment analysis with actor networks, **MovieKinsey Analytics** unlocks a deeper understanding of what makes movies resonate with audiences and achieve lasting success.*
 
-# **5. Exploring Key Factors for Movie Success**
+## **Exploring Key Factors for Movie Success**
 
 Understanding the factors that influence movie success requires a deep dive into key variables that shape a film's reach, engagement, and reception. At **MovieKinsey Analytics**, we examined how exposure, release timing, genre popularity, and economic growth influence cinematic success. Here's what we uncovered:
 
 ---
 
-## **5.1 Exposure: Language and Global Reach**
+### **Exposure: Language and Global Reach**
 
 A movie’s reach depends heavily on the languages it features, determining the potential size of its global audience. Using global language populations, we calculated a movie's **exposure score** by summing the number of speakers of all its spoken languages. For example:
 
@@ -332,7 +332,7 @@ The more widely spoken languages in a movie, the greater its potential audience.
 
 ---
 
-## **5.2 Holiday Releases: Timing the Premiere Right**
+### **Holiday Releases: Timing the Premiere Right**
 
 Release timing can play a crucial role in a movie's success. We defined **holiday releases** as movies launched in November, December, or July—peak months for cinema attendance.
 
@@ -342,7 +342,7 @@ Our analysis shows that movies released during these holiday months tend to perf
 
 ---
 
-## **5.3 Genre Popularity: Audience Preferences in Storytelling**
+### **Genre Popularity: Audience Preferences in Storytelling**
 
 Certain genres resonate more strongly with audiences. We calculated each movie's **weighted genre popularity** by averaging the success scores of its genres. Additionally, we assigned a **primary genre** based on the movie's most successful genre.
 
@@ -352,7 +352,7 @@ Movies with higher genre popularity scores often fall into well-loved categories
 
 ---
 
-## **5.4 Economic Growth: Riding the Market Waves**
+### **Economic Growth: Riding the Market Waves**
 
 The global economy affects entertainment consumption. We tracked the **S&P 500 Index returns** to measure annual economic performance. Movies released in years of positive economic growth showed higher average success rates, suggesting that a thriving economy boosts movie attendance.
 
@@ -360,7 +360,7 @@ The global economy affects entertainment consumption. We tracked the **S&P 500 I
 
 ---
 
-# **6. Results and Interpretations: What Drives Success?**
+## **Results and Interpretations: What Drives Success?**
 
 Combining these factors, we explored their collective influence on a movie’s success. Our model identified six key variables:
 
