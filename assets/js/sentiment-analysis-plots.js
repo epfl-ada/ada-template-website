@@ -5,6 +5,69 @@ function createSentimentPlots(vaderData, distilbertData) {
     createGenreSentimentPlot(vaderData);
 }
 
+// Function to update DistilBERT plot
+function updateDistilBERTPlot(movieId) {
+    // Load the sentiment data
+    Papa.parse('/data/distillbert_sentiment_analysis.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+            // Filter data for the selected movie
+            const movieData = results.data.filter(row => row.movie_id === movieId);
+            
+            if (movieData.length === 0) {
+                console.error('No data found for movie ID:', movieId);
+                return;
+            }
+
+            // Create the plot data
+            const trace = {
+                x: movieData.map((_, index) => index),
+                y: movieData.map(row => parseFloat(row.sentiment_score)),
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: {
+                    color: 'rgb(75, 192, 192)',
+                    width: 2
+                },
+                marker: {
+                    size: 6
+                }
+            };
+
+            const layout = {
+                title: {
+                    text: `Sentence Sentiment for Movie ID: ${movieId} (DistilBERT)`,
+                    font: { size: 24, color: 'white' }
+                },
+                xaxis: {
+                    title: 'Sentence Index',
+                    gridcolor: 'gray',
+                    color: 'white'
+                },
+                yaxis: {
+                    title: 'Sentiment Score',
+                    gridcolor: 'gray',
+                    color: 'white'
+                },
+                plot_bgcolor: '#1e1e1e',
+                paper_bgcolor: '#1e1e1e',
+                font: { color: 'white' }
+            };
+
+            Plotly.newPlot('distilbert-sentiment-plot', [trace], layout);
+        },
+        error: function(error) {
+            console.error('Error loading sentiment data:', error);
+        }
+    });
+}
+
+// Call the function when the page loads with the default movie ID
+document.addEventListener('DOMContentLoaded', function() {
+    updateDistilBERTPlot('77856');
+});
+
 function createSentimentComparisonPlot(vaderData, distilbertData) {
     const movieId = '77856';
     

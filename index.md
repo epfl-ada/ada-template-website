@@ -213,21 +213,6 @@ Below, we provide an example of a sentiment analysis plot for a movie with ID 77
 
 <div id="distilbert-sentiment-plot" style="width: 100%; height: 600px;"></div>
 
-<div class="plot-controls">
-    <label for="movie-id-input">Enter Movie ID:</label>
-    <input type="number" id="movie-id-input" value="77856" min="1">
-    <button onclick="updateDistilBERTPlot(document.getElementById('movie-id-input').value)">
-        Update Plot
-    </button>
-</div>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-<script src="{{ site.baseurl }}/assets/js/sentiment-analysis-plots.js"></script>
-
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-<script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
-<script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Load the movie master dataset
@@ -237,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         complete: function(movieResults) {
             const yearStats = processYearlyData(movieResults.data);
             const years = Object.keys(yearStats).sort((a,b) => a-b);
+            
             // Create movie-related plots
             createReleasesPlot(yearStats, years);
             createRevenuePlot(yearStats, years);
@@ -266,6 +252,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error('Error loading character data:', error);
                 }
             });
+
+            // Initialize DistilBERT plot with default movie ID
+            updateDistilBERTPlot('77856');
         },
         error: function(error) {
             console.error('Error loading movie data:', error);
