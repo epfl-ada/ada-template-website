@@ -13,9 +13,9 @@ html {
 body {
   font-family: 'Lora', 'Times New Roman', serif;
   font-size: 1.125rem;
-  color: #FFFFFF;
+  color: {{ site.text-col | default: "#404040" }};
   position: relative;
-  background-color: #000000;
+  background-color: {{ site.page-col | default: "#333333" }};
   {% if site.page-img %}
   background-image: url({{ site.page-img | relative_url }});
   background-attachment: fixed;
