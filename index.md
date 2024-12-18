@@ -156,13 +156,12 @@ Actors entering the scene later face a tougher climb, with decreasing movie coun
 
 By tracking the most experienced actor in each film, we captured a critical piece of the success puzzle. After all, in the cinematic universe, experience isn’t just an asset — it’s a legacy in motion.
 
-
+-----------------
 
 ## **Sentiment Analysis: Understanding Emotional Dynamics**
 
 In storytelling, emotions are key drivers of engagement. To capture the emotional journey of movies, **MovieKinsey Analytics** conducted sentiment analysis on movie plot summaries, leveraging cutting-edge natural language processing models.
 
----
 
 ### **Choosing the Right Sentiment Model**
 
@@ -174,7 +173,6 @@ We explored two sentiment analysis models:
 2. **DistilBERT (Distilled Bidirectional Encoder Representations from Transformers)**:  
    DistilBERT, a transformer-based language model, excels at capturing nuanced linguistic patterns. However, due to its computational demands, we opted for VADER for a more scalable approach.
 
----
 
 ### **Sentiment Analysis of Movie Plot Summaries Using VADER**
 
@@ -267,7 +265,6 @@ By clustering sentiment arcs using **Time-Series KMeans Clustering**, we identif
 
 *This is where the plot showing average success by narrative type will be displayed.*
 
----
 
 ### **Insights from Sentiment Analysis**
 
@@ -275,7 +272,7 @@ By clustering sentiment arcs using **Time-Series KMeans Clustering**, we identif
 - **Riches to Rags** performs the worst, highlighting limited audience engagement with steadily declining stories.
 - A statistically significant ANOVA result confirms narrative structure influences success rates.
 
----
+-----------------
 
 ## **Network Analysis: Exploring Actor Collaborations**
 
@@ -311,6 +308,8 @@ In this section, we evaluate how **actor collaborations** influence movie succes
 ---
 
 *By integrating sentiment analysis with actor networks, **MovieKinsey Analytics** unlocks a deeper understanding of what makes movies resonate with audiences and achieve lasting success.*
+
+-----------------
 
 ## **Exploring Key Factors for Movie Success**
 
@@ -358,7 +357,7 @@ The global economy affects entertainment consumption. We tracked the **S&P 500 I
 
 **HISTOGRAM OF S&P 500 RETURNS PLOT**  
 
----
+-----------------
 
 ## **Results and Interpretations: What Drives Success?**
 
@@ -387,9 +386,9 @@ To understand how these variables interact, we visualized a **correlation heatma
 
 **CORRELATION HEATMAP PLOT**  
 
----
+-----------------
 
-# **Model Evaluation: Decision Tree Analysis**
+## **Model Evaluation: Decision Tree Analysis**
 
 Finally, we used a **Decision Tree Regressor** to predict movie success based on our key factors. After testing various depths, we identified the **best depth of 4**, achieving an **R² score of 17.18%** with a **Mean Squared Error of 156.20**.
 
