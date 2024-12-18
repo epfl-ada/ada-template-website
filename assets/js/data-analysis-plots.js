@@ -330,8 +330,8 @@ function createActorAgePlot(characterData) {
                 zeroline: false,
                 fixedrange: true  // This prevents user from zooming on y-axis
             },
-            plot_bgcolor: '#000000',
-            paper_bgcolor: '#000000',
+            plot_bgcolor: '#1e1e1e',
+            paper_bgcolor: '#1e1e1e',
             showlegend: true,
             legend: {
                 font: { color: 'white' }
