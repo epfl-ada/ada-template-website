@@ -239,7 +239,7 @@ date_format: "%B %-d, %Y"
 #################################################################################
 
 # Output options (more information on Jekyll's site)
-timezone: "America/Toronto"
+timezone: "Switzerland/Bern" #-----------------------------------
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
@@ -283,13 +283,13 @@ plugins:
 # 2fc73a3a967e97599c9763d05e564189
 
 # New style------------------------
-navbar-col: "#00BFFF" #--------
+navbar-col: "#FFA500" #--------
 navbar-text-col: "#FFFFFF"
 navbar-border-col: "#333333"
 page-col: "#1e1e1e"
 text-col: "#FFFFFF"
 link-col: "#00BFFF"
 hover-col: "#87CEEB"
-footer-col: "#00BFFF" #------------
+footer-col: "#FFA500" #------------
 footer-text-col: "#FFFFFF"
 footer-link-col: "#00BFFF"
