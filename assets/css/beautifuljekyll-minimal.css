@@ -1,5 +1,7 @@
 .main-content {
   padding-bottom: 3.125rem;
+  background-color: #000000;
+  color: #FFFFFF;
 }
 
 footer.footer-min {
@@ -7,7 +9,32 @@ footer.footer-min {
   bottom: 0;
   width: 100%;
   padding: 0.1875rem;
-  background-color: #f5f5f5;
-  border-top: 1px solid #eeeeee;
+  background-color: #000000;
+  border-top: 1px solid #333333;
   text-align: center;
+  color: #FFFFFF;
+}
+
+footer.footer-min a {
+  color: #00BFFF;
+}
+
+footer.footer-min a:hover,
+footer.footer-min a:focus {
+  color: #87CEEB;
+}
+
+/* Add some basic dark theme elements */
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+a {
+  color: #00BFFF;
+}
+
+a:hover,
+a:focus {
+  color: #87CEEB;
 }

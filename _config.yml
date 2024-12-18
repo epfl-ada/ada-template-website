@@ -282,3 +282,14 @@ plugins:
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
 
+# New style------------------------
+navbar-col: "#000000"
+navbar-text-col: "#FFFFFF"
+navbar-border-col: "#333333"
+page-col: "#000000"
+text-col: "#FFFFFF"
+link-col: "#00BFFF"
+hover-col: "#87CEEB"
+footer-col: "#000000"
+footer-text-col: "#FFFFFF"
+footer-link-col: "#00BFFF"
