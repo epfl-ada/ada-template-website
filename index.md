@@ -8,11 +8,11 @@ share-img: /assets/img/stars.jpg
 use-site-title: true
 ---
 
-## *Introduction*
+## **Introduction**
 
 In the ever-evolving world of cinema, predicting a movie's success has become both an art and a science. At **MKA® (MovieKinsey Analytics®)**, we bring a data-driven approach to help producers, studios, and filmmakers understand what drives a movie’s critical success.
 
-Success in our model isn’t just about box office revenue—it’s defined by a combination of critical acclaim, audience reception, and overall impact. By analyzing patterns in **actor fame** and **narrative structure**, we decode the essential elements that set successful movies apart.
+Success in our model isn’t just about box office revenue—it’s defined by what we like to call here at MKA: **success** . By analyzing patterns in **actor fame** and **narrative structure**, we decode the essential elements that set successful movies apart.
 
 Our approach focuses on two critical factors:  
 
@@ -29,7 +29,7 @@ We answer the questions that matter most to the industry:
 
 At **MKA®**, we bridge the gap between storytelling and data science to empower decision-makers. From script development to casting decisions, our insights provide a clear roadmap for creating impactful movies that resonate with critics and audiences.  
 
-Discover the **data story** behind what makes a movie succeed. Let us guide you to the next big hit.
+Discover the **data story** behind what makes a movie succeed. Let us guide you to **the next big hit**.
 
 -----------------
 
@@ -46,7 +46,7 @@ Before diving into detailed modeling, we ensure:
 
 This **preliminary exploration** forms the backbone of our data-driven strategy, setting the stage for the deeper insights that follow. From here, we move forward with confidence, equipped with the metrics that matter most for predicting a movie’s success.
 
-### *The Evolution of Movie Releases*
+### **The Evolution of Movie Releases**
 
 <div id="releases-plot" style="width: 100%; height: 600px;"></div>
 
@@ -54,11 +54,12 @@ Picture this: it’s the early 20th century, the golden age of cinema has just b
 
 The data reveals a compelling story — a steady increase in movie releases. For decades, this rise was modest, reflecting the era’s cautious approach to film production. However, as the 1980s hit, the industry witnessed an explosion. Technological innovations, the rise of global distribution, and evolving audience tastes fueled a boom in movie production. From film reels to streaming platforms, cinema was no longer just an art form; it had become a global phenomenon.
 
-This growth in releases isn’t just a statistic; it sets the stage for everything that follows. More movies mean more competition, more innovation, and a higher bar for success. But does quantity translate to quality? Let’s keep the reel rolling.
+This growth in releases isn’t just a statistic; it sets the stage for everything that follows. More movies mean more competition, more innovation, and a higher bar for success. 
 
----
 
-### *The Story of Revenue: From Modest Beginnings to Box Office Titans*
+But does quantity translate to quality? Let’s keep the reel rolling.
+
+### **The Story of Revenue: From Modest Beginnings to Box Office Titans**
 
 <div id="revenue-plot" style="width: 100%; height: 600px;"></div>
 
@@ -79,20 +80,17 @@ Here’s where the story takes a fascinating turn. Over the years, the revenue l
 
 Take a closer look, and you’ll spot the trends: spikes in average revenue during the 1960s, 1970s, and the 2000s. These peaks suggest a few standout years when influential movies reshaped audience behavior and consumption. Movies weren’t just entertainment; they became cultural landmarks, driving trends and capturing imaginations.
 
-But here’s the twist: while revenue paints a broad picture of financial success, it’s not the whole story. A movie’s impact goes beyond earnings. Popularity, critical acclaim, and audience connection all play roles in determining what *success* truly means.
+But here’s the twist: while revenue paints a broad picture of financial success, it’s not the whole story. A movie’s impact goes beyond earnings. Popularity, critical acclaim, and audience connection all play roles in determining what **success** truly means.
 
 ---
 
-### *Why Revenue Isn’t Enough*
+#### **Why Revenue Isn’t Enough**
 
 The data tells us this much: the movie industry is growing, financially and creatively. But focusing on revenue alone misses the bigger picture. A movie’s success isn’t just about box office numbers; it’s about emotional connection, cultural impact, and the stories that resonate.
 
-Our analysis doesn’t stop here. While the industry’s financial growth is impressive, we believe there’s more to success than dollars earned. Through a deep dive into sentiment analysis and actor influence, we aim to uncover the hidden ingredients that separate good movies from great ones. 
+Our analysis doesn’t stop here. While the industry’s financial growth is impressive, we believe there’s more to success than dollars earned. 
 
-So, does a star-studded cast or an unforgettable storyline hold the key to success? The answer is coming — and it’s worth sticking around for.
-
-
-### *The Story Behind Movie Ratings: Audience Perception Unmasked*
+### **The Story Behind Movie Ratings: Audience Perception Unmasked**
 
 #### Ratings Analysis
 
