@@ -2,9 +2,9 @@
 layout: page
 title: MovieKinsey Analytics
 subtitle: A Consulting Startup for Predicting Movie Success
-cover-img: /assets/img/stars.jpg
-thumbnail-img: /assets/img/stars.jpg
-share-img: /assets/img/stars.jpg
+cover-img: /assets/img/Picture2.png
+thumbnail-img: /assets/img/Picture2.png
+share-img: /assets/img/Picture2.png
 use-site-title: true
 ---
 

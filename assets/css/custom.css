@@ -20,7 +20,7 @@
   }
   
   table tr:nth-child(2n) {
-    background-color: #2A2A2A;
+    background-color: #1e1e1e;
   }
   
   table th, table td {
