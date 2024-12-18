@@ -160,206 +160,157 @@ By tracking the most experienced actor in each film, we captured a critical piec
 
 # **3. Sentiment Analysis: Understanding Emotional Dynamics**
 
-In the cinematic world, a movie's ability to evoke emotions often defines its success. To explore this dimension, **MovieKinsey Analytics** conducted sentiment analysis on movie plot summaries, leveraging cutting-edge natural language processing tools.
+In storytelling, emotions are key drivers of engagement. To capture the emotional journey of movies, **MovieKinsey Analytics** conducted sentiment analysis on movie plot summaries, leveraging cutting-edge natural language processing models.
 
 ---
 
 ### **Choosing the Right Sentiment Model**
 
-We tested two sentiment analysis models to determine the best fit for our project:
+We explored two sentiment analysis models:
 
 1. **VADER (Valence Aware Dictionary and Sentiment Reasoner)**:  
-   A highly efficient, rule-based tool designed for analyzing short and emotive text, VADER captures **positive**, **neutral**, and **negative** sentiment using a pre-defined word lexicon and sentiment rules. It calculates an overall **compound score** between -1 (most negative) and +1 (most positive). VADER’s simplicity and speed made it a practical choice for processing extensive movie datasets.
+   VADER is a rule-based tool ideal for evaluating sentiment in shorter texts. It detects **positive**, **neutral**, and **negative** sentiment, along with a **compound score** ranging from -1 (most negative) to +1 (most positive). Its efficiency made it the preferred tool for our large-scale analysis.
 
 2. **DistilBERT (Distilled Bidirectional Encoder Representations from Transformers)**:  
-   While more advanced, DistilBERT is a transformer-based language model capable of deep contextual understanding. It excels in complex linguistic analysis but was ultimately too intricate for our focus on sentiment polarity in plot summaries.
+   DistilBERT, a transformer-based language model, excels at capturing nuanced linguistic patterns. However, due to its computational demands, we opted for VADER for a more scalable approach.
 
 ---
 
-### **Why We Chose VADER**
+### **Sentiment Analysis of Movie Plot Summaries Using VADER**
 
-Given our objective of scoring sentiment efficiently across thousands of movie plots, we chose **VADER** for its balance of speed and interpretability. Its rule-based approach aligns well with detecting sentiment in structured summaries while remaining computationally efficient.
-
-By leveraging VADER, **MovieKinsey Analytics** ensures robust sentiment analysis as part of our mission to predict a movie's success through data-driven insights.
-
-At **MovieKinsey Analytics**, we don't just analyze plots—we map emotions.
-
-
-
-<div id="distilbert-sentiment-plot" style="width: 100%; height: 600px;"></div>
-
-
-### Sentiment Analysis of Movie Plot Summaries Using VADER
-
-We utilized VADER (Valence Aware Dictionary and Sentiment Reasoner) for sentiment analysis on movie plot summaries, following a structured approach to analyze and interpret sentiment effectively:
+We applied VADER sentiment analysis with the following approach:
 
 1. **Sentiment Calculation**:  
-   - VADER, a lexicon- and rule-based tool, was applied to each plot summary. The `SentimentIntensityAnalyzer` function computed four sentiment metrics for each summary:  
-     - **Positive Sentiment**: The proportion of positive words.
-     - **Negative Sentiment**: The proportion of negative words.
-     - **Neutral Sentiment**: The proportion of neutral words.
-     - **Compound Score**: A single normalized score (-1 to +1) summarizing overall sentiment intensity.
+   VADER evaluated each movie's plot summary, producing four key metrics: 
+   - **Positive Sentiment**: Ratio of positive words
+   - **Negative Sentiment**: Ratio of negative words
+   - **Neutral Sentiment**: Ratio of neutral words
+   - **Compound Score**: A normalized summary of overall sentiment intensity
 
 2. **Metadata Integration**:  
-   - Sentiment data was combined with metadata for each movie, such as genres, revenue, and runtime. This enabled a deeper understanding of how sentiment relates to other attributes of the movies.
+   Sentiment scores were merged with movie metadata, such as genres and runtime, enabling deeper insight into sentiment-driven success patterns.
 
-3. **Analysis of Sentiment Trends**:  
-   - Using aggregated sentiment metrics, we analyzed sentiment patterns across genres, identifying trends such as the average positivity or negativity associated with specific movie types.
-
-4. **Clustering Sentiment Trajectories**:  
-   - Sentiment scores were clustered using machine learning techniques (KMeans and PCA). This provided insights into common sentiment patterns among movies and visualized relationships in a lower-dimensional space.
-
-5. **Saving Results**:  
-   - The processed data, including sentiment scores and clustering results, was saved in a CSV file (`sentiment_genre_Vader_analysis.csv`). This structured format allows for further analysis and visualization.
-
-This approach leverages VADER's efficiency and simplicity, making it well-suited for understanding overall sentiment trends in movie plot summaries, especially for lexicon-dominated text.
-
-
-
-VADER PLOT HERE 
-
-
-Averahge sentiment by top 20 genre for VADER
-
-
-
-
-PLOT HERE
-
-### 3.3 Analysis 
-
-#### 3.3.1 Sentiment Variability and Its Relationship with Success
-
-
-In this analysis, we compute the **variability of sentiment scores** for each movie to investigate how emotional dynamics influence a movie's success. Sentiment variability is measured as the standard deviation of sentiment scores across a movie's narrative arc.
-
-AVERAGE SUCCCESS BY SENTIMENT VARIABILITY PLOT
-
-
-The bar chart above shows the **average success** for movies with **High Variability** and **Low Variability** in sentiment arcs. 
-
-- **High Variability** movies have a higher average success compared to **Low Variability** movies.
-- The extremely low p-value (< 0.05) indicates that the observed difference in success between the two groups is **statistically significant**. This suggests that movies with higher sentiment variability (emotional rollercoaster) are more engaging for audiences and tend to achieve greater success.
-
-This finding supports the hypothesis that an **emotional rollercoaster experience**—indicated by high sentiment variability—leads to higher audience engagement, which in turn contributes to greater success for movies. This insight can inform storytelling and scriptwriting strategies to optimize audience reception.
-
-#### 3.3.2 Analysis of Shape-Based Sentiment Features and Success
-
-This analysis explores the relationship between key shape-based sentiment features and movie success. Specifically, we analyze:
-1. **Amplitude**: Difference between highest and lowest sentiment scores.
-2. **Slope**: Rate of sentiment change across the movie.
-3. **Peak Timing**: When the highest sentiment occurs (early, mid, or late in the movie).
-
-
-AVERAGE SUCCESS BY AMPLITUDE QUARTILES
-
-AVERAGE SUCCESS BY SLOPE QUARTILES 
-
-AVERAGE SUCCESS BY PEAK TIMING QUARTILES
-
-
-This analysis explores the relationship between key shape-based sentiment features and movie success. Specifically, we analyze:
-1. **Amplitude**: Difference between highest and lowest sentiment scores.
-2. **Slope**: Rate of sentiment change across the movie.
-3. **Peak Timing**: When the highest sentiment occurs (early, mid, or late in the movie).
-
-
-#### 3.3.4 Narrative Types Across All Movies
-
-This analysis identifies the narrative types across all movies by clustering sentiment arcs, assigns the clusters meaningful narrative labels, and examines their relationship with movie success. 
-
-
-**Kurt Vonnegut's Six Narrative Types**  
-The emotional story arc of a movie plot describes how the emotions of characters—and by extension, the audience—shift throughout the film. These arcs often reveal universal storytelling patterns that resonate across genres. American writer Kurt Vonnegut famously categorized all stories into **six narrative archetypes**, which can be used to classify emotional arcs:
-
-1. **Rags to Riches:** The protagonist starts low and rises to success.
-2. **Riches to Rags:** The protagonist starts high and descends into failure.
-3. **Man in a Hole:** The protagonist falls into difficulty but rises again.
-4. **Icarus:** The protagonist rises to great heights only to fall.
-5. **Cinderella:** The protagonist rises, falls, and rises again.
-6. **Oedipus:** The protagonist falls, rises, and falls again.
-
-
-We aim to uncover whether **genres** naturally exhibit these six narrative types by analyzing the average emotional arcs of movies. Grouping movies by genre allows us to observe recurring patterns and connections to Vonnegut’s archetypes, which could help identify dominant narrative types within genres.
-
-This analysis uses **Time-Series KMeans Clustering** to group movies in each genre by their sentiment arcs (emotional trajectories). The main steps include:
-1. **Data Preparation:** Sentiment arcs are extracted and normalized to a consistent length (200 points) for each movie in a genre.
-2. **Clustering:** 
-   - Time-series KMeans clustering groups movies into 4 clusters per genre based on their sentiment arcs.
-   - Each cluster represents a narrative type, visualized through its barycenter (average arc for the cluster).
-3. **Results:** The clusters reveal key narrative archetypes in each genre, aligning with **Kurt Vonnegut's six story types**.
-
-
-
-1. **Number of Movies per Narrative Type**
-   - **Most Common Narrative Types**:
-     - **Man in Hole**: 6,423 movies
-     - **Icarus**: 6,245 movies
-     - **Cinderella**: 6,087 movies
-   - **Less Common Narrative Types**:
-     - **Oedipus**: 4,995 movies
-     - **Rags to Riches**: 4,101 movies
-     - **Riches to Rags**: 3,486 movies
-
-2. **Average Success by Narrative Type**
-   - **Top Performing Narrative Types**:
-     - **Cinderella**: 41.46 (highest success)
-     - **Oedipus**: 41.01
-     - **Man in Hole**: 40.03
-   - **Lower Performing Narrative Types**:
-     - **Icarus**: 39.41
-     - **Rags to Riches**: 35.46
-     - **Riches to Rags**: 32.61 (lowest success)
-
-3. **ANOVA Test Results**
-   - **F-statistic**: 219.05
-   - **P-value**: 1.55e-230
-   - **Conclusion**: There is a highly statistically significant difference in success across narrative types. This confirms that different story arcs impact movie success differently.
-
-4. **Visualization Highlights**
-   - **Representative Story Arcs**: Six clusters were identified, aligning with Kurt Vonnegut’s narrative archetypes.
-   - **Success by Narrative Type**: "Cinderella" and "Oedipus" lead in average success, while "Riches to Rags" has the lowest performance.
-   - **Movie Count by Narrative Type**: "Man in Hole," "Icarus," and "Cinderella" are the most popular narrative structures.
+3. **Visualizing Sentiment Patterns**:  
+   Aggregated sentiment metrics were used to visualize trends across genres and narrative types.
 
 ---
 
-#### **Insights**
-- **Cinderella** and **Oedipus** are associated with the highest success rates, suggesting audiences resonate with these uplifting or dramatic story arcs.
-- **Riches to Rags** performs the worst in terms of success, indicating that steady decline may be less engaging for audiences.
-- **Man in Hole** and **Icarus** are popular but have slightly lower success rates compared to **Cinderella** and **Oedipus**.
-- The significant ANOVA results underline the impact of narrative structure on audience reception and movie success.
+### **AVERAGE SENTIMENT PLOT FOR VADER**
 
+*This is where the plot for average sentiment using VADER will be displayed.*
 
-# 4. Network Analysis
-In this section we will attempt to quantify an actor's success based on the success of the film. The relationship between collaborative status and success will then be explored in relation to the actors' partnerships.
+---
 
-We built this graph structure based on the movie's appearance schedule. If two actors appeared in the same movie, we consider that there is a collaboration between them. The graph is explained as follows:
+### **Average Sentiment by Top 20 Genres for VADER**
 
-- Edge: no direction, represents the existence of collaboration
-- Node: represents an actor
-- Degree: the number of edges of a node, i.e., the number of collaborations an actor has with other people
-- Actor's Success: the average of the successes of all the movies an actor has appeared in
+*This is where the average sentiment by the top 20 genres plot will be displayed.*
 
-We use colour and size to show the features of an actor:
-- Node Colour: represents an actor's success
-- Node Size: the number of degrees an actor has.
+---
 
-It can be observed that actors close to the centre tend to be more successful. However, since only the 60 actors with the highest number of collaborations were selected here to build the network, the number of successes and collaborations is not very intuitive. Therefore we will use all actors to fit the curves in the following analyses.
+### **3.3 Analysis: Sentiment Trends and Success**
 
-### 4.2 Relationship between Collaboration and Success
+#### **3.3.1 Sentiment Variability and Success**  
 
-Based on the analysis, we can observe:
-- The number of collaborations for most of the actors is clustered around 100, showing a right-skewed distribution.
+We analyzed **sentiment variability** by computing the standard deviation of sentiment scores across each movie's plot, hypothesizing that emotional rollercoasters might enhance audience engagement.
 
-- The metric we use to represent success rises as the number of collaborations rises.
+**AVERAGE SUCCESS BY SENTIMENT VARIABILITY PLOT**  
 
-This matches our expected assumptions and intuition:
+*This is where the plot showing average success by sentiment variability will be displayed.*
 
-- There are more unknown and smaller actors.
+- **High Variability** movies have significantly higher success than **Low Variability** movies.
+- A low p-value from statistical tests indicates this difference is **statistically significant**, confirming that emotional dynamics impact a movie's success.
 
-- There is a strong relationship between the success of the film in which an actor is cast and the actor's fame.
+---
 
-So we can say that the measure of an actor can be based on the popularity and ratings of the films he has appeared in. And since we find that there is a strong correlation between an actor's success and the number of collaborations an actor has, we can add the number of collaborations an actor has as a feature to the calculation of an actor's success rate.
+#### **3.3.2 Shape-Based Sentiment Features and Success**  
+
+We examined the following sentiment-based features:
+
+1. **Amplitude**: Difference between maximum and minimum sentiment scores
+2. **Slope**: Sentiment change rate
+3. **Peak Timing**: When the highest sentiment occurs (early, mid, or late in the plot)
+
+---
+
+**AVERAGE SUCCESS BY AMPLITUDE QUARTILES PLOT**  
+
+*This is where the plot for average success by amplitude quartiles will be displayed.*
+
+**AVERAGE SUCCESS BY SLOPE QUARTILES PLOT**  
+
+*This is where the plot for average success by slope quartiles will be displayed.*
+
+**AVERAGE SUCCESS BY PEAK TIMING QUARTILES PLOT**  
+
+*This is where the plot for average success by peak timing quartiles will be displayed.*
+
+---
+
+#### **3.3.4 Narrative Types Across All Movies**
+
+By clustering sentiment arcs using **Time-Series KMeans Clustering**, we identified six narrative archetypes, inspired by **Kurt Vonnegut's Story Shapes**:
+
+1. **Rags to Riches:** Rising success
+2. **Riches to Rags:** Declining fortunes
+3. **Man in a Hole:** Fall followed by recovery
+4. **Icarus:** Rise followed by downfall
+5. **Cinderella:** Rise, fall, and rise again
+6. **Oedipus:** Fall, rise, and fall again
+
+---
+
+**NUMBER OF MOVIES PER NARRATIVE TYPE PLOT**  
+
+*This is where the plot showing the number of movies per narrative type will be displayed.*
+
+**AVERAGE SUCCESS BY NARRATIVE TYPE PLOT**  
+
+*This is where the plot showing average success by narrative type will be displayed.*
+
+---
+
+### **Insights from Sentiment Analysis**
+
+- **Cinderella** and **Oedipus** narratives lead in average success, suggesting audiences resonate with these emotional arcs.
+- **Riches to Rags** performs the worst, highlighting limited audience engagement with steadily declining stories.
+- A statistically significant ANOVA result confirms narrative structure influences success rates.
+
+---
+
+# **4. Network Analysis: Exploring Actor Collaborations**
+
+In this section, we evaluate how **actor collaborations** influence movie success. Using a collaboration network model, we explore relationships between actors based on shared movie appearances.
+
+### **Network Structure Overview**
+
+- **Nodes:** Represent actors
+- **Edges:** Indicate shared movie appearances
+- **Node Color:** Reflects an actor's success
+- **Node Size:** Reflects the number of collaborations
+
+---
+
+### **NETWORK VISUALIZATION PLOT**  
+
+*This is where the network visualization plot will be displayed.*
+
+---
+
+### **4.2 Collaboration and Success**
+
+- **Collaboration Count Distribution:** Most actors have around 100 collaborations, with a few notable outliers.
+- **Success vs Collaboration Correlation:** A positive correlation confirms that actors with more collaborations tend to be more successful.
+
+---
+
+### **Conclusion from Network Analysis**
+
+- **Actor Success Metric:** Defined by an actor's average movie success and collaboration count.
+- **Industry Insight:** Actors with extensive networks and high collaboration counts tend to have greater success.
+
+---
+
+*By integrating sentiment analysis with actor networks, **MovieKinsey Analytics** unlocks a deeper understanding of what makes movies resonate with audiences and achieve lasting success.*
 
 
 
