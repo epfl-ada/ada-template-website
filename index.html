@@ -1,88 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Front Page</title>
+    <title>YouTube Channel Clone</title>
     <style>
-        body {
-            font-family: 'Roboto',Arial, sans-serif;
+        /* General Reset */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        header {
-            background-color: #ff0000;
-            color: white;
-            padding: 1rem;
-            text-align: center;
+
+        body {
+            background-color: white;
+            color: black;
         }
+
+        /* Header - Banner */
+        .banner {
+            background: url('assets/banner.jpeg') no-repeat center center/cover;
+            height: 200px;
+            position: relative;
+        }
+
+        /* Profile Info */
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #333;
+            background: url('assets/profile.jpeg') no-repeat center center/cover;
+        }
+
+        .channel-details h1 {
+            font-size: 1.8rem;
+        }
+
+        .channel-details p {
+            color: black;
+        }
+
+        /* Navigation Tabs */
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #333;
+        }
+
+        nav a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            padding-bottom: 0.5rem;
+        }
+
+        nav a.active {
+            color: black;
+            border-bottom: 2px solid red;
+        }
+
+        /* Video Grid */
+        .video-section {
+            padding: 1rem 2rem;
+        }
+
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
-            padding: 1rem;
         }
+
         .video-card {
-            border: 1px solid #ccc;
+            background-color: #181818;
             border-radius: 8px;
             overflow: hidden;
-            text-align: center;
             cursor: pointer;
         }
+
         .video-card img {
             width: 100%;
-            height: auto;
+            height: 140px;
+            object-fit: cover;
         }
-        .video-card h3 {
-            margin: 0;
+
+        .video-info {
             padding: 0.5rem;
         }
+
+        .video-info h3 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .video-info p {
+            color: black;
+            font-size: 0.8rem;
+        }
+
     </style>
 </head>
 <body>
-    <header>
-        <h1>My YouTube Clone</h1>
-    </header>
-    <p align="center">
-  <img src="assets/banner.jpeg" alt="My Banner" width="100%" height="500px">
-    </p>
-    <section class="video-grid">
-        <div class="video-card" onclick="alert('Video 1')">
-            <img src="assets/thumbnail1.jpg" alt="Video 1">
-            <h3>Video Title 1</h3>
+
+    <!-- Channel Banner -->
+    <div class="banner"></div>
+
+    <!-- Profile Info -->
+    <div class="profile-info">
+        <div class="profile-pic"></div>
+        <div class="channel-details">
+            <h1>Sickada</h1>
+            <p>@SickADA-2024 · 841k abonnés · 209 vidéos</p>
+            <p>Why you should drop out...</p>
         </div>
-        <div class="video-card" onclick="alert('Video 2')">
-            <img src="assets/thumbnail2.jpg" alt="Video 2">
-            <h3>Video Title 2</h3>
-        </div>
-        <div class="video-card" onclick="alert('Video 3')">
-            <img src="assets/thumbnail3.jpg" alt="Video 3">
-            <h3>Video Title 3</h3>
-        </div>
-        <div class="video-card" onclick="alert('Video 4')">
-            <img src="assets/thumbnail4.jpg" alt="Video 4">
-            <h3>Video Title 4</h3>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav>
+        <a href="#" class="active">Accueil</a>
+        <a href="#">Vidéos</a>
+        <a href="#">Shorts</a>
+        <a href="#">Playlists</a>
+        <a href="#">Communauté</a>
+    </nav>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <h2>Les plus récentes</h2>
+        <div class="video-grid">
+
+            <div class="video-card">
+                <a href="how_you_became_smarter.html">
+                    <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
+                    <div class="video-info">
+                        <h3>What’s your learning personality type?</h3>
+                        <p>209k vues · il y a 1 jour</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="video-card">
+                <img src="assets/thumbnail2.jpg" alt="Thumbnail 2">
+                <div class="video-info">
+                    <h3>You will never guess what others waste their time on…</h3>
+                    <p>1.1M vues · il y a 1 mois</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <img src="assets/thumbnail3.jpg" alt="Thumbnail 3">
+                <div class="video-info">
+                    <h3>Does size really matter?</h3>
+                    <p>1.8M vues · il y a 2 mois</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <img src="assets/thumbnail4.jpg" alt="Thumbnail 4">
+                <div class="video-info">
+                    <h3>How you became smarter</h3>
+                    <p>1M vues · il y a 2 mois</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <a href="how_you_became_smarter.html">
+                    <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
+                    <div class="video-info">
+                        <h3>YouTube Wrapped [EDU EDITION]</h3>
+                        <p>209k vues · il y a 1 jour</p>
+                    </div>
+                </a>
+            </div>
+            <div class="video-card">
+                <a href="how_you_became_smarter.html">
+                    <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
+                    <div class="video-info">
+                        <h3>Y’all study last minute, and it shows…</h3>
+                        <p>209k vues · il y a 1 jour</p>
+                    </div>
+                </a>
+            </div>
+            <div class="video-card">
+                <a href="how_you_became_smarter.html">
+                    <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
+                    <div class="video-info">
+                        <h3>Who is controlling the information?</h3>
+                        <p>209k vues · il y a 1 jour</p>
+                    </div>
+                </a>
+            </div>
+            <div class="video-card">
+                <a href="how_you_became_smarter.html">
+                    <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
+                    <div class="video-info">
+                        <h3>Which country is the smartest?</h3>
+                        <p>209k vues · il y a 1 jour</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </section>
-    <section class="text-zone">
-        <h2>Video Details</h2>
-        <div id="video1">
-            <h3>Video Title 1</h3>
-            <p>Description of Video 1 goes here.</p>
-        </div>
-        <div id="video2">
-            <h3>Video Title 2</h3>
-            <p>Description of Video 2 goes here.</p>
-        </div>
-        <div id="video3">
-            <h3>Video Title 3</h3>
-            <p>Description of Video 3 goes here.</p>
-        </div>
-        <div id="video4">
-            <h3>Video Title 4</h3>
-            <p>Description of Video 4 goes here.</p>
-        </div>
-    </section>
+
 </body>
 </html>

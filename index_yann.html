@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Front Page</title>
+    <style>
+        body {
+            font-family: 'Roboto',Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ff0000;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .video-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            cursor: pointer;
+        }
+        .video-card img {
+            width: 100%;
+            height: auto;
+        }
+        .video-card h3 {
+            margin: 0;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My YouTube Clone</h1>
+    </header>
+    <p align="center">
+  <img src="assets/banner.jpeg" alt="My Banner" width="100%" height="500px">
+    </p>
+    <section class="video-grid">
+        <div class="video-card" onclick="alert('Video 1')">
+            <img src="assets/thumbnail1.jpg" alt="Video 1">
+            <h3>Video Title 1</h3>
+        </div>
+        <div class="video-card" onclick="alert('Video 2')">
+            <img src="assets/thumbnail2.jpg" alt="Video 2">
+            <h3>Video Title 2</h3>
+        </div>
+        <div class="video-card" onclick="alert('Video 3')">
+            <img src="assets/thumbnail3.jpg" alt="Video 3">
+            <h3>Video Title 3</h3>
+        </div>
+        <div class="video-card" onclick="alert('Video 4')">
+            <img src="assets/thumbnail4.jpg" alt="Video 4">
+            <h3>Video Title 4</h3>
+        </div>
+    </section>
+    <section class="text-zone">
+        <h2>Video Details</h2>
+        <div id="video1">
+            <h3>Video Title 1</h3>
+            <p>Description of Video 1 goes here.</p>
+        </div>
+        <div id="video2">
+            <h3>Video Title 2</h3>
+            <p>Description of Video 2 goes here.</p>
+        </div>
+        <div id="video3">
+            <h3>Video Title 3</h3>
+            <p>Description of Video 3 goes here.</p>
+        </div>
+        <div id="video4">
+            <h3>Video Title 4</h3>
+            <p>Description of Video 4 goes here.</p>
+        </div>
+    </section>
+</body>
+</html>
