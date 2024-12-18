@@ -8,6 +8,8 @@
 5. Add your new `.md` files to the site by editing the `_config.yml` file in your forked repository. Under `navigation:` add a new pair of `- title:` and `url:`, and fill their value with your page name and `.md` file name. Remember to remove the `- title:` and `url:` pair for the example page.
 6. Go back to "Settings" -> "Pages" to find your website link.
 
+7. Test
+
 
 [View the HTML file](assets/grass_map.html)
 <iframe src="assets/grass_map.html" width="100%" height="500px"></iframe>
