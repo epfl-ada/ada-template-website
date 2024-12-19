@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Channel Clone</title>
+    <title>Sickada - Why you should drop out</title>
     <style>
         /* General Reset */
         * {
@@ -73,6 +73,13 @@
         .video-section {
             padding: 1rem 2rem;
         }
+        .video-section a {
+        color: black; 
+        text-decoration: none; 
+        }
+        .video-section a:hover {
+        color: red;
+        }
 
         .video-grid {
             display: grid;
@@ -81,7 +88,7 @@
         }
 
         .video-card {
-            background-color: #181818;
+            background-color: #1818189c;
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
@@ -89,7 +96,7 @@
 
         .video-card img {
             width: 100%;
-            height: 140px;
+            height: 100px;
             object-fit: cover;
         }
 
@@ -126,87 +133,140 @@
 
     <!-- Navigation Tabs -->
     <nav>
-        <a href="#" class="active">Accueil</a>
-        <a href="#">Vidéos</a>
+        <a href="#" class="active">Home</a>
+        <a href="#">Videos</a>
         <a href="#">Shorts</a>
         <a href="#">Playlists</a>
-        <a href="#">Communauté</a>
+        <a href="#">Community</a>
     </nav>
 
     <!-- Video Section -->
     <section class="video-section">
-        <h2>Les plus récentes</h2>
+        <h2>For you / popular videos</h2>
         <div class="video-grid">
 
             <div class="video-card">
-                <a href="template">
+                <a href="template_learning_personality">
                     <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
                     <div class="video-info">
                         <h3>What’s your learning personality type?</h3>
-                        <p>209k vues · il y a 1 jour</p>
+                        <p>209k views · 1 jour</p>
                     </div>
                 </a>
             </div>
             
             <div class="video-card">
-                <img src="assets/thumbnail2.jpg" alt="Thumbnail 2">
-                <div class="video-info">
-                    <h3>You will never guess what others waste their time on…</h3>
-                    <p>1.1M vues · il y a 1 mois</p>
-                </div>
+                <a href="template_time_waste">
+                    <img src="assets/thumbnail2.jpg" alt="Thumbnail 2">
+                    <div class="video-info">
+                        <h3>You will never guess what others waste their time on…</h3>
+                        <p>1.1M views · 1 months ago</p>
+                    </div>
+                </a>
             </div>
             <div class="video-card">
-                <img src="assets/thumbnail3.jpg" alt="Thumbnail 3">
-                <div class="video-info">
-                    <h3>Does size really matter?</h3>
-                    <p>1.8M vues · il y a 2 mois</p>
-                </div>
-            </div>
-            <div class="video-card">
-                <img src="assets/thumbnail4.jpg" alt="Thumbnail 4">
-                <div class="video-info">
-                    <h3>How you became smarter</h3>
-                    <p>1M vues · il y a 2 mois</p>
-                </div>
+                <a href="template_size_matters">
+                    <img src="assets/thumbnail3.jpg" alt="Thumbnail 3">
+                    <div class="video-info">
+                        <h3>Does size really matter?</h3>
+                        <p>1.8M views · 2 months ago</p>
+                    </div>
+                </a>
             </div>
             <div class="video-card">
                 <a href="how_you_became_smarter.html">
+                    <img src="assets/thumbnail4.jpg" alt="Thumbnail 4">
+                    <div class="video-info">
+                        <h3>How you became smarter</h3>
+                        <p>1M views · 2 months ago</p>
+                    </div>
+                </a>
+            </div>
+            <div class="video-card">
+                <a href="template_wrapped">
                     <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
                     <div class="video-info">
                         <h3>YouTube Wrapped [EDU EDITION]</h3>
-                        <p>209k vues · il y a 1 jour</p>
+                        <p>209k views · 1 day ago</p>
                     </div>
                 </a>
             </div>
             <div class="video-card">
-                <a href="how_you_became_smarter.html">
+                <a href="template_study_last_minute">
                     <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
                     <div class="video-info">
                         <h3>Y’all study last minute, and it shows…</h3>
-                        <p>209k vues · il y a 1 jour</p>
+                        <p>209k views · 1 day ago</p>
                     </div>
                 </a>
             </div>
             <div class="video-card">
-                <a href="how_you_became_smarter.html">
+                <a href="template_control_info">
                     <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
                     <div class="video-info">
                         <h3>Who is controlling the information?</h3>
-                        <p>209k vues · il y a 1 jour</p>
+                        <p>209k views · 1 day ago</p>
                     </div>
                 </a>
             </div>
             <div class="video-card">
-                <a href="how_you_became_smarter.html">
+                <a href="template_country">
                     <img src="assets/thumbnail1.jpg" alt="Thumbnail 1">
                     <div class="video-info">
                         <h3>Which country is the smartest?</h3>
-                        <p>209k vues · il y a 1 jour</p>
+                        <p>209k views · 1 day ago</p>
                     </div>
                 </a>
             </div>
         </div>
     </section>
+    
+    <section class="text">
+        <h2> A little bit about this project </h2>
+        <div class="explore-grid">
+            <div class="explore-card">
+                <p>Input here text about our project</p>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        .text {
+            padding: 2rem;
+            background-color: #f9f9f9;
+            color: black;
+        }
+        .text h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .explore-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .explore-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    
+        .explore-card p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+    </style>
+    
 
 </body>
 </html>
