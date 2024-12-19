@@ -42,7 +42,7 @@ async function createMoviesPerYearPlot() {
         mode: 'lines',
         line: {
             color: '#FF7E1D',
-            width: 2
+            width: 4
         },
         name: 'Number of Movies'
     };
@@ -88,7 +88,7 @@ async function createRevenuePerYearPlot() {
         mode: 'lines',
         line: {
             color: '#FF7E1D',
-            width: 2
+            width: 4
         },
         name: 'Total Box Office Revenue'
     };

@@ -8,7 +8,7 @@ function createReleasesPlot(yearStats, years) {
         mode: 'lines',
         line: {
             color: COLORS.primary,
-            width: 2
+            width: 4
         },
         name: 'Number of Movies'
     };
@@ -26,7 +26,7 @@ function createRevenuePlot(yearStats, years) {
         mode: 'lines',
         line: {
             color: COLORS.secondary,
-            width: 2
+            width: 4
         },
         name: 'Total Box Office Revenue'
     };
@@ -38,15 +38,6 @@ function createRevenuePlot(yearStats, years) {
 
 function createStatsPlot(divId, yearStats, years, field, title, yLabel, logY = false) {
     const stats = years.map(year => calculateStatistics(yearStats[year][field]));
-    
-    const meanTrace = {
-        x: years,
-        y: stats.map(s => s.mean),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean',
-        line: {color: field === 'revenues' ? COLORS.secondary : COLORS.tertiary, width: 3}
-    };
 
     const medianTrace = {
         x: years,
@@ -54,7 +45,16 @@ function createStatsPlot(divId, yearStats, years, field, title, yLabel, logY = f
         type: 'scatter',
         mode: 'lines',
         name: 'Median',
-        line: {color: COLORS.neutral, width: 3, dash: 'dash'}
+        line: {color: COLORS.neutral, width: 4, dash: 'dash'}
+    };
+
+    const meanTrace = {
+        x: years,
+        y: stats.map(s => s.mean),
+        type: 'scatter',
+        mode: 'lines',
+        name: 'Mean',
+        line: {color: field === 'revenues' ? COLORS.secondary : COLORS.tertiary, width: 4}
     };
 
     const stdUpperTrace = {
@@ -301,7 +301,7 @@ function createActorAgePlot(characterData) {
             name: 'Mean Occurrences',
             line: {
                 color: '#FF7E1D',
-                width: 3
+                width: 4
             }
         };
 
