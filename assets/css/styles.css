@@ -246,8 +246,18 @@ footer {
   z-index: 10; /* Ensure it stays on top */
 }
 
+.toc-bar {
+  position: absolute;  /* Make it absolute to ensure it stays fixed in the sidebar */
+  top: 50%; /* Move the bar to the vertical middle of the sidebar */
+  left: 0; /* Align the bar to the left */
+  width: 1px; /* Width of the line */
+  background-color: #b9b9b9; /* Color of the bar */
+  height: 90%; /* Set the height to 90% of the sidebar */
+  margin-right: 15px; /* Space between the bar and the TOC */
+  transform: translateY(-50%); /* Move the bar upwards by 50% of its height, effectively centering it */
+}
 
-/* List Style */
+/* Sidebar TOC */
 .sidebar ul {
   list-style-type: none;
   padding: 0;
@@ -257,7 +267,6 @@ footer {
   margin: 10px 0;
 }
 
-/* Links Style */
 .sidebar ul li a {
   text-decoration: none;
   color: #333;
@@ -266,6 +275,7 @@ footer {
 .sidebar ul li a:hover {
   color: #007BFF;
 }
+
 
 /* Main Content Adjustment */
 .main-content {
@@ -279,7 +289,7 @@ footer {
   position: fixed;
   top: 100px; /* Position it at the top */
   left: 20px; /* Position it to the left */
-  padding: 20px 20px;
+  padding: 10px 20px;
   background-color: #ffffff; /* Button color */
   color: rgb(0, 0, 0); /* Text color */
   font-size: 16px;
@@ -291,7 +301,7 @@ footer {
 }
 
 .sticky-button:hover {
-  background-color: #a4a6a8; /* Darker blue on hover */
+  background-color: #cecece; /* Darker blue on hover */
 }
 
 @media print, screen and (max-width: 960px) {

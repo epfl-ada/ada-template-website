@@ -22,6 +22,7 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+      <div class="toc-bar"></div> <!-- Left bar beside the TOC -->
       <ul id="toc"></ul>  <!-- This will be populated with JavaScript -->
     </div>
 
@@ -53,7 +54,7 @@
       </section>
       <footer>
         {% if site.github.is_project_page %}
-        <p>This project is maintained by Team SickADA</p>
+        <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
         {% endif %}
       </footer>
     </div>
@@ -73,31 +74,20 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Select all headers (h1, h2, h3, etc.)
-      const headers = document.querySelectorAll('h1, h2');
+      const headers = document.querySelectorAll('h1, h2');  // Get all headers
       const toc = document.getElementById('toc');
-  
-      // Iterate through all headers to create TOC items
+      
+      // Generate TOC based on headers
       headers.forEach((header, index) => {
-        if (header.classList.contains('subtitle')) {
-          return; //Skip subtitle
+        if (header.classList.contains('subtitle') || header.classList.contains('banner-header')) {
+          return;  // Skip subtitle and banner header
         }
-        if (header.classList.contains('banner-header')) {
-          return; //Skip banner header
-        }
+  
         const listItem = document.createElement('li');
         const link = document.createElement('a');
-        
-        // Create a unique ID for each header (if it doesn't have one)
-        if (!header.id) {
-          header.id = `toc-${index}`;
-        }
-  
-        // Set the link text and href attribute
         link.textContent = header.textContent;
-        link.href = `#${header.id}`;
+        link.href = `#${header.id}`;  // Ensure the link points to the section's ID
   
-        // Append the link to the list item, and the list item to the TOC
         listItem.appendChild(link);
         toc.appendChild(listItem);
       });

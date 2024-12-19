@@ -5,6 +5,8 @@ title: ""
 theme: jekyll-theme-cayman
 baseurl: "/sickada"
 
+markdown: kramdown
+
 # Custom CSS for styling
 include:
   - assets/css/style.css
