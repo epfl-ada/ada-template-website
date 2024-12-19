@@ -1,23 +1,74 @@
-// Function to create a new plot with Plotly
-function createNewPlot(plotId, xData, yData, plotTitle, xAxisTitle, yAxisTitle) {
+// Function to load data
+async function loadData() {
+    try {
+        const response = await fetch('../data/movie_master_dataset.csv');
+        const csvText = await response.text();
+        
+        // Parse CSV
+        const rows = csvText.split('\n').slice(1); // Skip header
+        const data = rows.map(row => {
+            const columns = row.split(',');
+            return {
+                release_date: new Date(columns[4]),
+                revenue: parseFloat(columns[3]),
+            };
+        });
+
+        return data.filter(d => !isNaN(d.revenue) && d.release_date.getFullYear() >= 1920);
+    } catch (error) {
+        console.error('Error loading data:', error);
+        return [];
+    }
+}
+
+// Create movies per year plot
+async function create_influence_FactorsPlot() {
+    const data = await loadData();
+    
+    // Group by year
+    const moviesPerYear = {};
+    data.forEach(movie => {
+        const year = movie.release_date.getFullYear();
+        moviesPerYear[year] = (moviesPerYear[year] || 0) + 1;
+    });
+
+    const years = Object.keys(moviesPerYear).sort();
+    const counts = years.map(year => moviesPerYear[year]);
+
     const trace = {
-        x: xData,
-        y: yData,
-        mode: 'lines+markers',
+        x: years,
+        y: counts,
         type: 'scatter',
-        marker: { size: 8, color: 'blue' },
-        line: { color: 'blue', width: 2 },
+        mode: 'lines',
+        line: {
+            color: 'lightblue',
+            width: 2
+        },
+        name: 'Number of Movies'
     };
 
     const layout = {
-        title: plotTitle,
-        xaxis: { title: xAxisTitle },
-        yaxis: { title: yAxisTitle },
-        margin: { l: 50, r: 50, b: 50, t: 50 },
-        hovermode: 'closest',
+        title: 'Total Number of Movies Released Yearly',
+        xaxis: {
+            title: 'Year',
+            gridcolor: 'gray'
+        },
+        yaxis: {
+            title: 'Number of Movies',
+            gridcolor: 'gray'
+        },
+        paper_bgcolor: '#1e1e1e',
+        plot_bgcolor: '#1e1e1e',
+        font: {
+            color: 'white'
+        }
     };
 
-    const data = [trace];
-
-    Plotly.newPlot(plotId, data, layout);
+    Plotly.newPlot('influence_Factors', [trace], layout);
 }
+
+
+// Initialize plots when document is ready
+document.addEventListener('DOMContentLoaded', () => {
+    create_influence_FactorsPlot();
+});
