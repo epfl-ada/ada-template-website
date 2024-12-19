@@ -238,11 +238,25 @@ footer {
 .sidebar {
   position: fixed;
   top: 100px; /* Adjusted for spacing */
-  right: 5px; /* Move the sidebar to the right */
+  right: -250px; /* Move the sidebar to the right */
   width: 250px; /* Sidebar width */
   background-color: #ffffff;
   padding: 15px;
+  transition: right 1s ease;
   z-index: 10; /* Ensure it stays on top */
+  white-space: normal; /* Ensure the text can wrap if longer*/
+  word-wrap: break-word;
+
+   /* Flexbox to center text */
+   /* display: flex; */
+   /* flex-direction: column; Stack items vertically */
+   /* justify-content: center; Center items vertically */
+   /* align-items: center; Center items horizontally */
+   /* text-align: center; Ensure text is centered */
+  
+}
+.sidebar:hover {
+  right: 5px; /* Move it into view when hovered */
 }
 
 .toc-bar {
@@ -252,7 +266,7 @@ footer {
   width: 1px; /* Width of the line */
   background-color: #b9b9b9; /* Color of the bar */
   height: 90%; /* Set the height to 90% of the sidebar */
-  margin-right: 15px; /* Space between the bar and the TOC */
+  margin-right: 10px; /* Space between the bar and the TOC */
   transform: translateY(-50%); /* Move the bar upwards by 50% of its height, effectively centering it */
 }
 
@@ -288,10 +302,10 @@ footer {
   position: fixed;
   top: 100px; /* Position it at the top */
   left: 20px; /* Position it to the left */
-  padding: 10px 20px;
+  padding: 10px 10px;
   background-color: #ffffff; /* Button color */
   color: rgb(0, 0, 0); /* Text color */
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: none; /* Remove underline from the link */
   border-radius: 5px; /* Rounded corners */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
