@@ -487,8 +487,10 @@ document.addEventListener('DOMContentLoaded', function() {
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
             createSuccessPlots(yearStats, years);
-            createNetworkPlots(characterData, movieData);
-            createDummyPlot();
+            // createNetworkPlots(characterData, movieData);
+            createResultsPlots();
+            
+            // createDummyPlot();
             
             // Load the character metadata for actor age plot
             Papa.parse('{{ site.baseurl }}/data/character_metadata_cleaned.csv', {
