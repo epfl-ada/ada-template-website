@@ -8,6 +8,16 @@ share-img: /assets/img/Picture2.png
 use-site-title: true
 ---
 
+<div id="header-logo-container"></div>
+<script type="module">
+  import { createRoot } from 'react-dom/client';
+  import HeaderLogo from './assets/js/components/HeaderLogo.js';
+
+  const container = document.getElementById('header-logo-container');
+  const root = createRoot(container);
+  root.render(<HeaderLogo />);
+</script>
+
 ## **Introduction**
 
 In the ever-evolving world of cinema, predicting a movie's success has become both an art and a science. At **MKA® (MovieKinsey Analytics®)**, we bring a data-driven approach to help producers, studios, and filmmakers understand what drives a movie’s critical success.
@@ -403,8 +413,13 @@ Finally, we used a **Decision Tree Regressor** to predict movie success based on
 Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that predicting cinematic success is an intricate process shaped by industry dynamics, creative choices, and market conditions.
 
 
+<div class="flex items-center justify-between p-4">
+  <div id="header-logo-container"></div>
+  <!-- Rest of your header content -->
+</div>
 
 <div class="plot-controls">
+
     <label for="movie-id-input">Enter Movie ID:</label>
     <input type="number" id="movie-id-input" value="77856" min="1">
     <button onclick="updateDistilBERTPlot(document.getElementById('movie-id-input').value)">
