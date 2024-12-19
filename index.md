@@ -207,7 +207,17 @@ We applied VADER sentiment analysis with the following approach:
 
 ### **AVERAGE SENTIMENT PLOT FOR VADER**
 
-*This is where the plot for average sentiment using VADER will be displayed.*
+<div id="vader-sentiment-plot" style="width: 100%; height: 600px;"></div>
+
+<div class="plot-controls">
+    <label for="movie-id-input-vader">Enter Movie ID:</label>
+    <input type="number" id="movie-id-input-vader" value="77856" min="1">
+    <button onclick="updateVADERPlot(document.getElementById('movie-id-input-vader').value)">
+        Update Plot
+    </button>
+</div>
+
+
 
 ---
 
@@ -433,7 +443,8 @@ Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/sentiment-analysis-plots.js"></script>
-
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/vader-sentiment-plot.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/utilities.js"></script>

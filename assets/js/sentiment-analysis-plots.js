@@ -5,6 +5,77 @@ function createSentimentPlots(vaderData, distilbertData) {
     createGenreSentimentPlot(vaderData);
 }
 
+// Load CSV data
+async function loadVADERSentimentData() {
+    const response = await fetch("data/sentence_sentimental_analysis_Vader.csv");
+    const csvData = await response.text();
+    return Papa.parse(csvData, { header: true }).data;
+}
+
+// Extract and plot VADER sentiment scores for a specific movie
+async function updateVADERPlot(movieId) {
+    const data = await loadVADERSentimentData();
+    const specificMovieData = data.filter(d => d.movie_id == movieId);
+
+    if (specificMovieData.length === 0) {
+        alert("Movie ID not found!");
+        return;
+    }
+
+    // Extract sentence sentiments
+    const sentenceSentiments = JSON.parse(specificMovieData[0].sentence_sentiments);
+    const compoundScores = sentenceSentiments.map(s => s.compound);
+    const posScores = sentenceSentiments.map(s => s.pos);
+    const neuScores = sentenceSentiments.map(s => s.neu);
+    const negScores = sentenceSentiments.map(s => s.neg);
+
+    // Create plot traces
+    const compoundTrace = {
+        x: [...Array(compoundScores.length).keys()],
+        y: compoundScores,
+        mode: "lines+markers",
+        name: "Compound",
+        line: { color: "blue" }
+    };
+
+    const posTrace = {
+        x: [...Array(posScores.length).keys()],
+        y: posScores,
+        mode: "lines+markers",
+        name: "Positive",
+        line: { color: "green" }
+    };
+
+    const neuTrace = {
+        x: [...Array(neuScores.length).keys()],
+        y: neuScores,
+        mode: "lines+markers",
+        name: "Neutral",
+        line: { color: "orange" }
+    };
+
+    const negTrace = {
+        x: [...Array(negScores.length).keys()],
+        y: negScores,
+        mode: "lines+markers",
+        name: "Negative",
+        line: { color: "red" }
+    };
+
+    // Plot the data
+    Plotly.newPlot("vader-sentiment-plot", [compoundTrace, posTrace, neuTrace, negTrace], {
+        title: `Sentence Sentiments for Movie ID: ${movieId} (VADER)`,
+        xaxis: { title: "Sentence Index" },
+        yaxis: { title: "Sentiment Score" }
+    });
+}
+
+// Initial plot for default Movie ID
+document.addEventListener("DOMContentLoaded", () => {
+    updateVADERPlot(77856);
+});
+
+
 // Function to update DistilBERT plot
 function updateDistilBERTPlot(movieId) {
     // Load the sentiment data
