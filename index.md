@@ -408,10 +408,10 @@ To understand how these variables interact, we visualized a **correlation heatma
 
 **CORRELATION HEATMAP PLOT**
 
-<div id="createResultsPlots"></div>
+<div id="correlation"></div>
 <script type="module">
   import { createRoot } from 'react-dom/client';
-  import HeaderLogo from './assets/js/results-plot.js';
+  import HeaderLogo from './assets/js/results-plots.js';
 
   const container = document.getElementById('header-logo-container');
   const root = createRoot(container);
@@ -461,6 +461,9 @@ Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that 
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
 <script src="{{ site.baseurl }}/assets/js/network-analysis-plots.js"></script>
 <!-- <script src="{{ site.baseurl }}/assets/js/results-plot.js"></script> -->
+<script src="{{ site.baseurl }}/assets/js/results-plot.js';"></script>
+<!-- <script src="{{ site.baseurl }}/assets/js/test.js';"></script> -->
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -488,6 +491,7 @@ document.addEventListener('DOMContentLoaded', function() {
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
             createSuccessPlots(yearStats, years);
+            createDummyPlot();
 
             // Load the character metadata dataset
             Papa.parse('{{ site.baseurl }}/data/character_metadata_cleaned.csv', {
@@ -511,6 +515,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+
 
 
 
