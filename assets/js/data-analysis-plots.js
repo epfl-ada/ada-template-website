@@ -300,7 +300,7 @@ function createActorAgePlot(characterData) {
             type: 'scatter',
             name: 'Mean Occurrences',
             line: {
-                color: 'cyan',
+                color: '#FF7E1D',
                 width: 3
             }
         };
