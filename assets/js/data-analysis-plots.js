@@ -32,7 +32,7 @@ function createRevenuePlot(yearStats, years) {
     };
 
     Plotly.newPlot('revenue-plot', [revenueTrace], 
-        createPlotlyLayout('Total Yearly Box Office Revenue (1920+)', 'Year', 'Total Box Office Revenue [$] (log)', true)
+        createPlotlyLayout('Total Yearly Box Office Revenue', 'Year', 'Total Box Office Revenue [$] (log)', true)
     );
 }
 
@@ -330,7 +330,7 @@ function createActorAgePlot(characterData) {
                 zeroline: false,
                 fixedrange: true  // This prevents user from zooming on y-axis
             },
-            plot_bgcolor: '#000000',
+            plot_bgcolor: '#1e1e1e',
             paper_bgcolor: '#1e1e1e',
             showlegend: true,
             legend: {
