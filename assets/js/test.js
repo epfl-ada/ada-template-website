@@ -59,15 +59,6 @@ function createDummyPlot() {
     Plotly.newPlot('dummyPlot', [dummyTrace], layout);
 }
 
-// Initialize plots when document is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Create a container div for the dummy plot
-    const dummyContainer = document.createElement('div');
-    dummyContainer.id = 'dummyPlot';
-    dummyContainer.style.width = '100%';
-    dummyContainer.style.height = '500px';
-    document.body.appendChild(dummyContainer);
-
-    // Create a dummy plot
     createDummyPlot();
 });

@@ -501,7 +501,4 @@ document.addEventListener('DOMContentLoaded', function() {
   import { createRoot } from 'react-dom/client';
   import HeaderLogo from './assets/js/test.js';
 
-  <!-- const container = document.getElementById('header-logo-container');
-  const root = createRoot(container);
-  root.render(<HeaderLogo />); -->
 </script>
