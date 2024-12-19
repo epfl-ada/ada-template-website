@@ -495,4 +495,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<div id="influence_Factors" style="width: 100%; height: 600px;"></div>
+<div id="dummyPlot" style="width: 100%; height: 600px;"></div>

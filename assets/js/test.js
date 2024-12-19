@@ -21,54 +21,53 @@ async function loadData() {
     }
 }
 
-// Create movies per year plot
-async function create_influence_FactorsPlot() {
-    const data = await loadData();
-    
-    // Group by year
-    const moviesPerYear = {};
-    data.forEach(movie => {
-        const year = movie.release_date.getFullYear();
-        moviesPerYear[year] = (moviesPerYear[year] || 0) + 1;
-    });
-
-    const years = Object.keys(moviesPerYear).sort();
-    const counts = years.map(year => moviesPerYear[year]);
-
-    const trace = {
-        x: years,
-        y: counts,
+// Create a dummy plot to check if it works
+function createDummyPlot() {
+    const dummyTrace = {
+        x: [1, 2, 3, 4, 5],
+        y: [10, 15, 13, 17, 20],
         type: 'scatter',
-        mode: 'lines',
+        mode: 'lines+markers',
+        marker: {
+            color: 'red',
+            size: 8
+        },
         line: {
-            color: 'lightblue',
+            color: 'blue',
             width: 2
         },
-        name: 'Number of Movies'
+        name: 'Dummy Data'
     };
 
     const layout = {
-        title: 'Total Number of Movies Released Yearly',
+        title: 'Dummy Plot',
         xaxis: {
-            title: 'Year',
+            title: 'X Axis',
             gridcolor: 'gray'
         },
         yaxis: {
-            title: 'Number of Movies',
+            title: 'Y Axis',
             gridcolor: 'gray'
         },
-        paper_bgcolor: '#1e1e1e',
-        plot_bgcolor: '#1e1e1e',
+        paper_bgcolor: '#f8f9fa',
+        plot_bgcolor: '#f8f9fa',
         font: {
-            color: 'white'
+            color: 'black'
         }
     };
 
-    Plotly.newPlot('influence_Factors', [trace], layout);
+    Plotly.newPlot('dummyPlot', [dummyTrace], layout);
 }
-
 
 // Initialize plots when document is ready
 document.addEventListener('DOMContentLoaded', () => {
-    create_influence_FactorsPlot();
+    // Create a container div for the dummy plot
+    const dummyContainer = document.createElement('div');
+    dummyContainer.id = 'dummyPlot';
+    dummyContainer.style.width = '100%';
+    dummyContainer.style.height = '500px';
+    document.body.appendChild(dummyContainer);
+
+    // Create a dummy plot
+    createDummyPlot();
 });
