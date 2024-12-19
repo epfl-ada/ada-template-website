@@ -310,8 +310,9 @@ In this section, we evaluate how **actor collaborations** influence movie succes
 ---
 
 ### **NETWORK VISUALIZATION PLOT**  
-
-*This is where the network visualization plot will be displayed.*
+<div id="actor-network-plot" style="width: 100%; height: 600px;"></div>
+<div id="collaboration-success-plot" style="width: 100%; height: 600px;"></div>
+<div id="career-trajectory-plot" style="width: 100%; height: 600px;"></div>
 
 ---
 
@@ -408,15 +409,15 @@ To understand how these variables interact, we visualized a **correlation heatma
 
 **CORRELATION HEATMAP PLOT**
 
-<div id="createResultsPlots"></div>
-<script type="module">
+<div id="correlation"></div>
+<!-- <script type="module">
   import { createRoot } from 'react-dom/client';
-  import HeaderLogo from './assets/js/results-plot.js';
+  import HeaderLogo from './assets/js/results-plots.js';
 
-  const container = document.getElementById('header-logo-container');
+  <!-- const container = document.getElementById('header-logo-container');
   const root = createRoot(container);
-  root.render(<HeaderLogo />);
-</script>
+  root.render(<HeaderLogo />); -->
+<!-- </script> --> -->
 
 -----------------
 
@@ -454,13 +455,17 @@ Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/sentiment-analysis-plots.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="{{ site.baseurl }}/assets/js/vader-sentiment-plot.js"></script>
+<!-- <script src="{{ site.baseurl }}/assets/js/vader-sentiment-plot.js"></script> -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
 <script src="{{ site.baseurl }}/assets/js/network-analysis-plots.js"></script>
-<!-- <script src="{{ site.baseurl }}/assets/js/results-plot.js"></script> -->
+<script src="{{ site.baseurl }}/assets/js/results-plot.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -488,22 +493,9 @@ document.addEventListener('DOMContentLoaded', function() {
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
             createSuccessPlots(yearStats, years);
-
-            // Load the character metadata dataset
-            Papa.parse('{{ site.baseurl }}/data/character_metadata_cleaned.csv', {
-                download: true,
-                header: true,
-                complete: function(characterResults) {
-                    // Process and use the character data
-                    const characterData = characterResults.data;
-
-                    // Example: Use characterData and movieResults.data for combined plots
-                    createNetworkPlots(characterData, movieResults.data);
-                },
-                error: function(error) {
-                    console.error('Error loading character metadata:', error);
-                }
-            });
+            createDummyPlot();
+            createCollaborationSuccessPlot();
+            createCareerTrajectoryPlot();
         },
         error: function(error) {
             console.error('Error loading movie master dataset:', error);
@@ -511,6 +503,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+
 
 
 

@@ -22,7 +22,7 @@ async function loadData() {
 }
 
 // Create a dummy plot to check if it works
-function createResultsPlots() {
+function createDummyPlot() {
     const dummyTrace = {
         x: [1, 2, 3, 4, 5],
         y: [10, 15, 13, 17, 20],
@@ -56,7 +56,7 @@ function createResultsPlots() {
         }
     };
 
-    Plotly.newPlot('dummyPlot', [dummyTrace], layout);
+    Plotly.newPlot('correlation', [dummyTrace], layout);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
