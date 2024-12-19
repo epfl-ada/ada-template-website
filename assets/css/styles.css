@@ -4,7 +4,7 @@ body {
   font-size: 17px;
   line-height: 1.5;
   /* font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color:#595959;
   font-weight:400;
 }
@@ -278,8 +278,8 @@ footer {
 
 /* Main Content Adjustment */
 .main-content {
-  margin-right: 0px; /* No margin needed on the right side now */
-  margin-left: 270px; /* Add space to the left side for the sidebar */
+  margin-right: 270px; /* Add space to the left side for the sidebar */
+  margin-left: 0px; /* No margin needed on the right side now */
   padding: 20px;
 }
 
