@@ -1,6 +1,6 @@
 ---
 layout: page
-title: MovieKinsey Analytics 2:08
+title: MovieKinsey Analytics 2:35
 subtitle: A Consulting Startup for Predicting Movie Success
 cover-img: /assets/img/Picture2.png
 thumbnail-img: /assets/img/Picture2.png
