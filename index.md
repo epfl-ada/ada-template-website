@@ -459,7 +459,8 @@ Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
-<script src="{{ site.baseurl }}/assets/js/test.js"></script>
+<script src="{{ site.baseurl }}/assets/js/network-analysis-plots.js"></script>
+<script src="{{ site.baseurl }}/assets/js/results-plot.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
