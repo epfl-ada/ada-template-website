@@ -449,6 +449,8 @@ Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
+<script src="{{ site.baseurl }}/assets/js/test.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Load the movie master dataset
@@ -474,6 +476,7 @@ document.addEventListener('DOMContentLoaded', function() {
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
             createSuccessPlots(yearStats, years);
+            createDummyPlot();
             
             // Load the character metadata for actor age plot
             Papa.parse('{{ site.baseurl }}/data/character_metadata_cleaned.csv', {
@@ -495,13 +498,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-<!-- <div id="dummyPlot" style="width: 100%; height: 600px;"></div>
-<script type="module">
-  import { createRoot } from 'react-dom/client';
-  import HeaderLogo from './assets/js/test.js';
-
-</script> -->
 
 <div id="dummyPlot"></div>
 <script type="module">
