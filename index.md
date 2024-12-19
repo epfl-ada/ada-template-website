@@ -406,7 +406,17 @@ We calculated each factor’s **percentage contribution** to the explained varia
 
 To understand how these variables interact, we visualized a **correlation heatmap**. This helped identify synergies between variables such as actor fame, budget, and exposure.
 
-**CORRELATION HEATMAP PLOT**  
+**CORRELATION HEATMAP PLOT**
+
+<div id="plot_results"></div>
+<script type="module">
+  import { createRoot } from 'react-dom/client';
+  import HeaderLogo from './assets/js/results-plot.js';
+
+  const container = document.getElementById('header-logo-container');
+  const root = createRoot(container);
+  root.render(<HeaderLogo />);
+</script>
 
 -----------------
 
@@ -476,6 +486,7 @@ document.addEventListener('DOMContentLoaded', function() {
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
             createSuccessPlots(yearStats, years);
+            createNetworkPlots(characterData, movieData);
             createDummyPlot();
             
             // Load the character metadata for actor age plot
@@ -499,12 +510,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-<div id="dummyPlot"></div>
-<script type="module">
-  import { createRoot } from 'react-dom/client';
-  import HeaderLogo from './assets/js/test.js';
-
-  const container = document.getElementById('header-logo-container');
-  const root = createRoot(container);
-  root.render(<HeaderLogo />);
-</script>
