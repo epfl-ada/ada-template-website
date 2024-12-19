@@ -454,7 +454,7 @@ Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/sentiment-analysis-plots.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="{{ site.baseurl }}/assets/js/vader-sentiment-plot.js"></script>
+<!-- <script src="{{ site.baseurl }}/assets/js/vader-sentiment-plot.js"></script> -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
