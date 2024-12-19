@@ -1,103 +1,157 @@
-# Data Analysis Report Template
-
-## **Main Title of the Report**
-> *Catchy headline summarizing the analysis in one sentence.*
-
 ---
-
-### **Table of Contents**
-1. [Introduction](#introduction)
-2. [Key Findings](#key-findings)
-3. [Visual Insights](#visual-insights)
-    - [Centered Image](#centered-image)
-    - [Image to the Left](#image-to-the-left)
-    - [Image to the Right](#image-to-the-right)
-4. [Deep Dive Analysis](#deep-dive-analysis)
-5. [Conclusions](#conclusions)
-6. [Next Steps & Recommendations](#next-steps--recommendations)
-
+layout: default
+title: "Sickada"
+banner_header: "How You Became Smarter ...."
+subtitle: ".... or how has the volume of educational content changed over time"
 ---
 
 ## **Introduction**
-> A brief introduction explaining the purpose of the analysis and the key questions being explored. Keep it casual and engaging.
+> A brief introduction explaining the purpose of the analysis and the key questions being explored. Keep it simple, clear, and engaging.
 
 **Example:**
-*Have you ever wondered why sales spike during certain months? This analysis breaks down the patterns, trends, and surprises in our latest dataset.*
+*Have you ever wondered why sales spike during certain months? This report uncovers trends, patterns, and insights from our latest dataset.*
 
 ---
 
 ## **Key Findings**
-Summarize the most important findings in bullet points or short sentences:
-- **Finding 1:** Sales increased by 25% in Q3 compared to Q2.
-- **Finding 2:** Product A outperformed others in urban markets.
-- **Finding 3:** Website traffic surged after the new marketing campaign.
+### **Top Insights:**
+- **Sales Growth:** Sales increased by **25%** in Q3 compared to Q2.
+- **Product Performance:** **Product A** outperformed others in urban markets.
+- **Web Traffic:** Website traffic surged following the new marketing campaign.
 
-Use bold text for key points and italics for clarifications.
+> Use **bold text** for key points and *italics* for clarifications.
 
 ---
 
 ## **Visual Insights**
-> This is where you display your key visuals with short explanations. Images can be centered, aligned left, or right for style.
-
 ### **Centered Image**
-![Centered Image Example](assets/profile.jpeg)
-> *Figure 1: A chart showing sales trends by quarter.*
+![Sales Trends Chart](assets/banner.jpeg)
+> *Figure 1: Sales trends across quarters.*
 
 ---
 
-### **Image to the Left with Text to the Right**
-<div style="display: flex; align-items: center;">
-    <img src="assets/profile.jpeg" alt="Left Aligned Image" width="40%" style="margin-right: 1rem;">
+### **Image with Text Alignment**
+#### Image to the Left
+<div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+    <img src="assets/profile.jpeg" alt="Urban Market Performance" width="40%" style="margin-right: 1rem;">
     <p>
-        **Observation:** *Product A showed impressive performance in urban markets during the campaign. This result highlights the need to further target similar demographics for sustained growth.*
+        **Observation:** *Product A demonstrated remarkable performance in urban markets during the campaign. This suggests a need to further target similar demographics for sustained growth.*
     </p>
 </div>
 
 ---
 
-### **Image to the Right with Text to the Left**
-<div style="display: flex; align-items: center;">
+#### Image to the Right
+<div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
     <p style="margin-right: 1rem;">
-        **Insight:** *Website traffic surged after the new campaign launch, indicating strong audience engagement. Additional campaigns can be planned to leverage this trend.*
+        **Insight:** *Website traffic surged after the new campaign launch, highlighting strong audience engagement. Future campaigns can capitalize on this trend to drive conversions.*
     </p>
-    <img src="assets/profile.jpeg" alt="Right Aligned Image" width="40%">
+    <img src="assets/profile.jpeg" alt="Website Traffic Growth" width="40%">
 </div>
 
 ---
 
 ## **Deep Dive Analysis**
-Break down each key finding with deeper analysis. Use headings, subheadings, and visuals where necessary.
+Break down each key finding with deeper analysis, supported by visuals and data tables.
 
 ### **Sales Analysis**
-- **Observation:** The highest sales occurred in July.
-- **Why?:** This was driven by the summer promotion.
+- **Observation:** The highest sales occurred in **July**, driven by a summer promotion.
+- **Details:** The promotion contributed to a **50% growth rate** in sales.
 
 | Month      | Sales ($)   | Growth Rate |
-|------------|------------|-------------|
-| June       | 10,000     | +5%         |
-| July       | 15,000     | +50%        |
-| August     | 12,000     | -20%        |
+|------------|-------------|-------------|
+| June       | 10,000      | +5%         |
+| July       | 15,000      | +50%        |
+| August     | 12,000      | -20%        |
+
+> *July's promotion was highly successful, but August showed a decline, indicating the need for follow-up strategies.*
+
+---
+
+## **Interactive Plotly Visualization**
+Below is an interactive Plotly chart embedded directly into this Markdown file using HTML:
+
+<div>
+  <iframe src="assets/plot.html" width="100%" height="500" frameborder="0"></iframe>
+  <p style="text-align: center;">Figure 1: Dummy Plotly Chart</p>
+</div>
+
+### **Plotly Chart with Text on the Right**
+<div style="display: flex; align-items: center; margin-bottom: 2rem;">
+  <!-- Plot -->
+  <div style="flex: 1; margin-right: 1rem;">
+    <iframe src="assets/plot.html" width="100%" height="500" frameborder="0"></iframe>
+  </div>
+  <!-- Text -->
+  <div style="flex: 1;">
+    <h3>Insights</h3>
+    <p>
+      This Plotly chart highlights the performance of various categories over time. Use it to analyze trends and identify key areas for improvement or further study.
+    </p>
+    <p>
+      The data indicates significant growth in Q3, with certain categories outperforming others due to targeted strategies.
+    </p>
+  </div>
+</div>
+
+---
+
+### **Plotly Chart with Text on the Left**
+<div style="display: flex; align-items: center; margin-bottom: 2rem;">
+  <!-- Text -->
+  <div style="flex: 1; margin-right: 1rem;">
+    <h3>Analysis</h3>
+    <p>
+      This visualization compares multiple metrics across different months. It reveals seasonal trends and helps in understanding variations in performance across quarters.
+    </p>
+    <p>
+      The results emphasize the importance of summer promotions and their impact on overall sales growth.
+    </p>
+  </div>
+  <!-- Plot -->
+  <div style="flex: 1;">
+    <iframe src="assets/plot.html" width="100%" height="500" frameborder="0"></iframe>
+  </div>
+</div>
+
+---
+
+## **Embedded Videos**
+You can embed videos directly into your report using HTML. For example:
+
+### **Marketing Campaign Video**
+<div style="text-align: center;">
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/tiEPzEp2T4A"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+<p style="text-align: center;">Figure 3: Overview of our marketing campaign strategy.</p>
 
 ---
 
 ## **Conclusions**
-Summarize your findings in a casual, reader-friendly tone.
-> *In short, our analysis revealed that summer promotions have a massive impact on sales. However, we observed a drop-off afterward, suggesting an opportunity for a follow-up campaign.*
+> *In summary, our analysis shows that targeted promotions in urban areas drive significant sales growth. However, maintaining momentum after campaigns remains a challenge.*
 
 ---
 
-## **Next Steps & Recommendations**
-Provide actionable insights for future decisions.
-- Launch a **follow-up campaign** in August to maintain sales momentum.
-- Focus on urban markets for **Product A**.
-- Continue monitoring website traffic to identify future trends.
+## **Next Steps and Recommendations**
+### **Actionable Recommendations:**
+1. Launch a **follow-up campaign** in **August** to sustain sales momentum.
+2. Focus on urban markets for **Product A**, as they demonstrate the highest potential.
+3. Leverage website analytics to identify trends and optimize future marketing campaigns.
 
 ---
 
 ## **Additional Notes**
-- Link to the full dataset: [Dataset Link](#)
-- References or tools used: *Python, pandas, Matplotlib*
+- **Dataset:** [View Dataset](https://github.com/epfl-dlab/YouNiverse)
+- **Tools Used:** *Python, pandas, Matplotlib*
+- **References:** Internal sales records and web traffic data.
 
 ---
 
-*Thank you for reading! 🎉 Feel free to reach out for more details.*
+*Thank you for reading! Feel free to reach out for further information or collaboration opportunities.*

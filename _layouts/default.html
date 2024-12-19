@@ -4,16 +4,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link rel="icon" type="image/png"  href="assets/img/favicon.png">
-    <title>{{ site.title | default: site.github.repository_name }} by {{ site.github.owner_name }}</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/styles.css?v=' | append: site.github.build_revision | relative_url }}">
     <meta name="viewport" content="width=device-width">
   </head>
   <body>
+
+    <nav class="sticky-banner">
+      <div class="banner-content">
+        <h1 class="banner-header">{{ page.banner_header }}</h1>  <!-- Using the banner_header variable -->
+        <h2 class="subtitle">{{ page.subtitle }}</h2> <!-- Using the subtitle variable -->
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <ul id="toc"></ul>  <!-- This will be populated with JavaScript -->
+    </div>
+
     <div class="wrapper">
       <header>
-        <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        <p>{{ site.description | default: site.github.project_tagline }}</p>
 
 <!--         <table>
           {% for nav in site.navigation %}
@@ -57,5 +67,39 @@
         ga('send', 'pageview');
     </script>
   {% endif %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Select all headers (h1, h2, h3, etc.)
+      const headers = document.querySelectorAll('h1, h2');
+      const toc = document.getElementById('toc');
+  
+      // Iterate through all headers to create TOC items
+      headers.forEach((header, index) => {
+        if (header.classList.contains('subtitle')) {
+          return; //Skip subtitle
+        }
+        if (header.classList.contains('banner-header')) {
+          return; //Skip banner header
+        }
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        
+        // Create a unique ID for each header (if it doesn't have one)
+        if (!header.id) {
+          header.id = `toc-${index}`;
+        }
+  
+        // Set the link text and href attribute
+        link.textContent = header.textContent;
+        link.href = `#${header.id}`;
+  
+        // Append the link to the list item, and the list item to the TOC
+        listItem.appendChild(link);
+        toc.appendChild(listItem);
+      });
+    });
+  </script>
+
   </body>
 </html>

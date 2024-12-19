@@ -1,7 +1,10 @@
 body {
   background-color: #fff;
   padding:50px;
-  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 17px;
+  line-height: 1.5;
+  /* font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
+  font-family: 'Montserrat', sans-serif;
   color:#595959;
   font-weight:400;
 }
@@ -103,11 +106,14 @@ img {
   max-width:100%;
 }
 
+
+
 header {
-  width:270px;
-  float:left;
-  position:fixed;
-  -webkit-font-smoothing:subpixel-antialiased;
+  width: 100%; /* Make the header span the full width of the page */
+  float: none; /* Remove float */
+  position: static; /* Allow the header to scroll with the content */
+  text-align: center; /* Center the content */
+  padding: 20px 0; /* Add some padding */
 }
 
 header ul {
@@ -170,9 +176,10 @@ header ul a strong {
 }
 
 section {
-  width:750px;
-  float:right;
-  padding-bottom:50px;
+  width: auto; /* Allow the content to use the available space */
+  float: none; /* Remove float */
+  margin: 0 auto; /* Center the content */
+  padding: 20px; /* Add padding for readability */
 }
 
 small {
@@ -187,11 +194,84 @@ hr {
 }
 
 footer {
-  width:270px;
-  float:left;
-  position:fixed;
-  bottom:50px;
-  -webkit-font-smoothing:subpixel-antialiased;
+  width: 100%; /* Make the footer span the full width of the page */
+  float: none; /* Remove float */
+  position: static; /* Allow the footer to scroll with the content */
+  text-align: center; /* Center the content */
+  padding: 20px 0; /* Add some padding */
+}
+
+/* Sticky Banner */
+.sticky-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  background-color: #20242c; /* Dark background */
+  color: #ffffff; /* White text */
+  display: flex; /* Flex layout for aligning items */
+  flex-direction: column; /* Stack the text vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center the content vertically */
+  padding: 8px 2rem; /* Padding for spacing */
+  z-index: 1000; /* Ensure the banner stays on top */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+/* Banner Title */
+.sticky-banner h1 {
+  font-size: 1.5rem; /* Adjust font size */
+  margin: 0; /* Remove margin */
+  color: #ffffff;
+  text-align: center; /* Ensure the text is centered */
+}
+
+/* Subtitle */
+.sticky-banner .subtitle {
+  font-size: 1rem; /* Slightly smaller font size for the subtitle */
+  margin: 0.5rem 0 0; /* Space between the title and subtitle */
+  color: #b0b0b0; /* Lighter color for the subtitle */
+  text-align: center; /* Center align the subtitle */
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 100px; /* Adjusted for spacing */
+  right: 5px; /* Move the sidebar to the right */
+  width: 250px; /* Sidebar width */
+  background-color: #f1f1f1;
+  padding: 15px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow on the left of the sidebar */
+  z-index: 10; /* Ensure it stays on top */
+}
+
+
+/* List Style */
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+/* Links Style */
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar ul li a:hover {
+  color: #007BFF;
+}
+
+/* Main Content Adjustment */
+.main-content {
+  margin-right: 0px; /* No margin needed on the right side now */
+  margin-left: 270px; /* Add space to the left side for the sidebar */
+  padding: 20px;
 }
 
 @media print, screen and (max-width: 960px) {
