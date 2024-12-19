@@ -269,7 +269,7 @@ function createActorAgePlot(characterData) {
             type: 'scatter',
             name: 'Actors',
             marker: {
-                color: 'magenta',
+                color: '#FF19B8',
                 size: 12,
                 opacity: 0.05
             }
@@ -300,7 +300,7 @@ function createActorAgePlot(characterData) {
             type: 'scatter',
             name: 'Mean Occurrences',
             line: {
-                color: 'cyan',
+                color: '#FF7E1D',
                 width: 3
             }
         };
@@ -343,14 +343,14 @@ function createActorAgePlot(characterData) {
                     x0: 3, x1: 3, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'yellow', width: 1 } 
+                    line: { color: 'white', width: 1 } 
                 },
                 { 
                     type: 'line', 
                     x0: 17, x1: 17, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'yellow', width: 1 } 
+                    line: { color: 'white', width: 1 } 
                 },
                 // Additional reference lines
                 { 
