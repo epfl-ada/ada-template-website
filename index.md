@@ -496,9 +496,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-<div id="dummyPlot" style="width: 100%; height: 600px;"></div>
+<!-- <div id="dummyPlot" style="width: 100%; height: 600px;"></div>
 <script type="module">
   import { createRoot } from 'react-dom/client';
   import HeaderLogo from './assets/js/test.js';
 
+</script> -->
+
+<div id="dummyPlot"></div>
+<script type="module">
+  import { createRoot } from 'react-dom/client';
+  import HeaderLogo from './assets/js/test.js';
+
+  const container = document.getElementById('header-logo-container');
+  const root = createRoot(container);
+  root.render(<HeaderLogo />);
 </script>
