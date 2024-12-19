@@ -239,7 +239,8 @@ date_format: "%B %-d, %Y"
 #################################################################################
 
 # Output options (more information on Jekyll's site)
-timezone: "Switzerland/Bern" #-----------------------------------
+# timezone: "Switzerland/Bern" #-----------------------------------
+timezone: Europe/Zurich
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
