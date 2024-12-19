@@ -3,6 +3,7 @@
 # Site Settings
 title: ""
 theme: jekyll-theme-cayman
+baseurl: "/sickada"
 
 # Custom CSS for styling
 include:
