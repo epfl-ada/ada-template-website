@@ -56,7 +56,7 @@ function createResultsPlots() {
         }
     };
 
-    Plotly.newPlot('dummyPlot', [dummyTrace], layout);
+    Plotly.newPlot('correlation', [dummyTrace], layout);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
