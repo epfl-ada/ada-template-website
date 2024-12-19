@@ -8,7 +8,7 @@ function createReleasesPlot(yearStats, years) {
         mode: 'lines',
         line: {
             color: COLORS.primary,
-            width: 4
+            width: 2
         },
         name: 'Number of Movies'
     };
@@ -26,7 +26,7 @@ function createRevenuePlot(yearStats, years) {
         mode: 'lines',
         line: {
             color: COLORS.secondary,
-            width: 4
+            width: 2
         },
         name: 'Total Box Office Revenue'
     };
@@ -38,6 +38,15 @@ function createRevenuePlot(yearStats, years) {
 
 function createStatsPlot(divId, yearStats, years, field, title, yLabel, logY = false) {
     const stats = years.map(year => calculateStatistics(yearStats[year][field]));
+    
+    const meanTrace = {
+        x: years,
+        y: stats.map(s => s.mean),
+        type: 'scatter',
+        mode: 'lines',
+        name: 'Mean',
+        line: {color: field === 'revenues' ? COLORS.secondary : COLORS.tertiary, width: 3}
+    };
 
     const medianTrace = {
         x: years,
@@ -45,16 +54,7 @@ function createStatsPlot(divId, yearStats, years, field, title, yLabel, logY = f
         type: 'scatter',
         mode: 'lines',
         name: 'Median',
-        line: {color: COLORS.neutral, width: 4, dash: 'dash'}
-    };
-
-    const meanTrace = {
-        x: years,
-        y: stats.map(s => s.mean),
-        type: 'scatter',
-        mode: 'lines',
-        name: 'Mean',
-        line: {color: field === 'revenues' ? COLORS.secondary : COLORS.tertiary, width: 4}
+        line: {color: COLORS.neutral, width: 3, dash: 'dash'}
     };
 
     const stdUpperTrace = {
@@ -300,8 +300,8 @@ function createActorAgePlot(characterData) {
             type: 'scatter',
             name: 'Mean Occurrences',
             line: {
-                color: '#FF7E1D',
-                width: 4
+                color: 'cyan',
+                width: 3
             }
         };
 
@@ -330,7 +330,7 @@ function createActorAgePlot(characterData) {
                 zeroline: false,
                 fixedrange: true  // This prevents user from zooming on y-axis
             },
-            plot_bgcolor: '#1e1e1e',
+            plot_bgcolor: '#000000',
             paper_bgcolor: '#1e1e1e',
             showlegend: true,
             legend: {
@@ -343,43 +343,22 @@ function createActorAgePlot(characterData) {
                     x0: 3, x1: 3, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'purple', width: 2 } 
+                    line: { color: 'yellow', width: 1 } 
                 },
                 { 
                     type: 'line', 
                     x0: 17, x1: 17, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'purple', width: 2 } 
+                    line: { color: 'yellow', width: 1 } 
                 },
                 // Additional reference lines
                 { 
                     type: 'line', 
-                    x0: 16, x1: 16, 
+                    x0: 1, x1: 1, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'purple', width: 1, dash: 'dash' } 
-                }
-                { 
-                    type: 'line', 
-                    x0: 18, x1: 18, 
-                    y0: 1, y1: 1000,
-                    yref: 'y',
-                    line: { color: 'purple', width: 1, dash: 'dash' } 
-                }
-                { 
-                    type: 'line', 
-                    x0: 2, x1: 2, 
-                    y0: 1, y1: 1000,
-                    yref: 'y',
-                    line: { color: 'purple', width: 1, dash: 'dash' } 
-                }
-                { 
-                    type: 'line', 
-                    x0: 4, x1: 4, 
-                    y0: 1, y1: 1000,
-                    yref: 'y',
-                    line: { color: 'purple', width: 1, dash: 'dash' } 
+                    line: { color: 'white', width: 0.5, dash: 'dash' } 
                 },
                 // ... (repeat for other vertical lines)
             ],
