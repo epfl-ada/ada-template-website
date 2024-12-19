@@ -356,3 +356,7 @@ function processCareerTrajectories(characterData, movieData) {
 
     return { years, avgSuccess };
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    createNetworkPlots();
+});

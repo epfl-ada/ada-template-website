@@ -406,7 +406,17 @@ We calculated each factor’s **percentage contribution** to the explained varia
 
 To understand how these variables interact, we visualized a **correlation heatmap**. This helped identify synergies between variables such as actor fame, budget, and exposure.
 
-**CORRELATION HEATMAP PLOT**  
+**CORRELATION HEATMAP PLOT**
+
+<div id="createResultsPlots"></div>
+<script type="module">
+  import { createRoot } from 'react-dom/client';
+  import HeaderLogo from './assets/js/results-plot.js';
+
+  const container = document.getElementById('header-logo-container');
+  const root = createRoot(container);
+  root.render(<HeaderLogo />);
+</script>
 
 -----------------
 
@@ -449,6 +459,9 @@ Through this multifaceted analysis, **MovieKinsey Analytics** demonstrates that 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="{{ site.baseurl }}/assets/js/utilities.js"></script>
 <script src="{{ site.baseurl }}/assets/js/data-analysis-plots.js"></script>
+<script src="{{ site.baseurl }}/assets/js/network-analysis-plots.js"></script>
+<!-- <script src="{{ site.baseurl }}/assets/js/results-plot.js"></script> -->
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Load the movie master dataset
@@ -457,7 +470,8 @@ document.addEventListener('DOMContentLoaded', function() {
         header: true,
         complete: function(movieResults) {
             const yearStats = processYearlyData(movieResults.data);
-            const years = Object.keys(yearStats).sort((a,b) => a-b);
+            const years = Object.keys(yearStats).sort((a, b) => a - b);
+
             // Create movie-related plots
             createReleasesPlot(yearStats, years);
             createRevenuePlot(yearStats, years);
@@ -474,34 +488,29 @@ document.addEventListener('DOMContentLoaded', function() {
             createScatterPlot('votes-scatter-plot', yearStats, years, 'votes',
                 'Vote Counts per Movie (log)', 'Vote Count (log)', true);
             createSuccessPlots(yearStats, years);
-            
-            // Load the character metadata for actor age plot
+
+            // Load the character metadata dataset
             Papa.parse('{{ site.baseurl }}/data/character_metadata_cleaned.csv', {
                 download: true,
                 header: true,
                 complete: function(characterResults) {
-                    console.log("Character data loaded:", characterResults.data.length);
-                    createActorAgePlot(characterResults.data);
+                    // Process and use the character data
+                    const characterData = characterResults.data;
+
+                    // Example: Use characterData and movieResults.data for combined plots
+                    createNetworkPlots(characterData, movieResults.data);
                 },
                 error: function(error) {
-                    console.error('Error loading character data:', error);
+                    console.error('Error loading character metadata:', error);
                 }
             });
         },
         error: function(error) {
-            console.error('Error loading movie data:', error);
+            console.error('Error loading movie master dataset:', error);
         }
     });
 });
 </script>
 
 
-<div id="dummyPlot" style="width: 100%; height: 600px;"></div>
-<script type="module">
-  import { createRoot } from 'react-dom/client';
-  import HeaderLogo from './assets/js/test.js';
 
-  <!-- const container = document.getElementById('header-logo-container');
-  const root = createRoot(container);
-  root.render(<HeaderLogo />); -->
-</script>

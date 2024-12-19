@@ -22,7 +22,7 @@ async function loadData() {
 }
 
 // Create a dummy plot to check if it works
-function createDummyPlot() {
+function createResultsPlots() {
     const dummyTrace = {
         x: [1, 2, 3, 4, 5],
         y: [10, 15, 13, 17, 20],
@@ -59,15 +59,6 @@ function createDummyPlot() {
     Plotly.newPlot('dummyPlot', [dummyTrace], layout);
 }
 
-// Initialize plots when document is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Create a container div for the dummy plot
-    const dummyContainer = document.createElement('div');
-    dummyContainer.id = 'dummyPlot';
-    dummyContainer.style.width = '100%';
-    dummyContainer.style.height = '500px';
-    document.body.appendChild(dummyContainer);
-
-    // Create a dummy plot
     createDummyPlot();
 });
