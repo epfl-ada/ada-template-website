@@ -1,0 +1,45 @@
+/* Progress bar container */
+.progress-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    pointer-events: none; /* Ensure it doesn't interfere with clicks */
+}
+
+/* Actual progress bar */
+.progress-bar {
+    width: 100%;
+    height: 0;
+    background: linear-gradient(180deg, #0085A1 0%, #0085A1 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: height 0.2s ease-out;
+}
+
+/* Adjust position when navbar is present */
+.navbar ~ .container .progress-container {
+    top: 50px; /* Adjust based on your navbar height */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .progress-container {
+        width: 4px;
+    }
+    
+    .navbar ~ .container .progress-container {
+        top: 40px; /* Adjust for mobile navbar height */
+    }
+}
+
+/* Fix for specific template layouts */
+.container-md .progress-container,
+.container .progress-container {
+    position: fixed;
+    right: 0;
+}
