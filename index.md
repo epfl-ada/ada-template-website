@@ -494,3 +494,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+// Example of how to call this function
+document.addEventListener('DOMContentLoaded', function() {
+    // Example data
+    const xData = ['2020', '2021', '2022', '2023'];
+    const yData = [100, 200, 300, 400];
+
+    // Create a container div for the plot
+    const plotContainer = document.createElement('div');
+    plotContainer.id = 'new-plot';
+    plotContainer.style.width = '100%';
+    plotContainer.style.height = '500px';
+    document.body.appendChild(plotContainer);
+
+    // Generate the plot
+    createNewPlot('new-plot', xData, yData, 'Example Plot', 'Year', 'Values');
+});
