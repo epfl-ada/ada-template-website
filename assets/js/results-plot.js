@@ -22,7 +22,7 @@ async function loadData() {
 }
 
 // Create a dummy plot to check if it works
-function createResultsPlots() {
+function createDummyPlot() {
     const dummyTrace = {
         x: [1, 2, 3, 4, 5],
         y: [10, 15, 13, 17, 20],
