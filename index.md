@@ -6,6 +6,10 @@ cover-img: /assets/img/Picture2.png
 thumbnail-img: /assets/img/Picture2.png
 share-img: /assets/img/Picture2.png
 use-site-title: true
+css: 
+  - /assets/css/progress-bar.css
+js:
+  - /assets/js/progress-bar.js
 ---
 
 <div id="header-logo-container"></div>
