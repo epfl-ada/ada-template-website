@@ -240,9 +240,8 @@ footer {
   top: 100px; /* Adjusted for spacing */
   right: 5px; /* Move the sidebar to the right */
   width: 250px; /* Sidebar width */
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   padding: 15px;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow on the left of the sidebar */
   z-index: 10; /* Ensure it stays on top */
 }
 
