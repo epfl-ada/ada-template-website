@@ -269,7 +269,7 @@ function createActorAgePlot(characterData) {
             type: 'scatter',
             name: 'Actors',
             marker: {
-                color: '#FF19B8',
+                color: 'magenta',
                 size: 12,
                 opacity: 0.05
             }
