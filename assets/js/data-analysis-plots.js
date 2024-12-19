@@ -343,22 +343,43 @@ function createActorAgePlot(characterData) {
                     x0: 3, x1: 3, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'white', width: 1 } 
+                    line: { color: 'purple', width: 2 } 
                 },
                 { 
                     type: 'line', 
                     x0: 17, x1: 17, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'white', width: 1 } 
+                    line: { color: 'purple', width: 2 } 
                 },
                 // Additional reference lines
                 { 
                     type: 'line', 
-                    x0: 1, x1: 1, 
+                    x0: 16, x1: 16, 
                     y0: 1, y1: 1000,
                     yref: 'y',
-                    line: { color: 'white', width: 0.5, dash: 'dash' } 
+                    line: { color: 'purple', width: 1, dash: 'dash' } 
+                }
+                { 
+                    type: 'line', 
+                    x0: 18, x1: 18, 
+                    y0: 1, y1: 1000,
+                    yref: 'y',
+                    line: { color: 'purple', width: 1, dash: 'dash' } 
+                }
+                { 
+                    type: 'line', 
+                    x0: 2, x1: 2, 
+                    y0: 1, y1: 1000,
+                    yref: 'y',
+                    line: { color: 'purple', width: 1, dash: 'dash' } 
+                }
+                { 
+                    type: 'line', 
+                    x0: 4, x1: 4, 
+                    y0: 1, y1: 1000,
+                    yref: 'y',
+                    line: { color: 'purple', width: 1, dash: 'dash' } 
                 },
                 // ... (repeat for other vertical lines)
             ],
