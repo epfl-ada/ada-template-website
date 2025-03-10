@@ -1,0 +1,33 @@
+/* In C:\Users\Pierre\Desktop\ADA\ada-2024-project-spaghetti-raclette-tangyuan-horizon-nexus\ada-template-website\ada-template-website\assets\css\custom.css */
+/* Remove title shadow */
+.intro-header .page-heading,
+.intro-header.big-img .page-heading,
+.intro-header .post-heading {
+    text-shadow: none;
+}
+/* Plot containers */
+.plot-container {
+    background-color: #1e1e1e;
+    border: 1px solid #333333;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  /* Table styling */
+  table {
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+  }
+  
+  table tr {
+    background-color: #1E1E1E;
+    border-color: #333333;
+  }
+  
+  table tr:nth-child(2n) {
+    background-color: #1e1e1e;
+  }
+  
+  table th, table td {
+    border-color: #333333;
+  }
