@@ -1,0 +1,1 @@
+This folder contains the raw data files for the project. It is ignored by git and not used directly by the website build. Move your raw CSV and pickle files here.

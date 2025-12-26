@@ -1,9 +1,23 @@
 theme: jekyll-theme-minimal
-title: ADA Template Website
-description: A template website for ADA
+title: 'ESG ETFs: Is it possible to find financial strength whilst being socially responsible?'
+description: A deep dive into how ESG funds behave in comparision to the rest of the market.
 show_downloads: True
 navigation:
-  - title: Home
+  - title: Introduction & Dataset
     url: /
-  - title: Example
-    url: example
+  - title: Volatility and Return
+    url: volatility
+  - title: Homogeneity
+    url: homogeneity
+  - title: Seasonality
+    url: seasonality
+  - title: Crisis Reaction
+    url: crisis
+  - title: Conclusion
+    url: conclusion
+  - title: The Team
+    url: team
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+
