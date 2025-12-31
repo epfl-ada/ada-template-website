@@ -1,0 +1,12 @@
+name,coef
+Redox_Lysosomal_Metabolism,-0.4667366875920109
+Autophagy_Proteostasis,0.3638295592945601
+Astrocyte_Metabolic_Support,0.2650405010061072
+Ion_Signaling_EnergyCoupling,-0.11960388952884
+AminoAcid_Creatine_OneCarbon,0.0
+GrowthFactor_Metabolic_Signaling,0.0
+Glucose_Nutrient_Transport,0.0
+Immune_Metabolic_Crosstalk,0.0
+Lipid_Metabolism_Transport,0.0
+Synaptic_Energy_Demand,0.0
+Vascular_Nutrient_Coupling,0.0

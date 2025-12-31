@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@layer base {
+    :root {
+        --color-primary: #2563eb;
+        --color-secondary: #8b5cf6;
+        --color-accent-green: #10b981;
+        --color-accent-yellow: #fbbf24;
+        --color-bg-dark: #0a0e27;
+        --color-bg-darker: #050814;
+        --color-text-light: #e2e8f0;
+        --color-text-muted: #94a3b8;
+    }
+
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-[#0a0e27] text-slate-200;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+            sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1 {
+        @apply tracking-tight;
+    }
+
+    h2 {
+        @apply tracking-tight;
+    }
+
+    h3 {
+        @apply tracking-tight;
+    }
+
+    p {
+        @apply leading-relaxed;
+    }
+
+    code {
+        @apply font-mono;
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0e27;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+}
+
+/* Gradient text utility */
+.gradient-text {
+    background: linear-gradient(135deg, #2563eb 0%, #8b5cf6 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glow effect */
+.glow {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+.glow-hover:hover {
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.5);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-zoomIn {
+    animation: zoomIn 0.25s ease-out forwards;
+}
+
+.plot-image {
+    cursor: pointer;
+    /* <- changes cursor to hand on hover */
+    border-radius: 12px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.plot-image:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Utility to justify text when Tailwind class is unavailable */
+.text-justify {
+    text-align: justify;
+}

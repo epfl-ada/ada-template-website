@@ -1,0 +1,150 @@
+{
+  "Astrocyte": [
+    {
+      "category": "Lipid Metabolism Transport",
+      "upregulated": 0,
+      "downregulated": 12
+    },
+    {
+      "category": "AminoAcid Creatine OneCarbon",
+      "upregulated": 3,
+      "downregulated": 7
+    },
+    {
+      "category": "Immune Metabolic Crosstalk",
+      "upregulated": 9,
+      "downregulated": 1
+    },
+    {
+      "category": "GrowthFactor Metabolic Signaling",
+      "upregulated": 2,
+      "downregulated": 6
+    },
+    {
+      "category": "Synaptic Energy Demand",
+      "upregulated": 6,
+      "downregulated": 2
+    },
+    {
+      "category": "Redox Lysosomal Metabolism",
+      "upregulated": 4,
+      "downregulated": 1
+    },
+    {
+      "category": "Oxidative Stress",
+      "upregulated": 0,
+      "downregulated": 2
+    }
+  ],
+  "Microglia": [
+    {
+      "category": "Lipid Metabolism Transport",
+      "upregulated": 0,
+      "downregulated": 11
+    },
+    {
+      "category": "AminoAcid Creatine OneCarbon",
+      "upregulated": 0,
+      "downregulated": 9
+    },
+    {
+      "category": "Immune Metabolic Crosstalk",
+      "upregulated": 1,
+      "downregulated": 8
+    },
+    {
+      "category": "GrowthFactor Metabolic Signaling",
+      "upregulated": 0,
+      "downregulated": 10
+    },
+    {
+      "category": "Synaptic Energy Demand",
+      "upregulated": 3,
+      "downregulated": 5
+    },
+    {
+      "category": "Redox Lysosomal Metabolism",
+      "upregulated": 0,
+      "downregulated": 9
+    },
+    {
+      "category": "Oxidative Stress",
+      "upregulated": 0,
+      "downregulated": 6
+    }
+  ],
+  "Neuron": [
+    {
+      "category": "Lipid Metabolism Transport",
+      "upregulated": 0,
+      "downregulated": 12
+    },
+    {
+      "category": "AminoAcid Creatine OneCarbon",
+      "upregulated": 0,
+      "downregulated": 11
+    },
+    {
+      "category": "Immune Metabolic Crosstalk",
+      "upregulated": 1,
+      "downregulated": 9
+    },
+    {
+      "category": "GrowthFactor Metabolic Signaling",
+      "upregulated": 0,
+      "downregulated": 6
+    },
+    {
+      "category": "Synaptic Energy Demand",
+      "upregulated": 1,
+      "downregulated": 6
+    },
+    {
+      "category": "Redox Lysosomal Metabolism",
+      "upregulated": 0,
+      "downregulated": 9
+    },
+    {
+      "category": "Oxidative Stress",
+      "upregulated": 0,
+      "downregulated": 6
+    }
+  ],
+  "Oligodendrocyte": [
+    {
+      "category": "Lipid Metabolism Transport",
+      "upregulated": 0,
+      "downregulated": 12
+    },
+    {
+      "category": "AminoAcid Creatine OneCarbon",
+      "upregulated": 0,
+      "downregulated": 11
+    },
+    {
+      "category": "Immune Metabolic Crosstalk",
+      "upregulated": 0,
+      "downregulated": 11
+    },
+    {
+      "category": "GrowthFactor Metabolic Signaling",
+      "upregulated": 0,
+      "downregulated": 10
+    },
+    {
+      "category": "Synaptic Energy Demand",
+      "upregulated": 1,
+      "downregulated": 7
+    },
+    {
+      "category": "Redox Lysosomal Metabolism",
+      "upregulated": 0,
+      "downregulated": 7
+    },
+    {
+      "category": "Oxidative Stress",
+      "upregulated": 0,
+      "downregulated": 6
+    }
+  ]
+}
