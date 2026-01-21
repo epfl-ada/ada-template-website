@@ -1,0 +1,283 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Presidential Market Analysis</title>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <style>
+            body {
+                margin: 0; padding: 0;
+                background-color: #111111;
+                font-family: 'Arial', sans-serif;
+                color: #E0E0E0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+            
+            .dashboard-header {
+                padding: 15px;
+                text-align: center;
+                background: #000;
+                border-bottom: 1px solid #333;
+            }
+            .dashboard-header h1 { margin: 0; font-size: 22px; color: #fff; }
+            .dashboard-header p { margin: 5px 0 0; color: #888; font-size: 14px; }
+
+            .cards-track {
+                flex: 0 0 380px;
+                display: flex;
+                align-items: center;
+                gap: 25px;
+                padding: 0 40px;
+                overflow-x: auto;
+                background: #141414;
+                border-bottom: 1px solid #333;
+                scroll-behavior: smooth;
+            }
+            .cards-track::-webkit-scrollbar { height: 8px; }
+            .cards-track::-webkit-scrollbar-track { background: #111; }
+            .cards-track::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+
+            .card {
+                flex: 0 0 240px;
+                height: 340px;
+                background: #1f1f1f;
+                border-radius: 12px;
+                overflow: hidden;
+                position: relative;
+                cursor: pointer;
+                border: 1px solid #333;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+                border-color: #666;
+            }
+
+            .img-container { 
+                width: 100%; 
+                height: 260px;
+            }
+            .img-container img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+                object-position: top;
+                filter: grayscale(40%);
+                transition: filter 0.3s;
+            }
+            .card:hover img { filter: grayscale(0%); }
+
+            .card-info { padding: 8px; text-align: center; }
+            .year { font-weight: bold; font-size: 24px; color: #fff; }
+            .president { font-size: 14px; color: #ccc; }
+            .party-bar { height: 4px; width: 100%; position: absolute; bottom: 0; }
+
+            .main-view {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: radial-gradient(circle, #222 0%, #000 100%);
+            }
+            .instruction {
+                text-align: center; color: #555; font-size: 20px;
+            }
+            
+            .modal-overlay {
+                display: none;
+                position: fixed; top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: rgba(0,0,0,0.85);
+                backdrop-filter: blur(5px);
+                z-index: 1000;
+            }
+            .modal-content {
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                width: 85%; height: 75%;
+                background: #111;
+                border: 1px solid #444;
+                border-radius: 10px;
+                box-shadow: 0 0 50px rgba(0,0,0,0.8);
+                display: flex; flex-direction: column;
+            }
+
+            .modal-header {
+                padding: 10px 20px;
+                background: #1a1a1a;
+                border-bottom: 1px solid #333;
+                display: flex; justify-content: space-between; align-items: center;
+            }
+            .modal-title { font-size: 18px; font-weight: bold; }
+            .close-btn {
+                background: none; border: 1px solid #555; color: #ccc;
+                padding: 5px 15px; border-radius: 15px; cursor: pointer;
+            }
+            .close-btn:hover { background: #c00; color: #fff; border-color: #c00; }
+
+            #chart-container { flex: 1; width: 100%; }
+        </style>
+    </head>
+    <body>
+
+        <div class="dashboard-header">
+            <h1>Presidential Market Analysis</h1>
+            <p>Select a card below to view sector performance around elections</p>
+        </div>
+
+        <div class="cards-track">
+            
+        <div class="card" onclick="loadElectionGraph('2000-11-07', 'Al Gore vs George W. Bush')">
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/GeorgeWBush_%281%29.jpg" loading="lazy" alt="Al Gore vs George W. Bush">
+            </div>
+            <div class="card-info">
+                <div class="year">2000</div>
+                <div class="president">Al Gore vs George W. Bush</div>
+            </div>
+            <div class="party-bar" style="background-color: #F65B55"></div>
+        </div>
+        
+        <div class="card" onclick="loadElectionGraph('2004-11-02', 'John Kerry vs George W. Bush')">
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/George-W-Bush.jpeg" loading="lazy" alt="John Kerry vs George W. Bush">
+            </div>
+            <div class="card-info">
+                <div class="year">2004</div>
+                <div class="president">John Kerry vs George W. Bush</div>
+            </div>
+            <div class="party-bar" style="background-color: #FF2200"></div>
+        </div>
+        
+        <div class="card" onclick="loadElectionGraph('2008-11-04', 'Barack Obama vs John McCain')">
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Official_portrait_of_Barack_Obama_%28cropped%29.jpg" loading="lazy" alt="Barack Obama vs John McCain">
+            </div>
+            <div class="card-info">
+                <div class="year">2008</div>
+                <div class="president">Barack Obama vs John McCain</div>
+            </div>
+            <div class="party-bar" style="background-color: #00FFFF"></div>
+        </div>
+        
+        <div class="card" onclick="loadElectionGraph('2012-11-06', 'Barack Obama vs Mitt Romney')">
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg" loading="lazy" alt="Barack Obama vs Mitt Romney">
+            </div>
+            <div class="card-info">
+                <div class="year">2012</div>
+                <div class="president">Barack Obama vs Mitt Romney</div>
+            </div>
+            <div class="party-bar" style="background-color: #0088FF"></div>
+        </div>
+        
+        <div class="card" onclick="loadElectionGraph('2016-11-08', 'Hillary Clinton vs Donald Trump')">
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg" loading="lazy" alt="Hillary Clinton vs Donald Trump">
+            </div>
+            <div class="card-info">
+                <div class="year">2016</div>
+                <div class="president">Hillary Clinton vs Donald Trump</div>
+            </div>
+            <div class="party-bar" style="background-color: #5F0505"></div>
+        </div>
+        
+        <div class="card" onclick="loadElectionGraph('2020-11-03', 'Joe Biden vs Donald Trump')">
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Joe_Biden_presidential_portrait.jpg" loading="lazy" alt="Joe Biden vs Donald Trump">
+            </div>
+            <div class="card-info">
+                <div class="year">2020</div>
+                <div class="president">Joe Biden vs Donald Trump</div>
+            </div>
+            <div class="party-bar" style="background-color: #2E04A2"></div>
+        </div>
+        
+        <div class="card" onclick="loadElectionGraph('2024-11-05', 'Kamala Harris vs Donald Trump')">
+            <div class="img-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Official_Presidential_Portrait_of_President_Donald_J._Trump_%282025%29_%283x4%29.jpg" loading="lazy" alt="Kamala Harris vs Donald Trump">
+            </div>
+            <div class="card-info">
+                <div class="year">2024</div>
+                <div class="president">Kamala Harris vs Donald Trump</div>
+            </div>
+            <div class="party-bar" style="background-color: #C63019"></div>
+        </div>
+        
+        </div>
+
+        <div class="main-view">
+            <div class="instruction">
+                &uarr;<br>Click an Election Card
+            </div>
+        </div>
+
+        <!-- Hidden Modal -->
+        <div id="modal" class="modal-overlay" onclick="closeModal()">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <div class="modal-title" id="modalTitle">Analysis</div>
+                    <button class="close-btn" onclick="closeModal()">Close</button>
+                </div>
+                <div id="chart-container"></div>
+            </div>
+        </div>
+
+        <script>
+            // 1. Ingest Data from Python
+            var chartData = {"2000-11-07": [{"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.024249207927531012, -0.015134621824807518, 0.023622367793978354, 0.006608013454947582, -0.024597220286439125, 0.007285759174005797, -0.024521853447490166, -0.009976727656178484, -0.024386083602978, 0.00653184600082278], "name": "Technology", "line_color": "#6795EAB9"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.011257834713239299, 0.009092610352852325, 0.007804492491357249, -0.004057381852987195, 0.002105096923036863, 0.004257500137958024, 0.006405208847146699, -0.043462430606929954, 0.01228677784801046, -0.016295691561670322], "name": "Healthcare", "line_color": "#2B8026F6"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0029463179267286326, 0.03211615438771829, -0.036284234375065644, -0.0048850052464931275, 0.001837740328976747, 0.007064163955809525, 0.01292443913755173, -0.010803842728463036, 0.006480014201506848, -0.007240387950962034], "name": "Energy", "line_color": "#FBB83BE0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.031107129564484463, 0.0118713559485903, 0.008286991961663779, -0.014010001443399835, 0.008362651901386565, -0.00901810135351141, 0.030459287176810065, -0.03481994337049297, -0.025310440054716405, 0.035169539154697144], "name": "Consumer Cyclical", "line_color": "#F9F96DA0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.009062893985741848, -0.0014068480625310654, 0.0029174401535287434, -0.0036338316406875834, 0.0063668761926641, -0.003392653512797278, 0.003573408751218851, 0.010460155397109195, 0.012574065891223563, -0.01644699996510881], "name": "Financial Services", "line_color": "#BD55FD99"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.023186895590788435, 0.0034155788174223783, -0.0033656036293688535, -0.008550637383452393, 0.003687554166487527, 0.004031572823590041, 0.01005886533692596, 0.009226081505481192, -0.004758091722822981, -0.012635841552035655], "name": "Industrials", "line_color": "#FF3D3D88"}], "2004-11-02": [{"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.017976224059885356, 0.008521311253597976, -0.0011541816473240492, 0.0010839980471760396, 0.004713824845091424, 0.0013693542085909767, -0.010982245212589111, -0.006503394332640463, 0.0007829460954706206, 0.0037323579728867715], "name": "Technology", "line_color": "#6795EAB9"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.007041122357672068, 0.01695567794099525, -0.0039528010600735075, 0.003206708862087309, -0.011193361392880307, -0.007592909703357989, 0.019841828981257345, -0.00851964083125822, 0.001196123419078073, 0.0010196528725734948], "name": "Healthcare", "line_color": "#2B8026F6"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.0019357128123966734, -0.02767903348274263, -0.021090263891564393, 0.01277391982189806, -0.009283131999344576, -0.016367231033096792, 0.009200212484601228, 0.0003010026141856102, -9.36683239133691e-05, -0.01661310983195716], "name": "Energy", "line_color": "#FBB83BE0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.001452949975060274, 0.005068726969284171, 0.002593960492058628, -0.001036373982641533, 0.0013016504867605014, 0.003350981838020729, -0.010054174038110875, 0.008403375701523703, -0.0026257115385090865, 0.0020544034825651014], "name": "Consumer Cyclical", "line_color": "#F9F96DA0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.007895718216493207, 0.0037148598207298496, 0.0024781465260257395, 0.0016062452152512947, 0.0006040381985031366, 0.003889261417571737, -0.005933101210542788, 0.0040707754339726464, -0.007898995600309116, 4.648563528907913e-05], "name": "Financial Services", "line_color": "#BD55FD99"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.00067525853133436, 0.0017028414854711252, -0.005483186053498021, 0.004390795561867858, 2.9659715364695888e-05, 0.0003453800148316764, -0.0019525624420556748, 0.0023485881621431934, 0.0011024027355236521, 0.003805691321678254], "name": "Industrials", "line_color": "#FF3D3D88"}], "2008-11-04": [{"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.035301421221147614, -0.0318761728871678, 0.006708800557993565, -0.010512893447499404, -0.002217725773682305, 0.012144601871312201, -0.022743236465989566, -0.005523763052584979, -0.0004679609902660635, 0.001291957199908338], "name": "Technology", "line_color": "#6795EAB9"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.01611791906500744, -0.002069567957645657, -9.280319810747728e-07, -0.0030610942654535414, 0.005471434975752781, -0.010015059876704573, 0.013601073087828132, 0.013087220915948161, -0.009779287667158642, 0.0015832098665741288], "name": "Healthcare", "line_color": "#2B8026F6"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.01097143717693494, 0.030128651824271935, 0.0037458486433840435, 0.013527429133384731, -0.03511365480380077, 0.022803699920751354, 0.00524594337044345, 0.005855804322640143, 0.006788815981443971, 0.01850568672390666], "name": "Energy", "line_color": "#FBB83BE0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0008031219714145083, 0.026989404270000742, 0.001959864212306539, 0.03663931324172489, -0.03066390921527709, 0.011564444762999716, -0.019668614151945728, -0.0062587094022185236, -0.009717017781529856, -0.011808168760948097], "name": "Consumer Cyclical", "line_color": "#F9F96DA0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.007269735745717737, -0.05135173095292168, -0.013648738621526213, 0.0409554889112427, 0.001809999843110745, 0.008610419287725907, -0.03230146660806761, 0.009330732839957473, -0.027746972548995642, -0.011015019501489635], "name": "Financial Services", "line_color": "#BD55FD99"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0037735818095376156, 0.010917247420626868, 0.0072101900476533795, 0.029040529719354512, -0.019054228241397173, 0.015227656021270356, -0.0056001638997936615, 0.0007196777834578769, -0.017414919235056704, 0.012042455098118986], "name": "Industrials", "line_color": "#FF3D3D88"}], "2012-11-06": [{"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0023076802594000313, -0.004122539307662227, 0.00588096306109682, -0.0040890723054491426, 0.0035043358980794514, -0.0033028903631223683, -0.0023945754299670996, -0.0023975093936392747, 0.0037775364699252946, -0.0021914495163075343], "name": "Technology", "line_color": "#6795EAB9"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.003909943179172216, -0.007580428559146684, -0.0001250573878082365, 0.0009378656373884124, -0.0014514371613612072, -0.005356350236328253, 0.00021836858941780626, -0.00311383461423358, 0.0017653684036288862, 0.004110838217033562], "name": "Healthcare", "line_color": "#2B8026F6"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0024475548182010844, 0.00019157483675086073, -0.008649374708677727, -0.0045966559440031845, 0.005441800110500971, 0.00649550552580498, 0.0034209549318297526, -0.0021758277534273084, -0.0009318196707806064, 0.0014615208374667284], "name": "Energy", "line_color": "#FBB83BE0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0037063805667294073, 0.003162654876476622, 0.0015297233482486575, 0.007635195170061431, 0.0005416754565609506, -0.0021261965446555276, 0.009546255822226912, -0.004935136138855085, -0.005743285225729829, 2.595587800246959e-05], "name": "Consumer Cyclical", "line_color": "#F9F96DA0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.004288959010203677, 0.006307924361727795, -0.0017059031554741977, 0.0058791334175363405, -0.00468697562899735, 0.0005907473924616803, -0.002586456630821847, 0.008028959907967783, 8.65328119245808e-05, 0.000828658312775491], "name": "Financial Services", "line_color": "#BD55FD99"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0016635669281195198, 0.004871191782955512, 0.006064019221847057, 0.001984273159876867, 0.0032855513981157602, 0.0020698221428324757, 0.0025261799107278923, 0.0035060507648164083, 0.0019646744845071844, 0.002040290717517513], "name": "Industrials", "line_color": "#FF3D3D88"}], "2016-11-08": [{"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.00121817370436668, -0.0002465649139982559, -0.005018019934670326, -0.0007770433905404889, -0.0018023002745489042, -8.117616715361438e-05, -0.012648436892389316, -0.01888940052014555, 0.005225900413188963, -0.016230196797132335], "name": "Technology", "line_color": "#6795EAB9"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0014883061196306682, 0.0004717774656547106, -0.005092287542660853, 0.0081057679657733, 0.005246476319539405, -0.0012703761963722042, 0.02554093272563019, 0.008824411462610494, -0.012698053824675502, -0.0037317019033947353], "name": "Healthcare", "line_color": "#2B8026F6"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.010059717317266098, -0.002836600849134901, 0.010244513153577262, -0.00391526670288931, -0.008602006703350297, -0.00484912260769781, 0.001816072222707573, 0.0008550438773592141, -0.015073192591159875, 0.0045499002007425154], "name": "Energy", "line_color": "#FBB83BE0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.0002624185819944955, 2.9573163239779085e-05, 0.002066078366812287, -0.0007335388500597628, 0.0013362987726328601, -0.0002612049018734363, -0.008350253158980265, 0.0013240930142097312, 0.00808662401828961, -0.0005270873094154888], "name": "Consumer Cyclical", "line_color": "#F9F96DA0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.004908683852058534, 0.000856374027615554, 0.006739536728546926, -0.001581489179454217, -0.001543208901429633, -0.0048319153371350915, 0.029771997038463286, 0.034059849040600505, 0.0057281082066295615, 0.023649541420703624], "name": "Financial Services", "line_color": "#BD55FD99"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.001475995973531926, 0.0021784247314500854, 0.0028684657496488184, 0.001924146132114133, 0.0028426442509939844, 0.001565429117136019, 0.014591912813871193, 0.018778358435811035, 0.004028316527585323, 0.0034383612661727132], "name": "Industrials", "line_color": "#FF3D3D88"}], "2020-11-03": [{"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.00803659679685595, -0.004096154555293892, 0.004079244907810611, -0.01109549670555145, -0.011274725962375626, -0.003570022192640066, 0.012308408053907899, 0.007738027041984775, 0.002883325641429451, -0.0225974778146651], "name": "Technology", "line_color": "#6795EAB9"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.004097368152057506, -0.0031593166652384985, -0.016879176512580505, 0.008317766350089791, 0.008436653594727806, -0.0003903663916656856, 0.025456005310834775, -0.014526826179604099, 0.0004091187104109208, -0.0013341444443325436], "name": "Healthcare", "line_color": "#2B8026F6"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.005485986784441602, 0.007729871065448382, 0.019518565020359466, 0.022641250765263653, 0.02153561527078389, -0.027140532289172625, -0.026488965831338574, -0.023945376592215566, -0.0185684696812929, 0.12831258733095602], "name": "Energy", "line_color": "#FBB83BE0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.002563349376816754, 0.0011230789313907627, -0.003788297701117443, -0.012052703029967015, -0.003997352655910315, 0.004652839294309437, -0.0006280651607749044, 0.00034894261200335563, -0.003082826188280959, -0.0157164758947407], "name": "Consumer Cyclical", "line_color": "#F9F96DA0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.012924390704852013, 0.017472288880661782, -0.0037872673327810705, 0.016822684034086294, 0.006165517057289155, 0.0015987773265517605, -0.03804976631381852, 0.001547024901449371, -0.00659446853997685, 0.06776976949930393], "name": "Financial Services", "line_color": "#BD55FD99"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.017732594633217847, 0.004964498371195704, 0.0037827249058542452, 0.010582037702539444, 0.015100230703465419, 0.010538375759485762, -0.034464400888789964, 0.0025539431567919713, 0.0015870080656921115, 0.0206490555803294], "name": "Industrials", "line_color": "#FF3D3D88"}], "2024-11-05": [{"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [0.011581244826865232, -0.010520472566049741, -0.0007802759904573381, 0.001558650126628789, 0.0032584748863807144, -0.004191588707684466, -0.009783144682775587, 0.005991952250266818, -0.00722447524803595, -0.006366876677067883], "name": "Technology", "line_color": "#6795EAB9"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.0036298447172098416, -0.00048049224122381773, 0.0011101251422266176, 0.0037707866207793875, -0.005587418550234121, 0.0013393909535751166, -0.0110083556581914, 0.0033503383183916854, 0.004968434882127155, -0.0064073247620184785], "name": "Healthcare", "line_color": "#2B8026F6"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.015506072575075643, 0.004194923527013435, 0.01593898422871236, -0.007800922920495192, 0.019003619262587642, 0.001527946904963275, 0.026435090374361304, -0.007722178283704315, 0.005125561281741128, 0.005706071341392997], "name": "Energy", "line_color": "#FBB83BE0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.006660508362831816, 0.0028587481355971025, 0.009307960762645295, 0.011613583683780368, -0.00026080077018032777, 0.0033999643993448195, 0.001995188310079294, 0.003894596709377536, 0.009415309024292155, 0.019547938720357726], "name": "Consumer Cyclical", "line_color": "#F9F96DA0"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.007899712109085862, 0.005918007353003283, -0.0009276531825864916, -0.0001074429345834637, -0.006876768529369542, 0.0003184805471709157, 0.04302710152333006, -0.022114546228348894, 0.005399261539728336, 0.012932016924891957], "name": "Financial Services", "line_color": "#BD55FD99"}, {"x": [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4], "y": [-0.0029745281614787797, 0.0005639167409850687, 0.0046919816864840515, -0.002494492907419203, 0.00040725281250287627, 0.006269104262152386, 0.017945318422532993, -0.01280512774969865, 0.006808299045852567, 0.006652853686490072], "name": "Industrials", "line_color": "#FF3D3D88"}]};
+            var modal = document.getElementById('modal');
+            var title = document.getElementById('modalTitle');
+
+            // 2. Logic to Draw Graph
+            function loadElectionGraph(electionKey, electionName) {
+                var data = chartData[electionKey];
+                if(!data) return;
+
+                modal.style.display = "block";
+                title.innerText = electionName;
+
+                var traces = data.map(function(item) {
+                    return {
+                        x: item.x,
+                        y: item.y,
+                        mode: 'lines',
+                        name: item.name,
+                        line: { color: item.line_color, width: 2.5 },
+                        hovertemplate: '<b>' + item.name + '</b><br>Day: %{x}<br>CAR: %{y:.2%}<extra></extra>'
+                    };
+                });
+
+                var layout = {
+                    paper_bgcolor: '#111',
+                    plot_bgcolor: '#111',
+                    font: { color: '#ccc', family: 'Arial' },
+                    xaxis: { 
+                        title: 'Days Relative to Election', 
+                        gridcolor: '#333', zerolinecolor: '#666' 
+                    },
+                    yaxis: { 
+                        title: 'Abnormal Returns (%)', 
+                        gridcolor: '#333', tickformat: '.1%' 
+                    },
+                    hovermode: 'x unified',
+                    showlegend: true,
+                    margin: { t: 50, l: 60, r: 40, b: 50 }
+                };
+
+                var config = { responsive: true, displayModeBar: false };
+                Plotly.newPlot('chart-container', traces, layout, config);
+            }
+
+            function closeModal() {
+                modal.style.display = "none";
+            }
+        </script>
+    </body>
+    </html>
+    

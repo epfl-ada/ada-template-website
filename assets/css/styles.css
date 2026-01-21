@@ -1,270 +1,790 @@
-body {
-  background-color: #fff;
-  padding:50px;
-  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color:#595959;
-  font-weight:400;
+/*---------------------------*/
+/* Our code section          */
+/*---------------------------*/
+@import url("variables.css");
+
+@font-face {
+    font-family: "Chomsky";
+    src: url("../fonts/Chomsky.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color:#222;
-  margin:0 0 20px;
+@font-face {
+    font-family: "Walbaum-Fraktur";
+    src: url("../fonts/Walbaum-Fraktur.ttf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
 }
 
-p, ul, ol, table, pre, dl {
-  margin:0 0 20px;
+@font-face {
+    font-family: "DSWalbaumfraktur";
+    src: url("../fonts/DSWalbaumfraktur.ttf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
 }
 
-h1, h2, h3 {
-  line-height:1.1;
-}
-
-h1 {
-  font-size:28px;
-  font-weight: 500;
-}
-
-h2 {
-  color:#393939;
-  font-weight: 500;
-}
-
-h3, h4, h5, h6 {
-  color:#494949;
-  font-weight: 500;
-}
-
-a {
-  color:#39c;
-  text-decoration:none;
-}
-
-a:hover {
-  color:#069;
-}
-
-a small {
-  font-size:11px;
-  color:#777;
-  margin-top:-0.3em;
-  display:block;
-}
-
-a:hover small {
-  color:#777;
-}
-
-.wrapper {
-  width:1080px;
-  margin:0 auto;
-}
-
-blockquote {
-  border-left:1px solid #e5e5e5;
-  margin:0;
-  padding:0 0 0 20px;
-  font-style:italic;
-}
-
-code, pre {
-  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-  color:#333;
-}
-
-pre {
-  padding:8px 15px;
-  background: #f8f8f8;
-  border-radius:5px;
-  border:1px solid #e5e5e5;
-  overflow-x: auto;
-}
-
-table {
-  width:100%;
-  border-collapse:collapse;
-}
-
-th, td {
-  text-align:left;
-  padding:5px 10px;
-  border-bottom:1px solid #e5e5e5;
-}
-
-dt {
-  color:#444;
-  font-weight:500;
-}
-
-th {
-  color:#444;
+@font-face {
+    font-family: "KlaberFraktur";
+    src: url("../fonts/KlaberFraktur.ttf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
 }
 
 img {
-  max-width:100%;
+    max-width: 100%;
 }
 
-header {
-  width:270px;
-  float:left;
-  position:fixed;
-  -webkit-font-smoothing:subpixel-antialiased;
+html {
+    scroll-behavior: smooth;
+    /* to make scroll smoothly to link */
 }
 
-header ul {
-  list-style:none;
-  height:40px;
-  padding:0;
-  background: #f4f4f4;
-  border-radius:5px;
-  border:1px solid #e0e0e0;
-  width:270px;
+/* Justify text for paragraph-like elements inside .content */
+.content p,
+.content li,
+.content .text {
+    text-align: justify;
 }
 
-header li {
-  width:89px;
-  float:left;
-  border-right:1px solid #e0e0e0;
-  height:40px;
+.content h1 {
+font-size: calc(var(--font-size-base) * 2 * var(--font-scale));
 }
 
-header li:first-child a {
-  border-radius:5px 0 0 5px;
+h1.title {
+    font-size: calc(var(--font-size-base) * 4 * var(--font-scale));
+    font-family: "Chomsky", "Walbaum-Fraktur", "KlaberFraktur", "DSWalbaumfraktur", serif;
+    text-align: center;
+    margin: 30px;
 }
 
-header li:last-child a {
-  border-radius:0 5px 5px 0;
+.content h2 {
+font-size: calc(var(--font-size-base) * 1.3 * var(--font-scale));
 }
 
-header ul a {
-  line-height:1;
-  font-size:11px;
-  color:#999;
-  display:block;
-  text-align:center;
-  padding-top:6px;
-  height:34px;
+.section.black h2 {
+    color: var(--black-accent);
 }
 
-header ul a:hover {
-  color:#999;
+.content h3 {
+font-size: calc(var(--font-size-base) * 1.2 * var(--font-scale));
 }
 
-header ul a:active {
-  background-color:#f0f0f0;
+.content h4 {
+font-size: calc(var(--font-size-base) * 1.1 * var(--font-scale));
 }
 
-strong {
-  color:#222;
-  font-weight:500;
+.content h5 {
+    font-size: calc(var(--font-size-base)*0.7*var(--font-scale));
 }
 
-header ul li + li + li {
-  border-right:none;
-  width:89px;
+.content h6 {
+    font-size: calc(var(--font-size-base)*0.5*var(--font-scale));
 }
 
-header ul a strong {
-  font-size:14px;
-  display:block;
-  color:#222;
+.content p, .content li, .conten ul {
+font-size: calc(var(--font-size-base) * 1 * var(--font-scale));
 }
 
-section {
-  width:750px;
-  float:right;
-  padding-bottom:50px;
+.section.black p {
+    max-width: 80%;
 }
 
-small {
-  font-size:11px;
+.content li {
+    font-size: calc(var(--font-size-base) * 1 * var(--font-scale));
 }
 
-hr {
-  border:0;
-  background:#e5e5e5;
-  height:1px;
-  margin:0 0 20px;
+.content .date {
+    font-size: calc(var(--font-size-base) * var(--font-scale) * 0.8);
+    text-align: right;
+    font-style: italic;
+    opacity: 0.75;
 }
 
-footer {
-  width:270px;
-  float:left;
-  position:fixed;
-  bottom:50px;
-  -webkit-font-smoothing:subpixel-antialiased;
+/*-------*/
+/* graphs*/
+/*-------*/
+.graph-frame {
+    width: 100%;
+    /* must be >= content height */
+    border: none;
+    display: block;
+    overflow: hidden;
 }
 
-@media print, screen and (max-width: 960px) {
-
-  div.wrapper {
-    width:auto;
-    margin:0;
-  }
-
-  header, section, footer {
-    float:none;
-    position:static;
-    width:auto;
-  }
-
-  header {
-    padding-right:320px;
-  }
-
-  section {
-    border:1px solid #e5e5e5;
-    border-width:1px 0;
-    padding:20px 0;
-    margin:0 0 20px;
-  }
-
-  header a small {
-    display:inline;
-  }
-
-  header ul {
-    position:absolute;
-    right:50px;
-    top:52px;
-  }
+iframe {
+    display: block;
+    margin: 0 auto;
+    align-items: center;
 }
 
-@media print, screen and (max-width: 720px) {
-  body {
-    word-wrap:break-word;
-  }
-
-  header {
-    padding:0;
-  }
-
-  header ul, header p.view {
-    position:static;
-  }
-
-  pre, code {
-    word-wrap:normal;
-  }
+/*----------------------------*/
+/* Section newspaper and black*/
+/*----------------------------*/
+/* Base layout */
+body {
+    margin: 0;
+    background: white;
+    color: var(--newspaper-color);
+    font-family: sans-serif;
 }
 
-@media print, screen and (max-width: 480px) {
-  body {
-    padding:15px;
-  }
-
-  header ul {
-    width:99%;
-  }
-
-  header li, header ul li + li + li {
-    width:33%;
-  }
+.section {
+    width: 100%;
+    padding: 60px 0;
 }
 
-@media print {
-  body {
-    padding:0.4in;
-    font-size:12pt;
-    color:#444;
-  }
+.content {
+    max-width: 60%;
+    /* your page width */
+    margin: 0 auto;
+    /* centres it */
+    padding: 40px 40px;
+    /* breathing space */
+    /*padding-top: 5px;*/
+}
+
+.section.black .content {
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Newspaper section */
+.section.newspaper {
+    background-color: var(--newspaper-bg);
+    transition: background-color 0.6s ease;
+    transition: color 0.6s ease;
+    font-family: var(--newspaper-font);
+    color: var(--newspaper-color);
+}
+
+/* Black section */
+.section.black {
+background: var(--black-bg);
+transition: background-color 0.6s ease;
+transition: color 0.6s ease;
+
+font-family: var(--black-font);
+color: var(--black-color);
+}
+
+.section.newspaper .content {
+    background: var(--margin-white);
+    transition: backgroud 0.6s ease;
+    /* white aroud */
+    /*padding: 40px;*/
+    /* adjust with respect to margin sizes */
+}
+
+.section.black .content {
+    background: var(--black-bg);
+    transition: backgroud 0.6s ease;
+    /* white aroud */
+    padding: 40px;
+    /* adjust with respect to margin sizes */
+}
+
+/*page diseappear on section transition*/
+/*
+body.scrolling-to-black .section.newspaper .content {
+    background: var(--black-bg);
+}
+
+body.scrolling-to-black .section.newspaper {
+    background-color: var(--black-bg);
+    color: var(--newspaper-bg);
+}
+
+body.scrolling-to-newspaper .section.black {
+background-color: var(--newspaper-bg);
+color: var(--newspaper-bg);
+} */
+
+/* Transition section (white → black on full width) */
+.section.transition {
+    height: 100px;
+    background: linear-gradient(to bottom, var(--newspaper-bg), var(--black-bg));
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+/*-------------------------------*/
+/* Ribbon navigation top of page */
+/*-------------------------------*/
+
+.top-ribbon .ribbon-content a {
+    font-size: var(--ribbon-font-size);
+    /* change to what you want */
+}
+
+/* end ribbon hidden scroll down */
+
+.top-ribbon {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 1000;
+
+background: rgba(255, 255, 255, 0.6);
+backdrop-filter: blur(8px);
+--underline-color: var(--underline-color-newspaper);
+
+padding: 10px 0;
+transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.ribbon-content {
+    display: flex;
+    /*justify-content: center;*/
+    gap: 20px;
+    position: relative;
+    align-items: center;
+}
+
+.ribbon-content a {
+    font-family: var(--newspaper-font);
+    font-size: calc(var(--font-size-base)*0.65*var(--font-scale)); /*before 16*/
+    text-decoration: none;
+    position: relative;
+
+    color: rgba(0, 0, 0, 0.7);
+    transition: color 0.4s ease;
+}
+
+.top-ribbon a {
+    text-decoration: none;
+    color: #222; /*TODO before #222*/
+    font-family: var(--newspaper-font);
+    font-size: calc(var(--font-size-base)*0.9*var(--font-scale)); 
+    letter-spacing: 0.5px;
+}
+
+.top-ribbon a:hover {
+    text-decoration: underline;
+}
+
+/* Light (newspaper) */
+.top-ribbon.light {
+    background: white;
+    border-bottom: 1px solid #ddd;
+    --underline-color: var(--underline-color-newspaper);
+    --underline-opacity: var(--underline-opacity-newspaper);
+}
+
+.top-ribbon.light a {
+    color: #222; /*TODO before #222*/
+}
+
+/* Dark (black section) */
+.top-ribbon.dark {
+    background: rgba(0, 0, 0, 0.55);
+    --underline-color: var(--underline-color-black);
+    --underline-opacity: var(--underline-opacity-black);
+}
+
+
+.top-ribbon.dark a {
+    color: rgba(255, 255, 255, 0.75); /*TODO*/
+}
+
+.top-ribbon a:hover {
+    text-decoration: underline;
+}
+
+/*active link styling*/
+.ribbon-content a.active {
+    color: black; /*TODO*/
+}
+
+.top-ribbon.dark a.active {
+    color: white; /*TODO*/
+}
+
+.ribbon-links {
+    display: flex;
+    gap: 20px;
+
+/* CENTER THE LINKS */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/*animated underline*/
+.ribbon-underline {
+    position: absolute;
+    bottom: -4px;
+    height: 2px;
+    background: var(--underline-color);
+    opacity: var(--underline-opacity);
+
+    width: 0;
+    left: 0;
+    transform: translateX(0);
+
+    transition: transform 0.35s ease, width 0.35s ease;
+}
+
+/*---------------------*/
+/* progress bar on top */
+/*---------------------*/
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.top-ribbon.dark .progress-bar {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: currentColor;
+    transition: width 0.2s linear;
+}
+
+/*--------------------------------*/
+/* Three dots to change font size */
+/*--------------------------------*/
+
+.nav-controls {
+    margin-left: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* three dots button*/
+.font-menu-toggle {
+    background: none;
+    border: none;
+    color: var(--newspaper-color);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.top-ribbon.dark .font-menu-toggle {
+    color: var(--black-color);
+}
+
+.font-menu-toggle:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.top-ribbon.dark .font-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+
+/* dropdown menu */
+.font-menu {
+    position: absolute;
+    top: 130%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    background: white;
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.top-ribbon.dark .font-menu {
+    background: #111;
+}
+
+/*show when open*/
+.font-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* buttons inside*/
+.font-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    color: inherit;
+}
+
+.font-menu button:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.top-ribbon.dark .font-menu button:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Default (newspaper / light section) */
+.font-menu button {
+    color: var(--newspaper-color);
+    transition: filter 0.2s ease;
+}
+
+/* Dark section */
+.top-ribbon.dark .font-menu button {
+    color: var(--black-color);
+}
+
+.font-menu button:hover {
+    filter: brightness(1.25);
+}
+
+/*---------------*/
+/* Dropdown menu */
+/*---------------*/
+.details-box {
+    border-left: 4px solid var(--hintbox-news-accent);
+    padding-left: var(--hintbox-box-padding);
+    font-size: var(--hintbox-box-font-size);
+}
+
+.details-box summary {
+    cursor: pointer;
+    font-size: var(--hintbox-box-font-size);
+}
+
+.section.newspaper .info-box {
+    color: var(--hintbox-news-text);
+    background: var(--hintbox-news-bg);
+}
+
+.section.black .info-box {
+    color: var(--hintbox-dark-accent);
+    background: var(--hintbox-dark-bg);
+    border-left: 4px solid var(--hintbox-dark-accent);
+}
+
+/* try correct info boxes for dark sections*/
+.section.black .info-dropdown,
+.section.black .details-box {
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+/*smooth animation*/
+.collapsible summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+:root {
+    interpolate-size: allow-keywords;
+}
+
+details::details-content {
+    overflow: hidden;
+    border-left: 4px solid var(--hintbox-news-accent);
+    padding-left: var(--hintbox-box-padding);
+
+    /*height: 0; test*/
+    opacity: 0;
+    block-size: 0;
+    /*test*/
+
+    transition:
+        /*height 0.45s ease, test*/
+        opacity 1s,
+        block-size 1s ease,
+    /* test */
+        content-visibility 1s ease;
+    /*test*/
+
+    transition-behavior: allow-discrete;
+}
+
+details[open]::details-content {
+    opacity: 1;
+    block-size: auto;
+}
+
+.section.black .details-content {
+  color: var(--hintbox-dark-text);
+}
+
+/*--------------------------------------------------*/
+/* add "chevron" : thing to indicate it's a dropdown*/
+
+/* Remove default disclosure triangle */
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::marker {
+    content: "";
+}
+
+/* other stuff*/
+.collapsible summary {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+}
+
+.summary-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* keyboard accessibility */
+.info-dropdown summary:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+.info-dropdown summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    cursor: pointer;
+    user-select: none;
+
+    padding: 1em 1.5em;
+    font-size: calc(var(--hintbox-box-font-size)*1.1);
+
+    border-left: 4px solid var(--hintbox-news-accent);
+    background: var(--hintbox-news-bg);
+    color: var(--hintbox-news-text);
+}
+
+/* Hover feedback */
+.info-dropdown summary:hover {
+    filter: brightness(1.05);
+}
+
+/* Chevron animation */
+.info-dropdown .chevron {
+    width: var(--hintbox-shevron-size);
+    height: var(--hintbox-shevron-size);
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+/* Rotate on open */
+details[open] .chevron {
+    transform: rotate(180deg);
+}
+
+/* Chevron icon */
+.chevron {
+    width: var(--hintbox-shevron-size);
+    height: var(--hintbox-shevron-size);
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    opacity: 0.7;
+    color: currentColor;
+    /* inherits text color */
+}
+
+/* Remove default marker */
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::marker {
+    content: "";
+}
+
+.section.black .chevron {
+    color: var(--hintbox-dark-accent);
+}
+
+/* Hover affordance */
+.collapsible summary:hover .chevron {
+    opacity: 1;
+    transform: translateY(1px);
+}
+
+/* the nudge*/
+@keyframes hint {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.collapsible:not([open]) .chevron {
+    animation: hint 1.6s ease-in-out infinite;
+}
+
+/*------------------*/
+/* Nicer math blocs */
+.math-block {
+    text-align: center;
+    margin: 2em auto;
+    padding: 1em 1.5em;
+
+    font-size: 1.05em;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid currentColor;
+
+    font-family: "Times New Roman", serif;
+}
+
+.section.newspaper .math-block {
+    color: var(--hintbox-news-text);
+    background: var(--hintbox-news-bg);
+    border-left: 3px solid var(--hintbox-news-accent);
+}
+
+.section.black .math-block {
+    color: var(--hintbox-dark-accent);
+    background: var(--hintbox-dark-bg);
+    border-left: 3px solid var(--hintbox-dark-accent);
+}
+
+/*------------------------------*/
+/* Make overlap appear on scoll */
+/*------------------------------*/
+.image-stack {
+    position: relative;
+    width: 100%;
+    height: auto;/*120vh*/
+    aspect-ratio: 16/9;
+    /* keeps proportion */
+    overflow: hidden;
+}
+
+.stack-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    z-index: 0;
+}
+
+/* Ensure proper stacking order */
+.stack-img:nth-child(1) {
+    z-index: 1;
+}
+
+.stack-img:nth-child(2) {
+    z-index: 2;
+}
+
+.stack-img:nth-child(3) {
+    z-index: 3;
+}
+
+.stack-img:nth-child(4) {
+    z-index: 4;
+}
+
+.stack-img:nth-child(5) {
+    z-index: 5;
+}
+
+.stack-img:nth-child(6) {
+    z-index: 6;
+}
+
+.stack-img:nth-child(7) {
+    z-index: 7;
+}
+
+.stack-img:nth-child(8) {
+    z-index: 8;
+}
+
+/* When revealed */
+.stack-img.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/*--------------------------------*/
+/* To make TODO paragraphs in RED */
+/*--------------------------------*/
+.TODO {
+    color: red;
+    font-weight: bold;
+}
+
+/*----------------------------------------------------------------------------------*/
+/* Scoll effect with multiple pictures (the fives appearing starting from the left) */
+/*----------------------------------------------------------------------------------*/
+.scroll-gallery {
+    max-width: 1000px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.scroll-gallery .images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.scroll-gallery .images img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    opacity: 0;
+    /* start hidden */
+    transform: translateY(20px);
+    /* start slightly down */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Staggered delays */
+.scroll-gallery .images img:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.scroll-gallery .images img:nth-child(2) {
+    transition-delay: 0.3s;
+}
+
+.scroll-gallery .images img:nth-child(3) {
+    transition-delay: 0.5s;
+}
+
+.scroll-gallery .images img:nth-child(4) {
+    transition-delay: 0.7s;
+}
+
+.scroll-gallery .images img.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

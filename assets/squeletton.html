@@ -1,0 +1,523 @@
+---
+layout: default
+---
+
+<nav class="top-ribbon">
+    <div class="ribbon-content">
+        <a href="#intro" data-section="intro">Introduction</a>
+        <a href="#financials" data-section="financials">Financials</a>
+        <a href="#event-study" data-section="event-study">Event-Study</a>
+        <a href="#sectors-impact" data-section="sectors-impact">Sector Impact</a>
+        <a href="#linear-regression" data-section="linear-regression">Linear Regression</a>
+    </div>
+
+    <!-- underline -->
+    <div class="ribbon-underline"></div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+</nav>
+
+<!-- TEMPLATES-->
+<!--news section-->
+<section id="aaaaaaaaaaa" class="section newspaper">
+    <div class="content">
+
+    </div>
+</section>
+
+<!--black section-->
+<section id="aaaaaaaaaaa" class="section black">
+    <div class="content">
+
+    </div>
+</section>
+
+<img src="assets/img/placeholders/ph1">
+
+<!--TEMPLATE_DROPDOWN_MENU-->
+<details class="collapsible info-dropdown">
+    <summary class="info-box">
+        <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+        <span>INTRODUCE THE THING TO EXPALIN</span>
+    </summary>
+
+    <div class="details-content">
+        <p>
+            Here we explain in much more details
+        </p>
+
+        <p>With a nice formula:</p>
+
+        <p class="math-block">
+            <!-- MathJax formula -->
+            $$1+ 1 \text{ is two}$$
+        </p>
+        <p>
+            With
+            \(x_1, x_2, \dots, x_n\) inline equation.
+        </p>
+    </div>
+</details>
+<!--END_TEMPLATES-->
+
+<section id="intro" class="section newspaper">
+    <div class="content">
+
+        <h1> The ADAcore Times </h1>
+
+        <hr>
+
+        <h2> King of White House, Wolf of Wall Street: How US presidential election impact companies' performance on the
+            stockmarket </h2>
+
+        <hr>
+
+        <h3> Brought to you by Team Adacore: Ghassan ABBOUD, Eliota BRAHA, Nicolas PAFUMI, Asia PEDROIA, Elsa SÁNCHEZ
+            FERNÁNDEZ</h3>
+
+        <hr>
+
+        <h1>Money right !?!</h1>
+
+        <p>A game, a necessity, a goal, it is everything to some but nothing to none.</p>
+
+        <h2>Cool dataset but what's the difference between 'Close' and 'Adj Close' ?</h2>
+        <p>The close price is the stock valuation on the market, it's price. That price is corrected for 'splits' : an
+            operation that can divide existing shares into a larger number. The adjusted close proce (Adj Close) correct
+            for the splits too but additionaly for the dividends : the money received by each stockholder. The payment
+            of devidends create a sudden drop in price of the stock of exactly the cash value of the dividend because as
+            this money left the firm (to land in your pocket) it diminishes accordingly the share's price.</p>
+
+        <div class="image-stack">
+            <img src="assets/img/pic_overlap/pic_overlap1.png" class="stack-img">
+            <img src="assets/img/pic_overlap/pic_overlap2.png" class="stack-img">
+            <img src="assets/img/pic_overlap/pic_overlap3.png" class="stack-img">
+            <img src="assets/img/pic_overlap/pic_overlap4.png" class="stack-img">
+            <img src="assets/img/pic_overlap/pic_overlap5.png" class="stack-img">
+        </div>
+
+        <h2>Returns</h2>
+        <p>You find yourself very slick, now that you bought a stock but you don't know how muck you're winning ? No
+            worries, we got you covered : you can just take the returns.</p>
+
+        <!-- RETURNS -->
+        <details class="collapsible info-dropdown">
+            <summary class="info-box">
+                <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>Returns</span>
+            </summary>
+
+            <div class="details-content">
+                <p>
+                    To compute how much a stock earns we take the difference in value to the next period divided by
+                    value at the
+                    start of the period.
+                </p>
+
+                <p class="math-block">
+                    $$R = \frac{V_f - V_i}{V_i}$$
+                </p>
+
+                <p>
+                    Typically the period used is days and the value used is the adjusted close price.
+                </p>
+            </div>
+        </details>
+
+
+        <h2>Will the elections affect my returns ?</h2>
+
+
+        <h2> Abstract </h2>
+        <p>It is an established fact that presidential elections have a significant impact on the stock market.
+            Investors react
+            to the uncertainty and potential policy changes that come with a new administration. Understanding these
+            dynamics
+            can help investors anticipate these movements and hedge their portfolios around election cycles. These
+            insights also
+            provide a window into the market's perceptions of different candidates and their proposed policies.
+            <br>
+            In this project, we explore how presidential elections influence company performance and investor sentiment
+            over
+            time. Using historical stock market data, election results, and prediction market trends, we look at how
+            markets
+            move as the likelihood of one candidate winning changes. We focus especially on how different sectors for
+            example
+            like technology, energy, healthcare, and finance, respond to the uncertainty and outcomes of election
+            cycles.
+            <br>
+            Our goal is to show how politics and markets move together in a clear, data-driven way. By analyzing past
+            elections
+            and the upcoming 2024 race, we hope to uncover patterns that explain when, why, and how the market reacts.
+        </p>
+
+    </div>
+
+</section>
+
+<section id="nasdaq" class="section black">
+    <div class="content">
+        <iframe id="nasdaq-iframe" src="assets/graphs/Nasdaq.html" width="100%" style="border:none;"
+            height="110%"></iframe>
+
+        <h2> What is NASDAQ</h2>
+        <p>NASDAQ stands for National Association of Securities Dealers Automated Quotations. It is a marketplace for
+            stock shares (a type of securities), like the New York stock exchange. The NASDAQ is specialized in
+            technology and high-growth companies.</p>
+        <iframe src="assets/graphs/sectors.html" width="100%" height="900px" style="border:none;"></iframe>
+        <h2> What is a sector </h2>
+        <p>A sector is a denomination for firms that shares area of exercise. Typically they have similar risk, returns
+            and exposition to external factors.</p>
+
+        <iframe src="assets/graphs/interactive_dashboard.html" width="100%" height="1300px"
+            style="border:none;"></iframe>
+
+
+        <h2>Just to check color scheme on black sections</h2>
+        <!-- Dropdown_menu_template -->
+        <details class="collapsible info-dropdown">
+            <summary class="info-box">
+                <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>INTRODUCE THE THING TO EXPALIN</span>
+            </summary>
+
+            <div class="details-content">
+                <p>
+                    Here we explain in much more details
+                </p>
+
+                <p>With a nice formula:</p>
+
+                <p class="math-block">
+                    <!-- MathJax formula -->
+                    $$1+ 1 \text{ is two}$$
+                </p>
+                <p>
+                    With
+                    \(x_1, x_2, \dots, x_n\) inline equation.
+                </p>
+            </div>
+        </details>
+
+
+    </div>
+</section>
+
+<section id="volatility" class="section newspaper">
+    <div class="content">
+
+        <h2> What is volatility</h2>
+        <p>
+            again a very finance-oriented paragraph, maybe paf and eliota can write stuff about how volatility is used
+            in the world
+            of trading: paf's discussion of portfolios as a way to bring down volatility, etc. Say that there are two
+            ways of
+            measuring volatility: historical volatility (standard deviation of returns over a period) and Parkinson's
+            volatility
+            (based on high and low volatility). explain how Parkinson's volatility is more suited for our purpose
+            because it
+            captures investor panic that might get resolved within the day, as can be the case in election days.
+
+            Also can have a dropdown menu with the formulas
+
+            Here we can show the graph of volatility over two decades, showing a rise in volatility around 2008 crisis.
+
+            Then, I want to talk about how to define the volatility of a sector, show two approaches: (1) volatility of
+            sector-specific ETF, (2) average volatility of all stocks in the sector. Show if the two are correlated and
+            why and
+            which one we choose.
+        </p>
+
+        <!-- historical volatility -->
+        <details class="collapsible info-dropdown">
+            <summary class="info-box">
+                <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>Historical volatility</span>
+            </summary>
+
+            <div class="details-content">
+                <p>
+                    Volatility is the finance term for the standard deviation. It can be computed using usual unbiased
+                    standard
+                    deviation formula with a rolling window.
+                </p>
+
+                <p>Formula:</p>
+
+                <p class="math-block">
+                    $$\sigma_H = \sqrt{ \frac{1}{N-1} \sum_{t=1}^{N} (\bar{V}^2 - V_t^2) } $$
+                </p>
+                <p>
+                    With
+                    \(N\) the selected window, e.g. \(t\) representing a day, \( \bar{V} \) the average price for the
+                    given window and
+                    \(V_t\) the price on a given \(t\) (e.g. a day).
+                </p>
+            </div>
+        </details>
+
+        <!-- Parkinson Volatility -->
+        <details class="collapsible info-dropdown">
+            <summary class="info-box">
+                <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>Parkinson volatility</span>
+            </summary>
+
+            <div class="details-content">
+                <p>
+                    Parkinson's volatility uses the highest and lowest price reached in a given time (e.g. a day) to
+                    compute volatility.
+                    It needs to be computed over a time window (e.g. a month) and yields
+                    accurate estimates with smaller values of \(N\), allowing to
+                    capture short-term variation without sacrificing reliability.
+                </p>
+
+                <p>Formula :</p>
+
+                <p class="math-block">
+                    <!-- MathJax formula -->
+                    $$\sigma_P = \sqrt{\frac{1}{4 \ln(2)} \cdot \frac{1}{N} \sum_{t=1}^{N} \left(
+                    \ln\left(\frac{H_t}{L_t}\right)
+                    \right)^2}$$
+                </p>
+                <p>
+                    where $H_t$ and \(L_t\) are the high and low prices on day \(t\). The factor \( \frac{1}{4 \ln(2)}
+                    \) is derived
+                    from modeling
+                    returns as a geometric Brownian motion.
+                </p>
+            </div>
+        </details>
+
+        <p>-> talk about the math and abnormal volatility</p>
+
+        <h2> What's an event study methodology: how to define abnormal returns </h2>
+
+        <h2> Event studies</h2>
+        <p>
+            Introduction to event studies, how they are used in finance to measure the impact of specific events on
+            stock prices.
+            Describe the concept then have a dropdown menu with formulas with abnormal returns, cumulative abnormal
+            returns, etc.
+
+            I finish this text by mentioning how when using event studies, given that a US election is a rare event, we
+            need to look
+            at multiple elections over time to get statistically significant results. This will tie nicely into the next
+            section.
+        </p>
+
+        <h5> Timeline des elections : </h5>
+
+        <p>J'aime beaucoup ce graph flourish mais (1) j'ai pas l'impression qu'il est assez long pour faire un truc qui
+            scroll,
+            c'est un peu awkward comment ca scroll un peu puis ca s'arrete. genre je dirais ou les mettre tous d'un cote
+            (en haut)
+            et faire que ca scroll ou garder comme ca mais du croup rapetir un peu et les montrer tous sans scrolling.
+            (2) y'a pas
+            moyen de faire que la couleur de fond match le blanc. (3) je vois que y'a des bars rouges en haut de chaque
+            candidat,
+            l'idée c'etati de mettre des bars rougs pour les republicains et bleus pour les democrates? (4) peut etre
+            ecrire les
+            dates en mode "4 Novembre 2008"plutot que "4-11-2008" (5) vous voulez on fair un truc quand tu hover sur un
+            des cercles
+            ca montre un carre avec un petit texte sur l'élection (genre il était contre qui, anything memorable de
+            l'élection etc)
+            ?</p>
+        <div class="flourish-embed flourish-timeline" data-src="visualisation/26692490">
+            <script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img
+                    src="https://public.flourish.studio/visualisation/26692490/thumbnail" width="100%"
+                    alt="timeline visualization" /></noscript>
+        </div>
+
+
+        <h5> Presidential Impact </h5>
+
+
+
+        <h2> Impact of elections on volatility</h2>
+
+        <p>
+            Here I show the graphs I do taht are based on volatility:<br>
+            - Graph like the one elsa made but by volatility and you can pick the election you want to display the
+            results for it.
+            - show which companies and which sectors are most impacted by elections in terms of volatility, bubble
+            hierarchy graph
+            from flourish like the one in the youtube datastory<br>
+
+            I then talk about statistical significance, I do paired t-tests to show that the volatility after elections
+            is
+            significantly different from before elections. (calm before the storm)</p>
+
+        <h2> which characteristics of elections impact volatility the most </h2>
+
+        <p>
+            we do a linear regression where the dependent variable is the change in Cumulative Abnormal Volatility
+            before and after
+            the election and the independent variables are characteristics of the elections, like democrat vs republican
+            win, margin
+            of victory, economic conditions at the time and sector. I let sector interact with the other variables so we
+            can see
+            which sectors are more impacted by which characteristics of elections.</p>
+
+        <h2> fine-grained IEM analysis for one election</h2>
+        <p>
+            I introduce what IEM is, how prediction markets work, how they reflect the beliefs of investors about the
+            likelihood of
+            a candidate winning.<br>
+
+            Then I show the analysis we did for one election (2020 or 2016), showing how as the IEM probabilities change
+            over time,
+            how does the volatility of different sectors change.<br>
+
+            If I have time I can do this for multiple elections.</p>
+
+    </div>
+</section>
+
+
+<section id="event-study" class="section black">
+    <div class="content">
+
+        <iframe src="assets/graphs/party_impact_analysis" width="100%" height="750px" style="border:none;"></iframe>
+
+        <iframe src="assets/graphs/presidential_dashboard.html" width="100%" height="750px"
+            style="border:none;"></iframe>
+
+        <iframe src="assets/graphs/party_impact_analysis_2.html" width="100%" height="750px"
+            style="border:none;"></iframe>
+
+    </div>
+</section>
+
+<section id="regression" class="section newspaper">
+    <div class="content">
+
+        <h2> Regression on volatility </h2>
+
+        <section class="scroll-gallery">
+            <div class="images">
+                <img src="assets/img/image1.jpg" class="scroll-fade" alt="Project 1">
+                <img src="assets/img/image2.jpg" class="scroll-fade" alt="Project 2">
+                <img src="assets/img/image3.jpg" class="scroll-fade" alt="Project 3">
+                <img src="assets/img/image4.jpg" class="scroll-fade" alt="Project 4">
+            </div>
+        </section>
+
+        <!--IDEA : ads with this-->
+        <h2>Idea : make fake ads</h2>
+        <section class="scroll-gallery">
+            <div class="images">
+                <img src="assets/img/image1.jpg" class="scroll-fade" alt="Project 1">
+                <img src="assets/img/image2.jpg" class="scroll-fade" alt="Project 2">
+                <img src="assets/img/image3.jpg" class="scroll-fade" alt="Project 3">
+                <img src="assets/img/image4.jpg" class="scroll-fade" alt="Project 4">
+            </div>
+        </section>
+
+        <!--Typewritter effect-->
+        <h2>nice effect I can implement :</h2>
+        <p id="typewriter"></p>
+        <script>
+        const text = "To be continued...";
+        const element = document.getElementById("typewriter");
+        let i = 0;
+
+        function typeWriter() {
+            if (i==0){
+                element.innerHTML = "";
+            }
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // adjust speed (ms) here
+            }
+            else{
+                setTimeout(typeWriter, 3000);
+                i=0;
+            }
+        }
+
+        typeWriter(); // start the effect
+        </script>
+
+        <p>$$R_t=\frac{P_{t+1}-P_t}{P_t}$$
+
+            where $P_i$ denotes closing price at time $i$. Expected returns are then computed using either a simple
+            model:
+
+            $$R_{t,i}^{expected} = R_{reference}$$
+
+            where $R_{reference}$ is the return of a reference index (e.g., S&P 500) at time $t$, or a market model:
+
+            $$R_{t,i}^{expected} = \alpha_i + \beta_i \cdot R_{reference}$$
+
+            where $\alpha_i$ and $\beta_i$ are parameters fitted using linear regression for stock $i$. Abnormal returns
+            are then
+            computed as the difference between realized and expected returns.
+
+            $$
+            R_{t,i}^{abnormal} = R_{t,i} - R_{t,i}^{expected}
+            $$</p>
+
+        <h2>TEST</h2>
+        <details class="collapsible info-dropdown">
+            <summary class="info-box">
+                <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <span>Returns</span>
+            </summary>
+
+            <div class="details-content">
+                <p>
+                    To compute how much a stock earns we take the difference in value to the next period
+                    divided by value at the start of the period.
+                </p>
+
+                <div class="math-block">
+                    $$R = \frac{V_f - V_i}{V_i}$$
+                </div>
+
+                <p>
+                    Typically the period used is days and the value used is the adjusted close price.
+                </p>
+            </div>
+        </details>
+
+
+        <h2>Random stuf to fill</h2>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+        <p>fsdgdfgdfgd</p><br>
+
+    </div>
+</section>
+
+
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>

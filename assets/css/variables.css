@@ -1,0 +1,47 @@
+:root {
+    --newspaper-bg: #f7f3e8;
+    --black-bg: #000000;
+    --margin-white: #ffffff;
+    --margin-black: #000000;
+    --paper: #f0ece2;
+    /* the one used previously for newspaper bg */
+    --font-size-base:calc(24px*var(--font-scale));
+    --font-scale: 1;
+    /*--font-size: 24px; *//*12px*/
+    --newspaper-color: black;
+    --black-color: white;
+    --black-accent: rgb(255, 152, 25);
+    --black-font: "Arial",
+        sans-serif;
+    --newspaper-font:"Times New Roman",
+        Times,
+        serif;
+
+    /* ribbon on top*/
+    --ribbon-font-size: calc(var(--font-size-base)*0.65* var(--font-scale));
+
+    /* underline */
+    --underline-color-newspaper: #111;
+    --underline-color-black: #fff;
+    --underline-opacity-newspaper: 1;
+    --underline-opacity-black: 0.7;
+
+    /* FOR HINT BOXES*/
+    /* Shared layout */
+    --hintbox-box-padding: 20px;
+    --hintbox-box-font-size: calc(var(--font-size-base)* var(--font-scale));
+
+    /* Newspaper */
+    --hintbox-news-accent: #d4ae2f;
+    --hintbox-news-bg: rgba(255, 216, 77, 0.243);
+    --hintbox-news-text: #000000;
+
+    /* Black section */
+    --hintbox-dark-accent: #e6c46a;
+    --hintbox-dark-bg: rgba(230, 196, 106, 0.10);
+    --hintbox-dark-text: var(--black-color);/*#fcb900*/
+
+    /* chevron */
+    --hintbox-shevron-size: calc(var(--hintbox-box-font-size)* var(--font-scale));
+
+}

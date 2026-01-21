@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Interactive Sector Explanation</title>
+    <style>
+        body {
+            /* Changed background to Black as requested */
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: "Arial", sans-serif;
+            margin: 10px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+            color: #FFFFFF;
+        }
+
+        p {
+            text-align: center;
+            color: #BBBBBB;
+            font-size: 14px;
+            margin-top: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .explanation {
+            background-color: transparent;
+            padding: 20px;
+            margin: 20px 20px;
+            width: 100%;
+        }
+
+        .explanation>p {
+            font-size: 16px;
+            color: #DDDDDD;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            line-height: 1.5;
+        }
+
+        .instruction {
+            background-color: #1a1a1a;
+            color: #FFFFFF;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #FFFFFF;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .sector-card {
+            background-color: #111111;
+            /* Slightly lighter than pure black */
+            padding: 20px;
+            border-radius: 8px;
+            width: 280px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sector Titles - All White as requested */
+        .sector-card h3 {
+            color: #FFFFFF;
+            margin-top: 0;
+        }
+
+        /* 
+           Using the provided SECTOR_PALETTE hex codes.
+           Applied to Top Border and Info Text.
+        */
+
+        /* Technology: #6795EAB9 -> #6795EA */
+        .tech-card {
+            border-top: 4px solid #6795EA;
+        }
+
+        .tech-info {
+            color: #6795EA;
+            font-weight: bold;
+        }
+
+        /* Financial Services: #BD55FD99 -> #BD55FD */
+        .finance-card {
+            border-top: 4px solid #BD55FD;
+        }
+
+        .finance-info {
+            color: #BD55FD;
+            font-weight: bold;
+        }
+
+        /* Healthcare: #2B8026F6 -> #2B8026 */
+        .health-card {
+            border-top: 4px solid #2B8026;
+        }
+
+        .health-info {
+            color: #4CAF50;
+            font-weight: bold;
+            /* Lightened specifically for readability on black */
+        }
+
+        /* Energy: #FBB83BE0 -> #FBB83B */
+        .energy-card {
+            border-top: 4px solid #FBB83B;
+        }
+
+        .energy-info {
+            color: #FBB83B;
+            font-weight: bold;
+        }
+
+        /* Industrials: #FF3D3D88 -> #FF3D3D */
+        .ind-card {
+            border-top: 4px solid #FF3D3D;
+        }
+
+        .ind-info {
+            color: #FF3D3D;
+            font-weight: bold;
+        }
+
+        /* Consumer Cyclical: #F9F96DA0 -> #F9F96D */
+        .cyclical-card {
+            border-top: 4px solid #F9F96D;
+        }
+
+        .cyclical-info {
+            color: #F9F96D;
+            font-weight: bold;
+        }
+
+        .sector-info {
+            display: none;
+            background-color: #222;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .sector-card.show .sector-info {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>What is a Sector?</h1>
+    <p>Hover over each card to learn more</p>
+
+    <div class="container">
+        <div class="instruction">
+            <b>Instructions:</b> Hover over each sector card to see an explanation.
+        </div>
+
+        <div class="explanation">
+            <p>A <strong>sector</strong> is a group of companies or industries that share similar business activities.
+                Sectors help organize and analyze the economy.</p>
+
+            <div class="cards-grid">
+                <!-- Technology -->
+                <div class="sector-card tech-card" onmouseenter="this.classList.add('show')"
+                    onmouseleave="this.classList.remove('show')">
+                    <h3>Technology</h3>
+                    <div class="sector-info tech-info">Companies like AAPL, MSFT, and IBM belong to the technology
+                        sector. They focus on developing and selling tech products and services.</div>
+                </div>
+
+                <!-- Financial Services -->
+                <div class="sector-card finance-card" onmouseenter="this.classList.add('show')"
+                    onmouseleave="this.classList.remove('show')">
+                    <h3>Financial Services</h3>
+                    <div class="sector-info finance-info">Banks like JPM, BAC, and C are part of the finance sector.
+                        They manage money and financial assets.</div>
+                </div>
+
+                <!-- Healthcare -->
+                <div class="sector-card health-card" onmouseenter="this.classList.add('show')"
+                    onmouseleave="this.classList.remove('show')">
+                    <h3>Healthcare</h3>
+                    <div class="sector-info health-info">Companies like JNJ, LLY, and MRK make up the healthcare sector.
+                        They provide health services and products.</div>
+                </div>
+
+                <!-- Energy -->
+                <div class="sector-card energy-card" onmouseenter="this.classList.add('show')"
+                    onmouseleave="this.classList.remove('show')">
+                    <h3>Energy</h3>
+                    <div class="sector-info energy-info">Oil, gas, and renewable energy companies are in the energy
+                        sector. They produce and distribute energy resources.</div>
+                </div>
+
+                <!-- Industrials-->
+                <div class="sector-card ind-card" onmouseenter="this.classList.add('show')"
+                    onmouseleave="this.classList.remove('show')">
+                    <h3>Industrials</h3>
+                    <div class="sector-info ind-info">Companies like BA, CAT, and GE belong to Industrials. They produce
+                        machinery, aircraft, and construction supplies.</div>
+                </div>
+
+                <!-- Consumer Cyclical -->
+                <div class="sector-card cyclical-card" onmouseenter="this.classList.add('show')"
+                    onmouseleave="this.classList.remove('show')">
+                    <h3>Consumer Cyclical</h3>
+                    <div class="sector-info cyclical-info">Companies like HD, MCD, and NKE belong to Consumer Cyclical.
+                        These rely on consumer spending (retail, automotive, etc.).</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

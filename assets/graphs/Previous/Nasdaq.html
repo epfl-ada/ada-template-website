@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/graph-style.css">
+    <title>Check your knowledge!</title>
+    <style>
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .question {
+            background-color: #222;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .instruction {
+            background-color: #222;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #00FFFF;
+            text-align: center;
+        }
+
+        h3 {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #444;
+            color: #E0E0E0;
+            border: 2px solid #555;
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        button.correct {
+            background-color: #00FF00;
+            color: #111;
+            animation: pulse 0.5s ease;
+        }
+        button.incorrect {
+            background-color: #FF0000;
+            color: #111;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .feedback {
+            margin-top: 10px;
+            color: #00FFFF;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Questionnaire!</h1>
+    <p>Answer the following questions</p>
+
+    <div class="container">
+        <div class="instruction">
+            <b>Instructions:</b> Select your answer to see instant feedback.
+        </div>
+
+        <div class="question">
+            <h3>1. What year was NASDAQ founded?</h3>
+            <button onclick="checkAnswer(this, 'A', 1)">1971</button>
+            <button onclick="checkAnswer(this, 'B', 1)">1985</button>
+            <button onclick="checkAnswer(this, 'C', 1)">1990</button>
+            <button onclick="checkAnswer(this, 'D', 1)">2000</button>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <div class="question">
+            <h3>2. What is NASDAQ primarily used for?</h3>
+            <button onclick="checkAnswer(this, 'A', 2)">Shopping</button>
+            <button onclick="checkAnswer(this, 'B', 2)">Stock trading</button>
+            <button onclick="checkAnswer(this, 'C', 2)">Cooking</button>
+            <button onclick="checkAnswer(this, 'D', 2)">Gardening</button>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <div class="question">
+            <h3>3. How can NASDAQ impact our everyday lifestyle?</h3>
+            <button onclick="checkAnswer(this, 'A', 3)">It doesn't impact us</button>
+            <button onclick="checkAnswer(this, 'B', 3)">Makes shopping easier</button>
+            <button onclick="checkAnswer(this, 'C', 3)">Determines the weather</button>
+            <button onclick="checkAnswer(this, 'D', 3)">Influences product prices</button>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+
+        <div class="question">
+            <h3>4. Which of the following is a famous NASDAQ-listed company?</h3>
+            <button onclick="checkAnswer(this, 'A', 4)">Apple Inc.</button>
+            <button onclick="checkAnswer(this, 'B', 4)">Ford</button>
+            <button onclick="checkAnswer(this, 'C', 4)">Coca-Cola</button>
+            <button onclick="checkAnswer(this, 'D', 4)">McDonald's</button>
+            <div class="feedback" id="feedback4"></div>
+        </div>
+
+        <div class="question">
+            <h3>5. What is the number of listing of Nasdaq in February 2025?</h3>
+            <button onclick="checkAnswer(this, 'A', 5)">100</button>
+            <button onclick="checkAnswer(this, 'B', 5)">2100</button>
+            <button onclick="checkAnswer(this, 'C', 5)">3900</button>
+            <button onclick="checkAnswer(this, 'D', 5)">5400</button>
+            <div class="feedback" id="feedback5"></div>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswer(button, choice, questionNum) {
+            const options = button.parentElement.querySelectorAll('button');
+            options.forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
+            });
+            const feedback = document.getElementById('feedback' + questionNum);
+            if (
+                (questionNum === 1 && choice === 'A') ||
+                (questionNum === 2 && choice === 'B') ||
+                (questionNum === 3 && choice === 'D') ||
+                (questionNum === 4 && choice === 'A') ||
+                (questionNum === 5 && choice === 'C')
+            ) {
+                button.classList.add('correct');
+                feedback.textContent = "Correct! Well done.";
+            } else {
+                button.classList.add('incorrect');
+                feedback.textContent = "Incorrect. Try again.";
+            }
+        }
+    </script>
+</body>
+</html>

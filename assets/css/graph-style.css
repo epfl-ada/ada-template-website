@@ -1,0 +1,29 @@
+/*TO LINK THE FONTS IN GRAPH'S HEAD : <link rel="stylesheet" href="../css/graph-style.css">*/
+@import url("variables.css");
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--black-bg);
+    color: var(--black-color);
+    font-family: var(--black-font);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    color: var(--black-accent);
+}
+
+p {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-top: 0;
+}
